@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes 101 — Anam Razzaque</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+</head>
+
+<body>
+
+  <div class="page-scale-wrapper" id="pageScaleWrapper">
+    <div class="page-canvas" id="pageCanvas">
+
+      <!-- ===================== HERO ===================== -->
+      <!-- Layer order matches Figma: bottom → top -->
+      <header class="hero">
+
+        <!-- Layer 7 (bottom): moving pages -->
+        <div class="hero__pages" id="heroPages" aria-label="Notebook page previews">
+          <div class="hero__page" aria-hidden="true"></div>
+          <div class="hero__page" aria-hidden="true"></div>
+          <div class="hero__page" aria-hidden="true"></div>
+        </div>
+
+        <!-- Layer 6: notes 101 (sits behind pages where they overlap) -->
+        <h1 class="hero__title">Notes 101</h1>
+
+        <!-- Layer 5: black shadow gradient (overlays bottom of pages) -->
+        <div class="hero__shadow" aria-hidden="true"></div>
+
+        <!-- Layer 4: tagline (above shadow) -->
+        <p class="hero__tagline">An open-source note-taking site</p>
+
+        <!-- Layer 2: Ready when you are -->
+        <p class="hero__ready">Ready when you are</p>
+
+        <!-- Layer 3+1: CTA button + label (topmost) -->
+        <button class="hero__cta" id="loginBtn" type="button" aria-label="Get started — log in with Google"
+          onclick="if(window.triggerGoogleLogin){window.triggerGoogleLogin(event);}else{window.location.href='index.html';}">
+          <span class="hero__cta-label" id="loginBtnText">Get Started</span>
+        </button>
+      </header>
+
+      <main>
+        <!-- ===================== PROMO ===================== -->
+        <section class="promo" aria-label="Pricing">
+          <img class="promo__texture" src="assets/texture_image.png" alt="" aria-hidden="true">
+
+          <h2 class="promo__heading js-typewriter">Completely FREEEEEEEEE</h2>
+
+          <div class="promo__blur-rect" aria-hidden="true"></div>
+
+          <img class="promo__screenshot js-scroll-scale" src="assets/app-screenshot.png"
+            alt="Screenshot of the note-taking application interface">
+
+          <p class="promo__tagline">A lil bit a dis a lil bit a dahh, type shit</p>
+        </section>
+
+        <!-- ===================== EDITORIAL ===================== -->
+        <section class="editorial" aria-label="About">
+          <div class="editorial__card"></div>
+
+          <div class="editorial__rule editorial__rule--top"></div>
+
+          <h2 class="editorial__headline1">This Didn't Need to Exist.</h2>
+          <h2 class="editorial__headline2">But <em>i made it anyway.</em></h2>
+
+          <div class="editorial__rule editorial__rule--mid"></div>
+          <div class="editorial__col-divider"></div>
+
+          <h3 class="editorial__col-heading editorial__col-heading--left"><em>SO... </em>WHY THIS?</h3>
+          <h3 class="editorial__col-heading editorial__col-heading--right">EDITOR'S <em>NOTE</em></h3>
+          <div class="editorial__rule editorial__rule--right"></div>
+          <div class="editorial__rule editorial__rule--left-sub"></div>
+
+          <p class="editorial__text editorial__text--justify editorial__left-para1">Couldn't find a note taking app
+            that looked the way I wanted. Everything felt either way too corporate or packed with features I'd never
+            use. I grew up using stuff like Photoshop and VS Code, so I ended up stealing that whole vibe and turning
+            it into a place for notes instead.</p>
+
+          <p class="editorial__text editorial__right-para1">I never sat down with a big plan for this. I just wanted
+            to see what a notes app would look like if I built it my way. One feature turned into another, a few
+            late nights disappeared, and it slowly became the website your looking at now.</p>
+
+          <p class="editorial__text editorial__quote">&ldquo;Honestly, I didn't have anything better to do.&rdquo;</p>
+          <p class="editorial__quote-attr">- anam razzaque</p>
+
+          <img class="editorial__photo" src="assets/ae49f0b2eaf092695185f90a8ce26df8__1_.gif" alt="">
+
+          <p class="editorial__text editorial__text--justify editorial__left-para2">Most note-taking apps get the job
+            done. I just wanted one that looked and felt a little different without making everything more
+            complicated.</p>
+
+          <h3 class="editorial__thing-heading">Here's the <em>thing...</em></h3>
+          <img class="editorial__thing-img" src="assets/the_thing.png" alt="">
+
+          <p class="editorial__noads">NO Ads &amp; Absolutely NO Subscriptions</p>
+
+          <div class="editorial__rule editorial__rule--footer"></div>
+          <div class="editorial__footer">
+            <span>PROJECT NO. 01</span>
+            <span>EST. 2026</span>
+            <span>BY ANAM</span>
+          </div>
+        </section>
+      </main>
+
+      <!-- ===================== CONTACT ===================== -->
+      <footer class="contact" aria-label="Contact">
+        <h2 class="contact__heading">Contact</h2>
+        <div class="contact__links">
+          <p>GitHub</p>
+          <p>anamrazzaque</p>
+          <p>&nbsp;</p>
+          <p>LinkedIn</p>
+          <p>anamrazzaque</p>
+          <p>&nbsp;</p>
+          <p>Email</p>
+          <p>anamrazzaque.work@gmail.com</p>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var wrapper = document.getElementById('pageScaleWrapper');
+      var canvas = document.getElementById('pageCanvas');
+      var DESIGN_WIDTH = 1920;
+      var DESIGN_HEIGHT = 5180;
+
+      function updateScale() {
+        var scale = window.innerWidth / DESIGN_WIDTH;
+        canvas.style.transform = 'scale(' + scale + ')';
+        wrapper.style.height = (DESIGN_HEIGHT * scale) + 'px';
+        if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+      }
+
+      window.addEventListener('resize', updateScale);
+      window.addEventListener('orientationchange', updateScale);
+      updateScale();
+    })();
+  </script>
+
+  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    var lenis = new Lenis({
+      duration: 1.8,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      smoothTouch: false,
+      touchMultiplier: 2
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add(function (time) {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    document.querySelectorAll('.js-scroll-scale').forEach(function (el) {
+      gsap.fromTo(el,
+        { scale: 0.7, transformOrigin: '50% 50%' },
+        {
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            end: 'top 35%',
+            scrub: 1
+          }
+        }
+      );
+    });
+
+    document.querySelectorAll('.js-typewriter').forEach(function (el) {
+      var text = el.textContent;
+      el.setAttribute('aria-label', text);
+      el.textContent = '';
+
+      var inner = document.createElement('span');
+      inner.setAttribute('aria-hidden', 'true');
+
+      var chars = [];
+      for (var i = 0; i < text.length; i++) {
+        var span = document.createElement('span');
+        span.className = 'promo__heading-char';
+        span.style.display = 'inline-block';
+        span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+        inner.appendChild(span);
+        chars.push(span);
+      }
+
+      el.appendChild(inner);
+
+      gsap.fromTo(chars,
+        { opacity: 0, y: 12, filter: 'blur(4px)' },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 0.45,
+          stagger: 0.035,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+  </script>
+  <script type="module" src="landing.js"></script>
+</body>
+
+</html>

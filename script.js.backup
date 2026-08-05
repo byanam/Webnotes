@@ -1,0 +1,1179 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // State
+    let bookCount = 1;
+    // let pageCount = 1; // Global page count for ID uniqueness - REMOVED, managed by EditorState
+    let currentBookId = 'book1-menu'; // Default active book
+
+    // Elements
+    const addBookBtn = document.getElementById('add-book-btn');
+    const addPageBtn = document.getElementById('add-page-btn');
+    const sidebarBooksScroll = document.querySelector('.sidebar-books-scroll');
+    const pageContainer = document.querySelector('.a4-page-container'); // Still needed for editor mounting
+
+    // --- Editor State Management ---
+    class EditorState {
+        constructor() {
+            this.chapters = new Map(); // id -> {id, title, content}
+            this.activeChapterId = null;
+            this.nextChapterId = 1;
+            this.savedSelection = null;
+        }
+
+        createChapter(id, title, content = '') {
+            const chapter = {
+                id: id,
+                title: title,
+                content: content
+            };
+            this.chapters.set(id, chapter);
+
+            // Track highest ID
+            const numericPart = parseInt(id.match(/\d+/)?.[0]);
+            if (numericPart && numericPart >= this.nextChapterId) {
+                this.nextChapterId = numericPart + 1;
+            }
+
+            return chapter;
+        }
+
+        setActiveChapter(id) {
+            this.activeChapterId = id;
+            this.renderActiveChapter();
+        }
+
+        renderActiveChapter() {
+            const chapter = this.chapters.get(this.activeChapterId);
+            if (!chapter) return;
+
+            const container = document.querySelector('.a4-page-container');
+            if (!container) return;
+
+            // Clear container
+            container.innerHTML = '';
+
+            // Create page(s) from content
+            if (!chapter.content || chapter.content.trim() === '') {
+                // Create empty first page
+                this.createPage(container, 0);
+            } else {
+                // Parse content into pages
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = chapter.content;
+
+                // Create first page with content
+                const firstPage = this.createPage(container, 0);
+                firstPage.innerHTML = tempDiv.innerHTML;
+
+                // Handle overflow by flowing to additional pages
+                this.handlePageOverflow(firstPage);
+            }
+        }
+
+        createPage(container, index) {
+            const page = document.createElement('div');
+            page.className = 'a4-page';
+            page.contentEditable = 'true';
+            page.dataset.pageIndex = index;
+
+            // Attach listeners
+            page.addEventListener('input', () => this.handleInput(page));
+            page.addEventListener('keydown', (e) => this.handleKeydown(e, page));
+
+            container.appendChild(page);
+            return page;
+        }
+
+        handleInput(page) {
+            // Debounce rapid input events
+            if (this._inputTimeout) {
+                clearTimeout(this._inputTimeout);
+            }
+
+            this._inputTimeout = setTimeout(() => {
+                try {
+                    // Save content
+                    this.saveCurrentContent();
+
+                    // Page: 1131px height, 80px padding top/bottom
+                    // Content area: 971px (1131 - 80 - 80)
+                    const CONTENT_HEIGHT = 971;
+
+                    console.log('Page scrollHeight:', page.scrollHeight, 'Limit:', CONTENT_HEIGHT);
+
+                    if (page.scrollHeight > CONTENT_HEIGHT) {
+                        console.log('OVERFLOW DETECTED - calling handlePageOverflow');
+                        // Move overflow content to next page
+                        this.handlePageOverflow(page);
+                    }
+                } catch (e) {
+                    console.error('Error in handleInput:', e);
+                }
+            }, 150); // Increased delay for stability
+        }
+
+        handleKeydown(e, page) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                document.execCommand('insertHTML', false, '<p><br></p>');
+            }
+        }
+
+        handlePageOverflow(page) {
+            try {
+                console.log('handlePageOverflow called for page', page.dataset.pageIndex);
+                const container = page.parentElement;
+                const pageIndex = parseInt(page.dataset.pageIndex);
+
+                const CONTENT_HEIGHT = 971; // Max height before overflow
+
+                // Only proceed if actually overflowing
+                if (page.scrollHeight <= CONTENT_HEIGHT) {
+                    console.log('Not overflowing, returning');
+                    return;
+                }
+
+                console.log('Page IS overflowing, moving content...');
+
+                // Ensure next page exists
+                let nextPage = container.querySelector(`.a4-page[data-page-index="${pageIndex + 1}"]`);
+                if (!nextPage) {
+                    console.log('Creating next page', pageIndex + 1);
+                    nextPage = this.createPage(container, pageIndex + 1);
+                }
+
+                // Save cursor position
+                this.saveSelection();
+
+                // Move bottom nodes until page fits
+                let attempts = 0;
+                const MAX_ATTEMPTS = 20;
+
+                while (page.scrollHeight > CONTENT_HEIGHT && page.childNodes.length > 1 && attempts < MAX_ATTEMPTS) {
+                    const lastNode = page.lastChild;
+
+                    // Don't move if it's the only content
+                    if (page.childNodes.length <= 1) {
+                        break;
+                    }
+
+                    // Skip empty nodes
+                    if (lastNode.nodeType === 3 && !lastNode.textContent.trim()) {
+                        lastNode.remove();
+                        continue;
+                    }
+
+                    console.log('Moving node to next page, attempt', attempts + 1);
+                    // Move to next page
+                    nextPage.insertBefore(lastNode, nextPage.firstChild);
+                    attempts++;
+                }
+
+                console.log('Moved', attempts, 'nodes');
+
+                // Restore cursor
+                try {
+                    this.restoreSelection();
+                } catch (e) {
+                    // Cursor restore failed, that's okay
+                }
+
+            } catch (e) {
+                console.error('handlePageOverflow error:', e);
+            }
+        }
+
+        pullContentFromNextPage(page) {
+            const container = page.parentElement;
+            const pageIndex = parseInt(page.dataset.pageIndex);
+            const nextPage = container.querySelector(`.a4-page[data-page-index="${pageIndex + 1}"]`);
+
+            if (!nextPage || nextPage.childNodes.length === 0) return;
+
+            // Save selection
+            this.saveSelection();
+
+            // Pull nodes from next page while current page has room
+            while (nextPage.childNodes.length > 0 &&
+                page.scrollHeight <= page.clientHeight) {
+                const firstNode = nextPage.firstChild;
+                page.appendChild(firstNode);
+
+                // Check if page is now overflowing
+                if (page.scrollHeight > page.clientHeight) {
+                    // Put it back
+                    nextPage.insertBefore(firstNode, nextPage.firstChild);
+                    break;
+                }
+            }
+
+            // Remove empty next page
+            if (nextPage.childNodes.length === 0 && nextPage.innerHTML.trim() === '') {
+                nextPage.remove();
+            }
+
+            // Restore selection
+            this.restoreSelection();
+        }
+
+        saveSelection() {
+            const sel = window.getSelection();
+            if (sel.rangeCount > 0) {
+                this.savedSelection = sel.getRangeAt(0).cloneRange();
+            }
+        }
+
+        restoreSelection() {
+            if (this.savedSelection) {
+                try {
+                    const sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(this.savedSelection);
+                } catch (e) {
+                    // Selection restoration failed, ignore
+                }
+            }
+        }
+
+        saveCurrentContent() {
+            const chapter = this.chapters.get(this.activeChapterId);
+            if (!chapter) return;
+
+            const container = document.querySelector('.a4-page-container');
+            if (!container) return;
+
+            // Combine all pages into single content
+            const pages = container.querySelectorAll('.a4-page');
+            const combinedContent = Array.from(pages).map(p => p.innerHTML).join('');
+            chapter.content = combinedContent;
+
+            saveData();
+        }
+
+        // Export helpers
+        getDocumentHTML() {
+            const container = document.querySelector('.a4-page-container');
+            if (!container) return '';
+            const pages = container.querySelectorAll('.a4-page');
+            return Array.from(pages).map(p => p.innerHTML).join('');
+        }
+
+        getDocumentPlainText() {
+            const container = document.querySelector('.a4-page-container');
+            if (!container) return '';
+            const pages = container.querySelectorAll('.a4-page');
+            return Array.from(pages).map(p => p.innerText).join('\n');
+        }
+
+        deleteChapter(id) {
+            this.chapters.delete(id);
+            if (this.activeChapterId === id) {
+                this.activeChapterId = null;
+                const container = document.querySelector('.a4-page-container');
+                if (container) container.innerHTML = '';
+            }
+        }
+    }
+
+    const editor = new EditorState();
+
+    // --- Persistence Logic ---
+
+    function saveData() {
+        const data = {
+            bookCount,
+            nextChapterId: editor.nextChapterId,
+            activeChapterId: editor.activeChapterId,
+            books: []
+        };
+
+        const bookGroups = document.querySelectorAll('.book-group');
+        bookGroups.forEach(group => {
+            const bookTab = group.querySelector('.book-tab');
+            const bookName = bookTab.querySelector('.sidebar-text').innerText;
+            const bookIcon = bookTab.querySelector('i');
+            const bookColor = bookIcon.style.color || '';
+            const bookId = group.dataset.bookId;
+
+            const pages = [];
+            const pageLinks = group.querySelectorAll('.page-link');
+            pageLinks.forEach(link => {
+                if (link.dataset.isContinuation === 'true' || link.classList.contains('virtual-page-link')) return;
+
+                const textWithPrefix = link.querySelector('.sidebar-text').innerText;
+                const targetId = link.dataset.targetId;
+
+                let content = '';
+                const chapter = editor.chapters.get(targetId);
+                if (chapter) {
+                    content = chapter.content || '';
+                }
+
+                pages.push({
+                    text: textWithPrefix,
+                    content: content,
+                    id: targetId
+                });
+            });
+
+            data.books.push({
+                startId: bookId,
+                name: bookName,
+                color: bookColor,
+                pages: pages
+            });
+        });
+
+        localStorage.setItem('aiNoteData', JSON.stringify(data));
+    }
+
+    function loadData() {
+        const stored = localStorage.getItem('aiNoteData');
+        if (!stored) return false;
+
+        try {
+            const data = JSON.parse(stored);
+            bookCount = data.bookCount;
+            editor.nextChapterId = data.nextChapterId || 1;
+            editor.activeChapterId = data.activeChapterId;
+
+            sidebarBooksScroll.innerHTML = '';
+
+            data.books.forEach(book => {
+                const group = createBookGroup(book.startId, book.name, book.color);
+                sidebarBooksScroll.appendChild(group);
+
+                const submenu = group.querySelector('.sidebar-submenu');
+
+                book.pages.forEach(page => {
+                    editor.createChapter(page.id, page.text, page.content);
+                    createSidebarLink(submenu, page.text, page.id, false);
+                });
+            });
+
+            return true;
+        } catch (e) {
+            console.error("Failed to load data", e);
+            return false;
+        }
+    }
+
+    // --- Helper Functions ---
+
+    function deleteVirtualPage(pageIndex) {
+        // pageIndex is 1-based. (e.g. Page 2)
+        // We calculate the pixel range:
+        // Start: (pageIndex - 1) * 1490 (1460 + 30)
+        // End: Start + 1460
+
+        const PAGE_HEIGHT = 1460;
+        const GAP = 30;
+        const startY = (pageIndex - 1) * (PAGE_HEIGHT + GAP);
+        const endY = startY + PAGE_HEIGHT;
+
+        // We need to delete content in this vertical range in #document-editor
+        const editorEl = document.getElementById('document-editor');
+        if (!editorEl) return;
+
+        // This is tricky. Web APIs don't easily let you "delete everything between Y1 and Y2".
+        // We can iterate blocks and check their positions.
+        // If a block is fully within the range, delete it.
+        // If it overlaps, we might need to split? 
+        // For V1, let's delete any block that *starts* within the range.
+
+        const blocks = Array.from(editorEl.children);
+        let deletedCount = 0;
+
+        blocks.forEach(block => {
+            const top = block.offsetTop;
+            const bottom = top + block.offsetHeight;
+
+            // strictly inside or just overlap?
+            // "Remove the corresponding page range".
+            // If we delete blocks starting in the range:
+            if (top >= startY && top < endY) {
+                block.remove();
+                deletedCount++;
+            }
+        });
+
+        if (deletedCount > 0) {
+            // Save updated content
+            const chapter = editor.chapters.get(editor.activeChapterId);
+            if (chapter) {
+                const docEditor = document.getElementById('document-editor');
+                if (docEditor) {
+                    chapter.content = docEditor.innerHTML;
+                    saveData();
+                    if (editor.updateVisualGuides) {
+                        editor.updateVisualGuides();
+                    }
+                }
+            }
+        }
+    }
+
+    // --- Helper Functions ---
+
+    function createSidebarLink(submenu, text, id, isContinuation) {
+        const link = document.createElement('div');
+        link.className = 'sidebar-item page-link';
+        link.dataset.targetId = id;
+        if (isContinuation) {
+            link.dataset.isContinuation = 'true';
+            link.style.display = 'none'; // Hide continuations in this model? Or show?
+            // For OneNote style, we might not show continuations as separate links
+            return;
+        }
+
+        link.innerHTML = `<i class="fa-regular fa-file-lines"></i> <span class="sidebar-text">${text}</span>`;
+
+        link.onclick = (e) => {
+            // Prevent bubbling if clicking delete/etc
+            if (e.target.closest('.icon-button')) return;
+
+            selectItem('page', link);
+            editor.setActiveChapter(id);
+        };
+
+        submenu.appendChild(link);
+        return link;
+    }
+
+    function createBookGroup(id, name, color) {
+        const group = document.createElement('div');
+        group.className = 'book-group';
+        group.dataset.bookId = id;
+
+        const bookTab = document.createElement('div');
+        bookTab.className = 'sidebar-item book-tab';
+        bookTab.onclick = () => toggleSidebarMenu(`${id}-menu`);
+
+        // Icon
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-book';
+        if (color) icon.style.color = color;
+
+        const text = document.createElement('span');
+        text.className = 'sidebar-text';
+        text.innerText = name;
+
+        bookTab.appendChild(icon);
+        bookTab.appendChild(text);
+
+        const submenu = document.createElement('div');
+        submenu.className = 'sidebar-submenu';
+        submenu.id = `${id}-menu`;
+
+        group.appendChild(bookTab);
+        group.appendChild(submenu);
+
+        return group;
+    }
+
+    // --- Button Event Listeners ---
+
+    addBookBtn.addEventListener('click', () => {
+        bookCount++;
+        const newBookId = `book${bookCount}`;
+        const group = createBookGroup(newBookId, `Book ${bookCount}`, null);
+        sidebarBooksScroll.appendChild(group);
+
+        toggleSidebarMenu(`${newBookId}-menu`);
+        saveData();
+    });
+
+    addPageBtn.addEventListener('click', () => {
+        // Find Active Book
+        let activeSubmenu = document.querySelector('.sidebar-submenu.active');
+        if (!activeSubmenu) {
+            // If no book open, default to first or create one
+            let firstGroup = document.querySelector('.book-group');
+            if (!firstGroup) {
+                addBookBtn.click();
+                firstGroup = document.querySelector('.book-group');
+            }
+            const menuId = firstGroup.dataset.bookId + '-menu';
+            toggleSidebarMenu(menuId);
+            activeSubmenu = document.getElementById(menuId);
+        }
+
+        // Calculate New Page ID
+        // We need a unique ID. editor.nextChapterId handles this.
+        const newPageId = `note-page-${editor.nextChapterId}`;
+        const newPageNum = activeSubmenu.querySelectorAll('.page-link').length + 1;
+
+        // Create Model
+        editor.createChapter(newPageId, `Page ${newPageNum}`);
+        editor.setActiveChapter(newPageId);
+
+        // Create Sidebar Link
+        const link = createSidebarLink(activeSubmenu, `Page ${newPageNum}`, newPageId, false);
+        selectItem('page', link);
+
+        saveData();
+    });
+
+    // --- Auto-Scroll Logic ---
+    let lastFocusedPageId = null;
+
+    function handleAutoScroll() {
+        const selection = window.getSelection();
+        if (selection.rangeCount === 0) return;
+
+        const range = selection.getRangeAt(0);
+        let startNode = range.startContainer;
+        if (startNode.nodeType === Node.TEXT_NODE) startNode = startNode.parentElement;
+
+        const currentPage = startNode.closest('.a4-page');
+
+        // Page Transition Detection
+        if (currentPage && currentPage.id) {
+            if (lastFocusedPageId && lastFocusedPageId !== currentPage.id) {
+                // We moved to a new page!
+                // Scroll to the top of this new page
+                currentPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                lastFocusedPageId = currentPage.id;
+                return; // Skip standard buffer scroll for this frame
+            }
+            lastFocusedPageId = currentPage.id;
+        }
+
+        const rect = range.getBoundingClientRect();
+
+        // Handle collapsed ranges returning 0 rects sometimes
+        if (rect.bottom === 0 && rect.top === 0) {
+            const clientRects = range.getClientRects();
+            if (clientRects.length > 0) {
+                checkAndScroll(clientRects[clientRects.length - 1]);
+            } else {
+                // FALLBACK: Use a dummy span to measure exact cursor position
+                // Avoid using parentElement (which could be the huge .a4-page)
+                const span = document.createElement('span');
+                // span.textContent = '|'; // Invisible char not needed if we clone range?
+                // Actually, insertNode puts it at cursor.
+                try {
+                    const rangeClone = range.cloneRange();
+                    rangeClone.insertNode(span);
+                    const spanRect = span.getBoundingClientRect();
+                    checkAndScroll(spanRect);
+                    span.remove();
+                } catch (e) {
+                    // If error (e.g. read-only context?), fallback to parent but check class
+                    const el = selection.focusNode.parentElement;
+                    if (el && !el.classList.contains('a4-page')) {
+                        checkAndScroll(el.getBoundingClientRect());
+                    }
+                }
+            }
+        } else {
+            checkAndScroll(rect);
+        }
+    }
+
+    function checkAndScroll(rect) {
+        const scrollContainer = document.querySelector('.main-content-area');
+        if (!scrollContainer) return;
+
+        const containerRect = scrollContainer.getBoundingClientRect();
+
+        // Thresholds relative to the container's viewport
+        // Use containerRect.bottom as the reference point for the bottom of the visible area
+        const bottomThreshold = containerRect.bottom - 150;
+        // Padding is 96px. Threshold must be smaller (80px) to avoid scrolling up 
+        const topThreshold = containerRect.top + 80;
+
+        // Scroll Down
+        if (rect.bottom > bottomThreshold) {
+            const diff = rect.bottom - bottomThreshold;
+            scrollContainer.scrollBy({
+                top: diff + 20,
+                behavior: 'auto'
+            });
+        }
+
+        // Scroll Up
+        if (rect.top < topThreshold) {
+            const diff = topThreshold - rect.top;
+            scrollContainer.scrollBy({
+                top: -(diff + 20),
+                behavior: 'auto'
+            });
+        }
+    }
+
+    // Global Listeners for Auto-Scroll
+    // Debounce slightly to avoid excessive rect calculations on every pixel of drag/select, 
+    // but keep it snappy for typing. 
+    // `requestId` for animation frame throttling.
+    let scrollRequestId = null;
+    const requestAutoScroll = () => {
+        if (scrollRequestId) return;
+        scrollRequestId = requestAnimationFrame(() => {
+            handleAutoScroll();
+            scrollRequestId = null;
+        });
+    };
+
+    document.addEventListener('input', requestAutoScroll);
+    document.addEventListener('keydown', requestAutoScroll); // Arrow keys
+    // document.addEventListener('mouseup', requestAutoScroll); // Removed: Causes unwanted scroll jumps on click
+
+    // Click-to-Position (Typewriter Mode)
+    document.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('a4-page')) return;
+
+        const page = e.target;
+        const style = window.getComputedStyle(page);
+        const lineHeight = parseFloat(style.lineHeight) || 28.8;
+        const paddingBottom = parseFloat(style.paddingBottom);
+        const pageRect = page.getBoundingClientRect();
+
+        // Calculate where the click happened relative to the page content area
+        const clickY = e.clientY - pageRect.top; // Relative Y in pixels
+
+        // Find the visual bottom of the current text content
+        let contentBottom = parseFloat(style.paddingTop);
+        if (page.lastChild) {
+            const range = document.createRange();
+            range.selectNodeContents(page);
+            const rects = range.getClientRects();
+            if (rects.length > 0) {
+                const lastRect = rects[rects.length - 1];
+                contentBottom = lastRect.bottom - pageRect.top;
+            } else {
+                // Determine if it has children that take up space
+                // Fallback to iterating children
+                const children = Array.from(page.children);
+                if (children.length > 0) {
+                    const lastEl = children[children.length - 1];
+                    const lastRect = lastEl.getBoundingClientRect();
+                    contentBottom = lastRect.bottom - pageRect.top;
+                }
+            }
+        }
+
+        // If we clicked significantly below the content
+        if (clickY > contentBottom + lineHeight) {
+            const gap = clickY - contentBottom;
+            const linesToAdd = Math.floor(gap / lineHeight);
+
+            if (linesToAdd > 0) {
+                // Prevent creating excessive newlines if we click accidentally
+                // Cap it at, say, 50 lines at once?
+                const safeLines = Math.min(linesToAdd, 50);
+
+                // Add the breaks
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < safeLines; i++) {
+                    fragment.appendChild(document.createElement('br'));
+                }
+                page.appendChild(fragment);
+
+                // Move cursor to the end
+                const selection = window.getSelection();
+                const range = document.createRange();
+                range.selectNodeContents(page);
+                range.collapse(false); // Move to end
+                selection.removeAllRanges();
+                selection.addRange(range);
+
+                // Scroll into view if needed
+                page.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // Save state since we modified content
+                saveData();
+            }
+        }
+    });
+
+    // --- Core View Handlers ---
+
+    window.toggleSidebarMenu = function (menuId) {
+        const menu = document.getElementById(menuId);
+        if (!menu) return;
+
+        let bookTab = menu.previousElementSibling;
+        if (!bookTab || !bookTab.classList.contains('book-tab')) {
+            bookTab = menu.parentElement.querySelector('.book-tab');
+        }
+
+        menu.classList.toggle('active');
+
+        if (menu.classList.contains('active')) {
+            if (bookTab) bookTab.classList.add('selected');
+            currentBookId = menuId;
+        } else {
+            if (bookTab) bookTab.classList.remove('selected');
+        }
+        updateToolbarText();
+    };
+
+    function updateToolbarText() {
+        const toolbarText = document.querySelector('.sidebar-toolbar .toolbar-text');
+        if (!toolbarText) return;
+
+        const selectedPage = document.querySelector('.page-link.selected');
+        const selectedBook = document.querySelector('.book-tab.selected');
+
+        let bookName = "";
+        let pageName = "";
+        let bookColor = getComputedStyle(document.body).color;
+
+        const getBookColor = (bookTab) => {
+            const icon = bookTab.querySelector('i');
+            if (icon) {
+                return icon.style.color || getComputedStyle(icon).color;
+            }
+            return '';
+        };
+
+        if (selectedPage) {
+            const submenu = selectedPage.closest('.sidebar-submenu');
+            if (submenu) {
+                const parentBookTab = submenu.previousElementSibling;
+                if (parentBookTab && parentBookTab.classList.contains('book-tab')) {
+                    bookName = parentBookTab.querySelector('.sidebar-text').innerText;
+                    bookColor = getBookColor(parentBookTab);
+                }
+            }
+            let text = selectedPage.querySelector('.sidebar-text').innerText;
+            if (text.includes(':')) {
+                text = text.split(':')[0].trim();
+            }
+            pageName = text;
+        }
+        else if (selectedBook) {
+            bookName = selectedBook.querySelector('.sidebar-text').innerText;
+            bookColor = getBookColor(selectedBook);
+        }
+
+        const bookSpan = `<span class="book-part" style="color: ${bookColor};">${bookName}</span>`;
+
+        if (bookName && pageName) {
+            toolbarText.innerHTML = `${bookSpan}<span class="separator"></span><span class="page-part">${pageName}</span>`;
+            toolbarText.title = `${bookName} | ${pageName}`;
+        } else if (bookName) {
+            toolbarText.innerHTML = `${bookSpan}`;
+        } else {
+            toolbarText.textContent = "Select a Page";
+        }
+    }
+
+    function selectItem(type, element) {
+        const selector = type === 'book' ? '.book-tab' : '.page-link';
+        if (type === 'page') {
+            document.querySelectorAll(selector).forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        updateToolbarText();
+    }
+
+    // --- Interactions (Context Menu, Rename, etc) that need Save ---
+
+    const contextMenu = document.getElementById('context-menu');
+    const contextClose = document.getElementById('context-close');
+    const contextColor = document.getElementById('context-color');
+    let targetElement = null;
+
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#context-menu')) return;
+        if (contextMenu.style.display === 'block') {
+            contextMenu.style.display = 'none';
+        }
+    });
+
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        sidebar.addEventListener('contextmenu', (e) => {
+            const item = e.target.closest('.sidebar-item');
+            if (item) {
+                e.preventDefault();
+                targetElement = item;
+
+                if (item.classList.contains('book-tab')) {
+                    contextColor.style.display = 'flex';
+                } else {
+                    contextColor.style.display = 'none';
+                }
+
+                contextMenu.style.top = `${e.pageY}px`;
+                contextMenu.style.left = `${e.pageX}px`;
+                contextMenu.style.display = 'block';
+            }
+        });
+    }
+
+    contextMenu.addEventListener('click', (e) => {
+        const swatch = e.target.closest('.context-swatch');
+        if (swatch) {
+            e.stopPropagation();
+            const color = swatch.dataset.color;
+
+            if (targetElement && targetElement.classList.contains('book-tab')) {
+                const icon = targetElement.querySelector('i');
+                if (icon) {
+                    icon.style.setProperty('color', color, 'important');
+                    updateToolbarText();
+                    saveData(); // SAVE: Color change
+                }
+            }
+            contextMenu.style.display = 'none';
+        }
+    });
+
+    // --- Deletion Logic ---
+
+    function deleteItem(targetElement) {
+        if (!targetElement) return;
+
+        // Check if it's a Book
+        if (targetElement.classList.contains('book-tab')) {
+            const group = targetElement.closest('.book-group');
+            if (group) {
+                // Remove associated content pages for ALL pages in this book
+                const pages = group.querySelectorAll('.page-link');
+                pages.forEach(page => {
+                    const targetId = page.dataset.targetId;
+                    if (targetId && editor.chapters.has(targetId)) {
+                        editor.deleteChapter(targetId);
+                    }
+                });
+                group.remove();
+            }
+        }
+        // Check if it's a Virtual Page (Visual Slice)
+        else if (targetElement.classList.contains('virtual-page-link')) {
+            const text = targetElement.querySelector('.sidebar-text').innerText;
+            const match = text.match(/Page (\d+)/);
+            if (match) {
+                deleteVirtualPage(parseInt(match[1]));
+                // No manual remove needed, updatePagination reflows sidebar
+            }
+        }
+        // Check if it's a Standard Page (Chapter)
+        else if (targetElement.classList.contains('page-link')) {
+            const targetId = targetElement.dataset.targetId;
+            if (targetId) {
+                editor.deleteChapter(targetId);
+            }
+            targetElement.remove();
+        }
+
+        updateToolbarText();
+        saveData(); // SAVE: Deletion
+    }
+
+    // Backspace / Delete Key Listener
+    document.addEventListener('keydown', (e) => {
+        // Only trigger if NOT typing in an editor or input
+        if (e.target.isContentEditable || e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            return;
+        }
+
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+            const selected = document.querySelector('.page-link.selected, .book-tab.selected');
+            if (selected) {
+                // Optional: Confirm dialog? User requested "just click backspace".
+                deleteItem(selected);
+            }
+        }
+    });
+
+    contextClose.addEventListener('click', () => {
+        if (targetElement) {
+            deleteItem(targetElement);
+            contextMenu.style.display = 'none';
+            targetElement = null;
+        }
+    });
+
+    // Rename
+    sidebarBooksScroll.addEventListener('dblclick', (e) => {
+        const bookTab = e.target.closest('.book-tab');
+        if (!bookTab) return;
+
+        const textSpan = bookTab.querySelector('.sidebar-text');
+        if (!textSpan) return;
+        if (textSpan.style.display === 'none') return;
+
+        const currentName = textSpan.innerText;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = currentName;
+        input.className = 'editable-input';
+
+        textSpan.style.display = 'none';
+        bookTab.insertBefore(input, textSpan);
+        input.focus();
+        input.select();
+
+        function saveName() {
+            const newName = input.value.trim() || currentName;
+            textSpan.innerText = newName;
+            textSpan.style.display = '';
+            input.remove();
+            updateToolbarText();
+            saveData(); // SAVE: Rename
+        }
+
+        input.addEventListener('blur', saveName);
+        input.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter') saveName();
+        });
+    });
+
+    // Click Delegation
+    sidebarBooksScroll.addEventListener('click', (e) => {
+        const pageLink = e.target.closest('.page-link');
+        if (pageLink) {
+            selectItem('page', pageLink);
+        }
+    });
+
+
+    // --- Drag and Drop Logic ---
+    let draggedItem = null;
+    let longPressTimer;
+    let isDragging = false;
+    let startY = 0;
+
+    function initDraggable(draggableEl, handleEl) {
+        if (!handleEl) return;
+
+        handleEl.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return;
+            startY = e.clientY;
+            longPressTimer = setTimeout(() => {
+                startDrag(draggableEl, e.clientY);
+            }, 600);
+        });
+
+        const clearTimer = () => {
+            if (longPressTimer) clearTimeout(longPressTimer);
+        };
+
+        handleEl.addEventListener('mouseup', clearTimer);
+        handleEl.addEventListener('mouseleave', clearTimer);
+        handleEl.addEventListener('mousemove', (e) => {
+            if (Math.abs(e.clientY - startY) > 5) clearTimer();
+        });
+
+        handleEl.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            longPressTimer = setTimeout(() => {
+                startDrag(draggableEl, e.touches[0].clientY);
+            }, 600);
+        }, { passive: false });
+
+        handleEl.addEventListener('touchend', clearTimer);
+        handleEl.addEventListener('touchmove', (e) => {
+            if (Math.abs(e.touches[0].clientY - startY) > 5) clearTimer();
+        }, { passive: false });
+    }
+
+    function setupBookGroupDrag(group) {
+        const bookTab = group.querySelector('.book-tab');
+        initDraggable(group, bookTab);
+        group.querySelectorAll('.page-link').forEach(page => {
+            initDraggable(page, page);
+        });
+    }
+
+    function startDrag(item, initialY) {
+        isDragging = true;
+        draggedItem = item;
+        item.classList.add('dragging');
+        document.body.style.userSelect = 'none';
+
+        document.addEventListener('mousemove', onDragMove);
+        document.addEventListener('mouseup', onDragEnd);
+        document.addEventListener('touchmove', onTouchMove, { passive: false });
+        document.addEventListener('touchend', onDragEnd);
+    }
+
+    function onDragMove(e) {
+        if (!isDragging || !draggedItem) return;
+        e.preventDefault();
+        handleMove(e.clientY);
+    }
+
+    function onTouchMove(e) {
+        if (!isDragging || !draggedItem) return;
+        e.preventDefault();
+        handleMove(e.touches[0].clientY);
+    }
+
+    function handleMove(clientY) {
+        const container = draggedItem.parentElement;
+        const itemClass = draggedItem.classList.contains('book-group') ? '.book-group' : '.page-link';
+        const siblings = [...container.querySelectorAll(`${itemClass}:not(.dragging)`)];
+
+        let nextSibling = siblings.find(sibling => {
+            const box = sibling.getBoundingClientRect();
+            const center = box.top + box.height / 2;
+            return clientY < center;
+        }) || null;
+
+        container.insertBefore(draggedItem, nextSibling);
+    }
+
+    function onDragEnd() {
+        if (draggedItem) {
+            draggedItem.classList.remove('dragging');
+            draggedItem = null;
+        }
+        isDragging = false;
+        document.body.style.userSelect = '';
+
+        document.removeEventListener('mousemove', onDragMove);
+        document.removeEventListener('mouseup', onDragEnd);
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('touchend', onDragEnd);
+
+        updateToolbarText();
+        saveData(); // SAVE: Reordering
+    }
+
+    // --- Init ---
+    // --- Init ---
+    // Always start fresh - disabled persistence
+    if (true) { // Changed from: if (!loadData())
+        // First Run: Default 1 Book 1 Page
+        const initialPageId = 'note-page-1';
+        editor.createChapter(initialPageId, 'Page 1', '<p class="editor-block" id="block-init">Start typing...</p>');
+        editor.setActiveChapter(initialPageId);
+
+        // Don't save - we want fresh state on refresh
+        // saveData(); // Disabled
+
+        const defaultGroup = document.querySelector('.book-group');
+        if (defaultGroup) {
+            setupBookGroupDrag(defaultGroup);
+            const submenu = defaultGroup.querySelector('.sidebar-submenu');
+            if (submenu) {
+                submenu.innerHTML = '';
+                createSidebarLink(submenu, 'Page 1', initialPageId, false);
+                const menuId = defaultGroup.dataset.bookId + '-menu';
+                submenu.id = menuId;
+                const bookTab = defaultGroup.querySelector('.book-tab');
+                if (bookTab) bookTab.onclick = () => toggleSidebarMenu(menuId);
+                toggleSidebarMenu(menuId);
+                const link = submenu.querySelector('.page-link');
+                if (link) selectItem('page', link);
+            }
+        }
+    } else {
+        // Data Loaded successfully
+        // Validate Active Chapter
+        if (!editor.activeChapterId || !editor.chapters.has(editor.activeChapterId)) {
+            // Fallback: Find first available page
+            const firstBook = document.querySelector('.book-group');
+            if (firstBook) {
+                const firstPageLink = firstBook.querySelector('.page-link');
+                if (firstPageLink) {
+                    editor.activeChapterId = firstPageLink.dataset.targetId;
+                }
+            }
+        }
+
+        // If still no active chapter (empty books?), force default
+        if (!editor.activeChapterId) {
+            const initialPageId = 'note-page-1';
+            // Check if we need to recreate the chapter or just set ID
+            if (!editor.chapters.has(initialPageId)) {
+                editor.createChapter(initialPageId, 'Page 1', '<p class="editor-block" id="block-init">Start typing...</p>');
+            }
+            editor.activeChapterId = initialPageId;
+        }
+
+        // Render
+        if (editor.activeChapterId) {
+            editor.setActiveChapter(editor.activeChapterId);
+
+            // Sync UI Selection
+            const pageLink = document.querySelector(`.page-link[data-target-id="${editor.activeChapterId}"]`);
+            if (pageLink) selectItem('page', pageLink);
+
+            updateToolbarText();
+        }
+    }
+
+    // --- Toolbar & Context ---
+    // (updateToolbarText is already defined above)
+
+    // --- Zoom Logic ---
+    let currentScale = 1;
+    const MIN_SCALE = 0.5;
+    const MAX_SCALE = 3.0;
+    const zoomLevels = [1, 1.2, 0.8, 0.5];
+    let zoomCycleIndex = 0;
+
+    // 'pageContainer' is defined globally at the top.
+    if (pageContainer) {
+        pageContainer.style.zoom = `${currentScale}`;
+    }
+
+    const mainContentArea = document.querySelector('.main-content-area');
+    const zoomBtn = document.getElementById('zoom-btn');
+
+    // 1. Wheel Zoom (Free)
+    if (mainContentArea && pageContainer) {
+        mainContentArea.addEventListener('wheel', (e) => {
+            if (e.ctrlKey) {
+                e.preventDefault();
+                const zoomFactor = 0.01;
+                if (e.deltaY < 0) {
+                    currentScale += (Math.abs(e.deltaY) * zoomFactor);
+                } else {
+                    currentScale -= (Math.abs(e.deltaY) * zoomFactor);
+                }
+                currentScale = Math.min(Math.max(currentScale, MIN_SCALE), MAX_SCALE);
+                pageContainer.style.zoom = `${currentScale}`;
+            }
+        }, { passive: false });
+    }
+
+    // 2. Button Cycle Zoom
+    if (zoomBtn && pageContainer) {
+        zoomBtn.addEventListener('click', () => {
+            zoomCycleIndex = (zoomCycleIndex + 1) % zoomLevels.length;
+            currentScale = zoomLevels[zoomCycleIndex];
+            pageContainer.style.zoom = `${currentScale}`;
+        });
+    }
+
+    // --- NUCLEAR FAILSAFE: Ensure Page Renders ---
+    setTimeout(() => {
+        const container = document.querySelector('.a4-page-container');
+        const editorEl = document.getElementById('document-editor');
+        if (container && (!editorEl || container.children.length === 0)) {
+            console.warn("Failsafe: No page rendered. Forcing Page 1.");
+
+            // Force Init
+            let firstPageId = 'note-page-1';
+
+            // Try to find first page in data if possible
+            if (editor.chapters.size > 0) {
+                firstPageId = editor.chapters.keys().next().value;
+            } else {
+                // Create fresh if totally empty
+                editor.createChapter(firstPageId, 'Page 1', '<p class="editor-block" id="block-init">Start typing...</p>');
+            }
+
+            editor.activeChapterId = firstPageId;
+            editor.renderActiveChapter();
+
+            // Sync UI Selection
+            const link = document.querySelector(`.page-link[data-target-id="${firstPageId}"]`);
+            if (link) {
+                selectItem('page', link);
+                const submenu = link.closest('.sidebar-submenu');
+                if (submenu) {
+                    toggleSidebarMenu(submenu.id);
+                }
+                updateToolbarText();
+            }
+        }
+    }, 500);
+
+}); // End DOMContentLoaded
