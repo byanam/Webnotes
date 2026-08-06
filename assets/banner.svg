@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260" width="100%" height="260">
+  <defs>
+    <!-- Dark Gothic Radial Glow Gradient -->
+    <radialGradient id="gothicBg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#18181c" />
+      <stop offset="100%" stop-color="#08080a" />
+    </radialGradient>
+
+    <!-- Metallic Silver Text Gradient -->
+    <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#a1a1aa" />
+      <stop offset="100%" stop-color="#52525b" />
+    </linearGradient>
+
+    <!-- Glowing Border Gradient -->
+    <linearGradient id="borderGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#27272a" />
+      <stop offset="50%" stop-color="#71717a" />
+      <stop offset="100%" stop-color="#27272a" />
+    </linearGradient>
+
+    <!-- CSS Keyframe Animations -->
+    <style>
+      @keyframes pulseBorder {
+        0%, 100% { stroke-opacity: 0.3; }
+        50% { stroke-opacity: 0.9; }
+      }
+      @keyframes lineDraw {
+        0% { stroke-dashoffset: 600; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes glowText {
+        0%, 100% { filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.2)); }
+        50% { filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.6)); }
+      }
+      @keyframes fadeFloat {
+        0%, 100% { transform: translateY(0px); opacity: 0.85; }
+        50% { transform: translateY(-4px); opacity: 1; }
+      }
+      @keyframes blinkCursor {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      .bg-card { fill: url(#gothicBg); }
+      .border-pulse {
+        stroke: url(#borderGlow);
+        stroke-width: 1.5px;
+        animation: pulseBorder 4s infinite ease-in-out;
+      }
+      .title-text {
+        font-family: 'EB Garamond', 'Georgia', serif;
+        font-size: 42px;
+        font-weight: 700;
+        letter-spacing: 6px;
+        fill: url(#silverGradient);
+        animation: glowText 3.5s infinite ease-in-out;
+      }
+      .subtitle-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        fill: #a1a1aa;
+        animation: fadeFloat 4s infinite ease-in-out;
+      }
+      .divider-line {
+        stroke: #3f3f46;
+        stroke-width: 1px;
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+        animation: lineDraw 2.5s forwards ease-out;
+      }
+      .tag-pill {
+        fill: #18181b;
+        stroke: #27272a;
+        stroke-width: 1px;
+        rx: 4px;
+      }
+      .tag-text {
+        font-family: monospace;
+        font-size: 11px;
+        fill: #d4d4d8;
+        font-weight: 600;
+      }
+      .cursor {
+        fill: #e4e4e7;
+        animation: blinkCursor 1s infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Canvas Card -->
+  <rect width="796" height="256" x="2" y="2" rx="12" class="bg-card" />
+  <rect width="796" height="256" x="2" y="2" rx="12" fill="none" class="border-pulse" />
+
+  <!-- Animated Cross Gothic Decorators -->
+  <text x="24" y="32" fill="#52525b" font-family="sans-serif" font-size="12">🕇 EDITORIAL EDITION</text>
+  <text x="710" y="32" fill="#52525b" font-family="sans-serif" font-size="12">NO. 01 🕇</text>
+
+  <!-- Title & Cursor -->
+  <g transform="translate(400, 95)" text-anchor="middle">
+    <text class="title-text">NOTES 101</text>
+  </g>
+
+  <!-- Animated Divider Line -->
+  <line x1="120" y1="122" x2="680" y2="122" class="divider-line" />
+
+  <!-- Subtitle -->
+  <g transform="translate(400, 148)" text-anchor="middle">
+    <text class="subtitle-text">DESIGNED IN PHOTOSHOP · ILLUSTRATOR · FIGMA</text>
+  </g>
+
+  <!-- Dark Gothic Monochrome Badges Row -->
+  <g transform="translate(65, 185)">
+    <!-- HTML5 -->
+    <rect x="0" y="0" width="65" height="26" class="tag-pill" />
+    <text x="32.5" y="17" text-anchor="middle" class="tag-text">HTML5</text>
+
+    <!-- CSS3 -->
+    <rect x="73" y="0" width="55" height="26" class="tag-pill" />
+    <text x="100.5" y="17" text-anchor="middle" class="tag-text">CSS3</text>
+
+    <!-- JS -->
+    <rect x="136" y="0" width="45" height="26" class="tag-pill" />
+    <text x="158.5" y="17" text-anchor="middle" class="tag-text">JS</text>
+
+    <!-- PHOTOSHOP -->
+    <rect x="189" y="0" width="95" height="26" class="tag-pill" />
+    <text x="236.5" y="17" text-anchor="middle" class="tag-text">PHOTOSHOP</text>
+
+    <!-- ILLUSTRATOR -->
+    <rect x="292" y="0" width="95" height="26" class="tag-pill" />
+    <text x="339.5" y="17" text-anchor="middle" class="tag-text">ILLUSTRATOR</text>
+
+    <!-- FIGMA -->
+    <rect x="395" y="0" width="60" height="26" class="tag-pill" />
+    <text x="425" y="17" text-anchor="middle" class="tag-text">FIGMA</text>
+
+    <!-- GSAP -->
+    <rect x="463" y="0" width="55" height="26" class="tag-pill" />
+    <text x="490.5" y="17" text-anchor="middle" class="tag-text">GSAP</text>
+
+    <!-- FIREBASE -->
+    <rect x="526" y="0" width="75" height="26" class="tag-pill" />
+    <text x="563.5" y="17" text-anchor="middle" class="tag-text">FIREBASE</text>
+
+    <!-- MIT -->
+    <rect x="609" y="0" width="60" height="26" class="tag-pill" />
+    <text x="639" y="17" text-anchor="middle" class="tag-text">MIT</text>
+  </g>
+</svg>
