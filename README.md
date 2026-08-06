@@ -1,31 +1,27 @@
 <div align="center">
 
-  <!-- Animated Typing Banner -->
-  <a href="https://github.com/anamrazzaque/ai-note">
-    <img src="https://readme-typing-svg.demolab.com?font=EB+Garamond&weight=700&size=30&pause=1200&color=CCCCCC&center=true&vCenter=true&width=700&height=65&lines=NOTES+101;Designed+in+Photoshop%2C+Illustrator+%26+Figma;Dark+editorial+note-taking+app;Canvas+drawing+%C2%B7+100%2B+fonts+%C2%B7+PDF+export" alt="Notes 101 Animated Banner" />
-  </a>
+  <!-- Animated SVG Header Banner -->
+  <img src="assets/banner.svg" alt="Notes 101 Dark Gothic Banner" width="100%" />
 
+  <br><br>
+
+  <!-- Dark Gothic Pure Monochrome Badge Row -->
   <p align="center">
-    <code>DARK EDITORIAL NOTE-TAKING DESK</code>
+    <img src="https://img.shields.io/badge/HTML5-000000?style=for-the-badge&logoColor=CCCCCC" alt="HTML5" />
+    <img src="https://img.shields.io/badge/CSS3-000000?style=for-the-badge&logoColor=CCCCCC" alt="CSS3" />
+    <img src="https://img.shields.io/badge/JavaScript-000000?style=for-the-badge&logoColor=CCCCCC" alt="JavaScript" />
+    <img src="https://img.shields.io/badge/Photoshop-000000?style=for-the-badge&logoColor=CCCCCC" alt="Photoshop" />
+    <img src="https://img.shields.io/badge/Illustrator-000000?style=for-the-badge&logoColor=CCCCCC" alt="Illustrator" />
+    <img src="https://img.shields.io/badge/Figma-000000?style=for-the-badge&logoColor=CCCCCC" alt="Figma" />
+    <img src="https://img.shields.io/badge/GSAP-000000?style=for-the-badge&logoColor=CCCCCC" alt="GSAP" />
+    <img src="https://img.shields.io/badge/Firebase-000000?style=for-the-badge&logoColor=CCCCCC" alt="Firebase" />
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-000000?style=for-the-badge&logoColor=CCCCCC" alt="MIT License" /></a>
   </p>
 
-  <!-- Dark Gothic Monochrome Badges -->
-  <p align="center">
-    <img src="https://img.shields.io/badge/HTML5-0D0D0D?style=for-the-badge&logo=html5&logoColor=CCCCCC" alt="HTML5" />
-    <img src="https://img.shields.io/badge/CSS3-0D0D0D?style=for-the-badge&logo=css3&logoColor=CCCCCC" alt="CSS3" />
-    <img src="https://img.shields.io/badge/JavaScript-0D0D0D?style=for-the-badge&logo=javascript&logoColor=CCCCCC" alt="JavaScript" />
-    <img src="https://img.shields.io/badge/Photoshop-0D0D0D?style=for-the-badge&logo=adobephotoshop&logoColor=CCCCCC" alt="Photoshop" />
-    <img src="https://img.shields.io/badge/Illustrator-0D0D0D?style=for-the-badge&logo=adobeillustrator&logoColor=CCCCCC" alt="Illustrator" />
-    <img src="https://img.shields.io/badge/Figma-0D0D0D?style=for-the-badge&logo=figma&logoColor=CCCCCC" alt="Figma" />
-    <img src="https://img.shields.io/badge/GSAP-0D0D0D?style=for-the-badge&logo=greensock&logoColor=CCCCCC" alt="GSAP" />
-    <img src="https://img.shields.io/badge/Firebase-0D0D0D?style=for-the-badge&logo=firebase&logoColor=CCCCCC" alt="Firebase" />
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-0D0D0D?style=for-the-badge&logo=opensourceinitiative&logoColor=CCCCCC" alt="MIT License" /></a>
-  </p>
-
-  <br />
+  <br>
 
   <p align="center">
-    <a href="index.html">📁 <b>Open Editor Desk</b></a> &nbsp;·&nbsp;
+    <a href="index.html">📁 <b>Open App Desk</b></a> &nbsp;·&nbsp;
     <a href="landing.html">🖤 <b>Open Landing Page</b></a> &nbsp;·&nbsp;
     <a href="https://opensource.org/licenses/MIT">📜 <b>MIT License</b></a>
   </p>
@@ -34,72 +30,82 @@
 
 <p align="center">─────── 🕇 ───────</p>
 
+## Visual Media & Animation Preview
+
+<div align="center">
+  <img src="assets/ae49f0b2eaf092695185f90a8ce26df8__1_.gif" alt="Notes 101 Animation GIF" width="80%" style="border-radius: 8px; border: 1px solid #222;" />
+  <br><br>
+  <img src="assets/app-screenshot.png" alt="Notes 101 Interface Screenshot" width="90%" style="border-radius: 8px; border: 1px solid #222;" />
+</div>
+
+<p align="center">─────── 🕇 ───────</p>
+
 ## About
 
-Notes 101 is a minimal, dark-themed note-taking app.
+Notes 101 is a minimal, dark-themed note-taking web app.
 
 It was designed in **Photoshop**, **Illustrator**, and **Figma**, then built using plain HTML, CSS, JavaScript, GSAP, and Firebase.
 
-It has no ads, no subscriptions, and runs directly in the browser.
+It is 100% free, has no ads, no subscriptions, and runs directly in your web browser.
 
 ---
 
 ## Animated Effects
 
-- **Animated Typing Header**: Live dynamic text effect at the top of the page.
-- **Scroll Animations**: Smooth scrolling with scroll-triggered text fade-ins and screenshot scale effects on the landing page (`landing.html`).
-- **Smooth Page Transitions**: Transition overlays between landing page and editor view.
-- **Curtain Reveal Footer**: Fixed contact footer that reveals as you scroll down the page.
+1. **Animated SVG Banner**: Dynamic border pulsing, line drawing, and glowing title animations at the top of the README.
+2. **Scroll Animations**: Smooth scrolling on the landing page (`landing.html`) with scroll-triggered text reveals and screenshot zoom effects.
+3. **Curtain Reveal Footer**: Contact footer anchored behind the page that reveals when scrolling to the bottom.
+4. **Animated GIF Element**: Embedded animation asset showcasing the aesthetic tone.
 
 ---
 
 ## Features
 
-### 1. Editor & Pages
-- **A4 Page Layout**: Pages look like A4 sheets with automatic page splitting when text overflows.
-- **Folders & Books**: Organize notes into folders, books, and pages using the sidebar tree.
-- **Note Search**: Search bar to scan text across pages with match counters and highlight markers.
+### 1. Editor & Workspace
+- **A4 Page Layout**: Notes render as A4 sheets with automatic page splitting when text overflows.
+- **Sidebar Tree**: Organize notes into folders, books, and pages.
+- **Text Search**: Document search bar to scan pages with match counters and highlight markers.
 
-### 2. Typography & Fonts
-- **100+ Google Fonts**: Switch font styles instantly from a dropdown (Sumana, Inter, Fira Code, Caveat, Playfair Display, etc.).
-- **Formatting Options**: Bold, italic, underline, alignment (left/center/right), line spacing, bullet lists, numbered lists, and checklists.
-- **Font Sizing**: Preset sizes for small, medium, and large text.
+### 2. Typography & Formatting
+- **100+ Google Fonts**: Dropdown menu to switch fonts (Sumana, Inter, Fira Code, Caveat, Playfair Display, etc.).
+- **Text Formatting**: Bold, italic, underline, alignment (left, center, right), line spacing, bullet lists, numbered lists, and checklists.
+- **Font Sizes**: Preset text sizing for small, medium, and large.
 
 ### 3. Color Pickers
-- **Text Color Picker**: HSL spectrum color canvas with hue slider and HEX codes.
-- **Highlight Colors**: Preset pastel swatches for marking text.
-- **Canvas Colors**: Options to change page background shade (dark mode, warm ivory, pure white).
-- **Ink Color**: Color selector for drawing lines and sketches.
+- **Text Color**: HSL spectrum canvas with hue slider and HEX input.
+- **Highlights**: Preset swatches for highlighting text.
+- **Canvas Background**: Change page background shade (dark mode, warm ivory, pure white).
+- **Ink Color**: Color selector for drawing lines.
 
-### 4. Drawing & Sketching
-- **Freehand Canvas Overlay**: Draw directly on top of note pages.
+### 4. Canvas Drawing Layer
+- **Freehand Sketching**: Draw directly on top of note pages.
 - **Tools**: Fountain pen, pencil, art brush, and eraser.
-- **Line Sizes**: Fine (2px), medium (6px), and thick (14px).
+- **Stroke Sizes**: Fine (2px), medium (6px), and thick (14px).
 
 ### 5. Media & Export
-- **Insert Images & Tables**: Add photos and structured data tables into notes.
-- **PDF Export**: Download notes as PDF files with a single click.
+- **Insert Media**: Upload images and insert data tables.
+- **PDF Export**: Download notes as PDF files with one click.
 
-### 6. Cloud & Account
+### 6. Cloud Sync
 - **Google Sign-In**: Login with Google via Firebase Auth.
-- **Cloud Save**: Notes auto-save to Firestore database in the background.
-- **Offline Support**: Saves locally in browser storage if offline.
+- **Background Sync**: Notes auto-save to Firestore database per user.
+- **Offline Storage**: Local browser storage backup when offline.
 
 ---
 
-## Software & Tech Used
+## Software & Technologies Used
 
-- **Design**: Adobe Photoshop, Adobe Illustrator, Figma
+- **Design Software**: Adobe Photoshop, Adobe Illustrator, Figma
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Motion & Scroll**: GSAP, ScrollTrigger, Lenis
-- **Backend & Auth**: Firebase Auth, Cloud Firestore
-- **PDF Export**: html2pdf.js, html2canvas, jsPDF
+- **Scroll & Motion**: GSAP, ScrollTrigger, Lenis
+- **Backend & Storage**: Firebase Auth, Cloud Firestore
+- **PDF Compiler**: html2pdf.js, html2canvas, jsPDF
 
 ---
 
 ## Keyboard Shortcuts
 
-| Key | Function |
+| Shortcut | Function |
 | :--- | :--- |
 | `Ctrl + B` / `Cmd + B` | Bold |
 | `Ctrl + I` / `Cmd + I` | Italic |
@@ -108,13 +114,13 @@ It has no ads, no subscriptions, and runs directly in the browser.
 
 ---
 
-## How to Run Locally
+## Local Setup
 
-1. Clone the repo:
+1. Clone the repository:
    ```bash
    git clone https://github.com/anamrazzaque/ai-note.git
    ```
-2. Start a local server:
+2. Run a local server:
    ```bash
    python3 -m http.server 8000
    ```
@@ -124,7 +130,7 @@ It has no ads, no subscriptions, and runs directly in the browser.
 
 ## License
 
-This project is licensed under the **MIT License**. Free to use, modify, and distribute.
+Licensed under the **MIT License**. Free to use, modify, and share.
 
 <p align="center">
   <sub>Notes 101 · Designed in Photoshop, Illustrator & Figma · MIT License</sub>
