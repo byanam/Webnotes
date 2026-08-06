@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "login-note-taking",
+    "hosting": "notes--101"
+  },
+  "targets": {},
+  "etags": {}
+}

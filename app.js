@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof window.clearNotesData === 'function') {
                 window.clearNotesData();
             }
-            if (!window.location.pathname.endsWith('landing.html') && !window.location.href.includes('landing.html')) {
-                window.location.href = 'landing.html';
+            if (!window.location.pathname.endsWith('index.html') && !window.location.href.includes('index.html') && window.location.pathname !== '/') {
+                window.location.href = 'index.html';
             }
             return;
         }
@@ -150,9 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const result = await logoutUser();
         if (result.success) {
-            console.log("[App] Logged out. Redirecting to landing.html...");
+            console.log("[App] Logged out. Redirecting to index.html...");
             sessionStorage.setItem('justLoggedOut', 'true');
-            window.location.href = 'landing.html?logout=true';
+            window.location.href = 'index.html?logout=true';
         } else {
             alert("Logout failed: " + result.error);
             if (logoutBtn) {
