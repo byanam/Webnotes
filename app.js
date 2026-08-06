@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof window.clearNotesData === 'function') {
                 window.clearNotesData();
             }
-            window.location.href = 'landing.html';
+            if (!window.location.pathname.endsWith('landing.html') && !window.location.href.includes('landing.html')) {
+                window.location.href = 'landing.html';
+            }
             return;
         }
 

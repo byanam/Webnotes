@@ -424,7 +424,9 @@ function initAuthUI() {
                 setLoading(true, 'Redirecting...');
 
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    if (!window.location.pathname.endsWith('index.html') && !window.location.href.includes('index.html')) {
+                        window.location.href = 'index.html';
+                    }
                 }, 300);
             }
         });
