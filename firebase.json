@@ -9,7 +9,12 @@
     "redirects": [
       {
         "source": "/landing.html",
-        "destination": "/index.html",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/index.html",
+        "destination": "/",
         "type": 301
       }
     ]

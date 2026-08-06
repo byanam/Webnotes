@@ -35,8 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof window.clearNotesData === 'function') {
                 window.clearNotesData();
             }
-            if (!window.location.pathname.endsWith('index.html') && !window.location.href.includes('index.html') && window.location.pathname !== '/') {
-                window.location.href = 'index.html';
+            const path = window.location.pathname;
+            if (path !== '/' && path !== '' && !path.endsWith('/index.html') && !path.endsWith('/')) {
+                window.location.href = '/';
             }
             return;
         }
@@ -150,9 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const result = await logoutUser();
         if (result.success) {
-            console.log("[App] Logged out. Redirecting to index.html...");
+            console.log("[App] Logged out. Redirecting to clean homepage...");
             sessionStorage.setItem('justLoggedOut', 'true');
-            window.location.href = 'index.html?logout=true';
+            window.location.href = '/?logout=true';
         } else {
             alert("Logout failed: " + result.error);
             if (logoutBtn) {

@@ -21,8 +21,8 @@
   <br>
 
   <p align="center">
-    <a href="editor.html">📁 <b>Open App Desk</b></a> &nbsp;·&nbsp;
-    <a href="index.html">🖤 <b>Open Landing Page</b></a> &nbsp;·&nbsp;
+    <a href="/editor.html">📁 <b>Open App Desk</b></a> &nbsp;·&nbsp;
+    <a href="/">🖤 <b>Open Landing Page</b></a> &nbsp;·&nbsp;
     <a href="https://opensource.org/licenses/MIT">📜 <b>MIT License</b></a>
   </p>
 
@@ -43,7 +43,7 @@ It is 100% free, has no ads, no subscriptions, and runs directly in your web bro
 ## Animated Effects
 
 1. **Animated SVG Banner**: Dynamic border pulsing, line drawing, and glowing title animations at the top of the README.
-2. **Scroll Animations**: Smooth scrolling on the landing page (`index.html`) with scroll-triggered text reveals and screenshot zoom effects.
+2. **Scroll Animations**: Smooth scrolling on the landing page (`/`) with scroll-triggered text reveals and screenshot zoom effects.
 3. **Curtain Reveal Footer**: Contact footer anchored behind the page that reveals when scrolling to the bottom.
 
 ---
@@ -113,7 +113,7 @@ It is 100% free, has no ads, no subscriptions, and runs directly in your web bro
    ```bash
    python3 -m http.server 8000
    ```
-3. Open `http://localhost:8000/index.html` (or `http://localhost:8000/`) in your browser.
+3. Open `http://localhost:8000/` in your browser.
 
 ---
 
