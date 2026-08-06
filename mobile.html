@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes 101 — Desktop Experience Required</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+  <style>
+    body {
+      background-color: #08080a;
+      color: #DFD5C7;
+      font-family: 'EB Garamond', Georgia, serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .mobile-card {
+      max-width: 420px;
+      width: 100%;
+      background: rgba(18, 18, 22, 0.95);
+      border: 1px solid rgba(223, 213, 199, 0.15);
+      border-radius: 12px;
+      padding: 40px 28px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
+    .mobile-icon {
+      font-size: 42px;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+    .mobile-title {
+      font-family: 'Oranienbaum', serif;
+      font-size: 32px;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+    .mobile-subtitle {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #888888;
+      margin-bottom: 24px;
+    }
+    .mobile-text {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #DFD5C7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .mobile-notice {
+      font-size: 14px;
+      color: #888888;
+      margin-bottom: 32px;
+      font-style: normal;
+      line-height: 1.5;
+    }
+    .mobile-btn {
+      display: block;
+      width: 100%;
+      padding: 14px 20px;
+      background: transparent;
+      border: 1px solid rgba(223, 213, 199, 0.3);
+      color: #DFD5C7;
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: all 0.25s ease;
+    }
+    .mobile-btn:hover {
+      background: rgba(223, 213, 199, 0.08);
+      border-color: #DFD5C7;
+      color: #ffffff;
+    }
+    .mobile-btn-subtle {
+      margin-top: 12px;
+      border: none;
+      color: #666666;
+      font-size: 14px;
+      background: none;
+    }
+    .mobile-btn-subtle:hover {
+      color: #999999;
+      background: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-card">
+    <div class="mobile-icon">🖥️</div>
+    <h1 class="mobile-title">Notes 101</h1>
+    <div class="mobile-subtitle">Desktop Experience Required</div>
+    <p class="mobile-text">
+      Notes 101 is designed for larger screen displays to provide full studio tools, A4 paper page layouts, typography controls, and freehand drawing canvas.
+    </p>
+    <p class="mobile-notice">
+      Please open this site on a laptop or desktop computer for the intended experience.
+    </p>
+    <button class="mobile-btn" onclick="overrideAndContinue()">
+      Continue to Desktop Site Anyway
+    </button>
+    <button class="mobile-btn mobile-btn-subtle" onclick="window.location.href='https://github.com/byanam/Webnotes'">
+      View GitHub Repository ↗
+    </button>
+  </div>
+
+  <script>
+    function overrideAndContinue() {
+      sessionStorage.setItem('overrideMobile', 'true');
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

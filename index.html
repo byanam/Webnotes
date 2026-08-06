@@ -4,6 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function() {
+      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth < 768 && window.innerHeight < 1000);
+      if (isMobile && sessionStorage.getItem('overrideMobile') !== 'true' && !window.location.pathname.endsWith('mobile.html')) {
+        window.location.href = 'mobile.html';
+      }
+    })();
+  </script>
   <title>Notes 101 — Anam Razzaque</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
