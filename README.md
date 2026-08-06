@@ -1,274 +1,131 @@
 <div align="center">
 
-  <!-- Main Hero Title Banner -->
-  <h1><code>📝 NOTES 101</code></h1>
+  <!-- Animated Typing Banner -->
+  <a href="https://github.com/anamrazzaque/ai-note">
+    <img src="https://readme-typing-svg.demolab.com?font=EB+Garamond&weight=700&size=30&pause=1200&color=CCCCCC&center=true&vCenter=true&width=700&height=65&lines=NOTES+101;Designed+in+Photoshop%2C+Illustrator+%26+Figma;Dark+editorial+note-taking+app;Canvas+drawing+%C2%B7+100%2B+fonts+%C2%B7+PDF+export" alt="Notes 101 Animated Banner" />
+  </a>
 
-  <h3>A Photoshop, Illustrator & Figma Crafted Digital Desk & Editorial Note Platform</h3>
-
-  <p>
-    <em>“Where modern design tools meet high-performance typography, digital canvas drawing, and real-time cloud synchronization.”</em>
+  <p align="center">
+    <code>DARK EDITORIAL NOTE-TAKING DESK</code>
   </p>
 
-  <!-- Animated Tech Badges -->
-  <p>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" /></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" /></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" /></a>
-    <a href="https://www.adobe.com/products/photoshop.html"><img src="https://img.shields.io/badge/Adobe%20Photoshop-31A8FF?style=for-the-badge&logo=adobephotoshop&logoColor=white" alt="Photoshop" /></a>
-    <a href="https://www.adobe.com/products/illustrator.html"><img src="https://img.shields.io/badge/Adobe%20Illustrator-FF9A00?style=for-the-badge&logo=adobeillustrator&logoColor=white" alt="Illustrator" /></a>
-    <a href="https://www.figma.com/"><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="Figma" /></a>
-    <a href="https://greensock.com/gsap/"><img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP" /></a>
-    <a href="https://firebase.google.com/"><img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" /></a>
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-000000?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="MIT License" /></a>
+  <!-- Dark Gothic Monochrome Badges -->
+  <p align="center">
+    <img src="https://img.shields.io/badge/HTML5-0D0D0D?style=for-the-badge&logo=html5&logoColor=CCCCCC" alt="HTML5" />
+    <img src="https://img.shields.io/badge/CSS3-0D0D0D?style=for-the-badge&logo=css3&logoColor=CCCCCC" alt="CSS3" />
+    <img src="https://img.shields.io/badge/JavaScript-0D0D0D?style=for-the-badge&logo=javascript&logoColor=CCCCCC" alt="JavaScript" />
+    <img src="https://img.shields.io/badge/Photoshop-0D0D0D?style=for-the-badge&logo=adobephotoshop&logoColor=CCCCCC" alt="Photoshop" />
+    <img src="https://img.shields.io/badge/Illustrator-0D0D0D?style=for-the-badge&logo=adobeillustrator&logoColor=CCCCCC" alt="Illustrator" />
+    <img src="https://img.shields.io/badge/Figma-0D0D0D?style=for-the-badge&logo=figma&logoColor=CCCCCC" alt="Figma" />
+    <img src="https://img.shields.io/badge/GSAP-0D0D0D?style=for-the-badge&logo=greensock&logoColor=CCCCCC" alt="GSAP" />
+    <img src="https://img.shields.io/badge/Firebase-0D0D0D?style=for-the-badge&logo=firebase&logoColor=CCCCCC" alt="Firebase" />
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-0D0D0D?style=for-the-badge&logo=opensourceinitiative&logoColor=CCCCCC" alt="MIT License" /></a>
   </p>
 
   <br />
 
-  <!-- Action Links -->
-  <p>
-    <a href="index.html"><strong>🚀 Open Web Application Desk</strong></a> ·
-    <a href="landing.html"><strong>📰 View Hermes Editorial Landing Page</strong></a> ·
-    <a href="https://opensource.org/licenses/MIT"><strong>📜 MIT License</strong></a>
+  <p align="center">
+    <a href="index.html">📁 <b>Open Editor Desk</b></a> &nbsp;·&nbsp;
+    <a href="landing.html">🖤 <b>Open Landing Page</b></a> &nbsp;·&nbsp;
+    <a href="https://opensource.org/licenses/MIT">📜 <b>MIT License</b></a>
   </p>
 
 </div>
 
-<hr />
+<p align="center">─────── 🕇 ───────</p>
 
-## 📰 Editorial Manifesto & Design Origins
+## About
 
-> *“Most note-taking applications either feel like spreadsheet software disguised as text editors or corporate workspace tools bloated with subscriptions. **Notes 101** was born out of stealing the vibe of Photoshop inspector panels, VS Code command aesthetics, and Hermes print editorial newspapers to create a digital desk environment that feels alive.”*
+Notes 101 is a minimal, dark-themed note-taking app.
 
-```
-─── EDITORIAL EDITION NO. 01 ────────────────────────────────────────────────────────
-DESIGNED ON : ADOBE PHOTOSHOP · ADOBE ILLUSTRATOR · FIGMA
-ENGINE      : VANILLA JS (ES6+) · GSAP 3 · LENIS SMOOTH SCROLL · FIREBASE V10
-LICENSE     : MIT OPEN-SOURCE LICENSE (100% FREE · NO ADS · NO SUBSCRIPTIONS)
-─────────────────────────────────────────────────────────────────────────────────────
-```
+It was designed in **Photoshop**, **Illustrator**, and **Figma**, then built using plain HTML, CSS, JavaScript, GSAP, and Firebase.
+
+It has no ads, no subscriptions, and runs directly in the browser.
 
 ---
 
-## ⚡ System Architecture & Data Flow
+## Animated Effects
 
-```mermaid
-flowchart TD
-    subgraph UI ["🎨 Studio Inspector Interface"]
-        A[Typography Inspector<br>100+ Google Fonts] --> D[A4 Editor Engine]
-        B[HSL & HEX Color Spectrum Pickers] --> D
-        C[Freehand Sketch Canvas Layer] --> D
-    end
-
-    subgraph Core ["🧠 Core Processing Engine"]
-        D[Word-Style A4 Canvas Stack] --> E[Auto-Reflow & Page Splitter]
-        E --> F[DOM Search & Highlight Engine]
-        E --> G[Vector PDF Export Compiler]
-    end
-
-    subgraph Persistence ["☁️ Cloud & Local Storage"]
-        D --> H[Firebase Auth & Firestore Cloud DB]
-        D --> I[LocalStorage Offline Fallback]
-    end
-
-    G --> J[📄 Printable PDF Document]
-    H --> K[🔐 Per-User Scoped Cloud Vault]
-```
+- **Animated Typing Header**: Live dynamic text effect at the top of the page.
+- **Scroll Animations**: Smooth scrolling with scroll-triggered text fade-ins and screenshot scale effects on the landing page (`landing.html`).
+- **Smooth Page Transitions**: Transition overlays between landing page and editor view.
+- **Curtain Reveal Footer**: Fixed contact footer that reveals as you scroll down the page.
 
 ---
 
-## 💎 Feature Deep-Dive
+## Features
 
-<details open>
-<summary><h3>🗞️ 01. Hermes Editorial Landing Page & Motion System</h3></summary>
+### 1. Editor & Pages
+- **A4 Page Layout**: Pages look like A4 sheets with automatic page splitting when text overflows.
+- **Folders & Books**: Organize notes into folders, books, and pages using the sidebar tree.
+- **Note Search**: Search bar to scan text across pages with match counters and highlight markers.
 
-The landing page (`landing.html`) is modeled after luxury editorial newspapers and high-fashion print layouts.
+### 2. Typography & Fonts
+- **100+ Google Fonts**: Switch font styles instantly from a dropdown (Sumana, Inter, Fira Code, Caveat, Playfair Display, etc.).
+- **Formatting Options**: Bold, italic, underline, alignment (left/center/right), line spacing, bullet lists, numbered lists, and checklists.
+- **Font Sizing**: Preset sizes for small, medium, and large text.
 
-- **Hermes Curtain Reveal**: Fixed-position contact section (`.contact`) anchored behind the main scrolling canvas, gracefully revealed as the editorial newspaper lifts away.
-- **Lenis Smooth Scroll Integration**: High-frequency inertial scroll engine synced to `gsap.ticker` with zero lag smoothing.
-- **GSAP Character Stagger Reveals**: Text reveal effects splitting headlines into individual letter elements (`.promo__heading-char`) with progressive blur-to-sharp transitions.
-- **App Screenshot Zoom-Out FX**: Continuous scroll-scrubbed scale transformation (`scale: 0.65` to `scale: 1.0`) for real-time visual pop.
-- **Responsive 1920px Canvas Scaling**: Responsive wrapper recalculating aspect scale factors on browser viewport resizing or orientation changes.
+### 3. Color Pickers
+- **Text Color Picker**: HSL spectrum color canvas with hue slider and HEX codes.
+- **Highlight Colors**: Preset pastel swatches for marking text.
+- **Canvas Colors**: Options to change page background shade (dark mode, warm ivory, pure white).
+- **Ink Color**: Color selector for drawing lines and sketches.
 
-</details>
+### 4. Drawing & Sketching
+- **Freehand Canvas Overlay**: Draw directly on top of note pages.
+- **Tools**: Fountain pen, pencil, art brush, and eraser.
+- **Line Sizes**: Fine (2px), medium (6px), and thick (14px).
 
-<details>
-<summary><h3>📚 02. Word-Style A4 Document Engine & Reflow</h3></summary>
+### 5. Media & Export
+- **Insert Images & Tables**: Add photos and structured data tables into notes.
+- **PDF Export**: Download notes as PDF files with a single click.
 
-- **A4 Digital Desk Pages**: Clean white/ivory contenteditable pages rendered with exact print dimensions (`210mm x 297mm` equivalent aspect ratio).
-- **Auto-Page Reflow Engine**: Real-time content height calculator that detects overflow (`scrollHeight > clientHeight`) and automatically pushes trailing nodes onto newly spawned pages.
-- **Tree-View Workspace Management**: Dynamic sidebar hierarchy supporting Folders, Books, and nested Pages with live title syncing and state persistence.
-- **Automatic Page Cleanup**: Empty auto-generated pages are dynamically detected and garbage-collected when text is deleted.
-
-</details>
-
-<details>
-<summary><h3>🔤 03. Studio Typography Engine (100+ Google Fonts)</h3></summary>
-
-- **Comprehensive Google Fonts Library**: Instant real-time font switching across 100+ typography families:
-  - *Serif & Editorial*: Sumana, EB Garamond, Playfair Display, Lora, Cormorant Garamond, Cinzel.
-  - *Sans-Serif & Modern*: Inter, Roboto, Montserrat, Outfit, Poppins, Work Sans, Syne.
-  - *Handwriting & Creative*: Caveat, Dancing Script, Pacifico, Homemade Apple, Kalam, Sacramento.
-  - *Monospace & Tech*: Fira Code, JetBrains Mono, Space Mono, Courier Prime, Inconsolata.
-- **Font Formatting Bar**: One-click toggles for Bold (`<b>`), Italic (`<i>`), Underline (`<u>`), Left / Center / Right alignment, line-height spacing, bullet lists, numbered lists, and interactive checklists.
-
-</details>
-
-<details>
-<summary><h3>🎨 04. Dual HSL / HEX Color Spectrum Pickers</h3></summary>
-
-- **Text Color Spectrum**: Custom HTML5 Canvas spectrum box rendering dynamic HSL gradients with a smooth hue slider, HEX badge display, and native input fallbacks.
-- **Aesthetic Text Highlight Swatches**: 12 curated pastel highlight tones (Yellow, Mint, Lavender, Coral, Soft Red, Lime, Gold, Cyan, Orange, Pink).
-- **Canvas Shading Engine**: Change canvas background shading (Dark Mode `#191919`, Warm Ivory `#fcf5e5`, Pure White `#ffffff`, or custom spectrum color).
-- **Ink Color Selector**: Dedicated color palette for drawing over note pages.
-
-</details>
-
-<details>
-<summary><h3>🖌️ 05. Layered Freehand Sketch & Drawing Canvas</h3></summary>
-
-- **Multi-Layer Drawing Overlay**: Every page features an interactive HTML5 canvas overlay positioned above text content.
-- **Tool Modes**:
-  - `Text Mode`: Type and format text normally.
-  - `Fountain Pen`: Fluid line stroke rendering.
-  - `Pencil`: Fine-grain sketch pencil mode.
-  - `Art Brush`: Expressive brush stroke simulation.
-  - `Eraser`: Precise stroke erasing layer.
-- **Stroke Thickness Preset Pill**: Instant switching between **FINE (2px)**, **MEDIUM (6px)**, and **THICK (14px)**.
-
-</details>
-
-<details>
-<summary><h3>📄 06. PDF Compiler & Media Insertion Suite</h3></summary>
-
-- **Vector PDF Export Engine**: One-click PDF compilation combining text DOM nodes and canvas drawing layers using `html2pdf.js`, `html2canvas`, and `jsPDF`.
-- **Local Image Upload**: Drag-and-drop or file upload input for inserting photos and assets directly onto pages.
-- **Formatted Table Insertion**: Instant insertion of styled HTML data tables.
-- **Deep Note Link Sharing**: Copy direct URLs to launch specific books and page IDs.
-
-</details>
-
-<details>
-<summary><h3>🔍 07. Real-Time Document Search Engine</h3></summary>
-
-- **DOM TreeWalker Search**: High-performance DOM walker traversing text nodes without corrupting event listeners.
-- **Live Match Counter**: Dynamic badge displaying current match index and total match count (`1/8`).
-- **Highlight Navigation**: Forward/backward match jumping with auto-scrolling to highlighted `<mark>` nodes.
-
-</details>
-
-<details>
-<summary><h3>☁️ 08. Firebase Auth & Per-User Cloud Isolation</h3></summary>
-
-- **Google Authentication**: Built with Firebase Web SDK v10 supporting Popup auth and Browser Redirect mode fallback.
-- **Per-User Cloud Firestore Vault**: Automatic debounced background syncing (`500ms`) to user-scoped Firestore documents (`users/{uid}/notes/workspace`).
-- **Local Storage Cache**: Fallback state management ensuring zero data loss even during network disconnections.
-
-</details>
+### 6. Cloud & Account
+- **Google Sign-In**: Login with Google via Firebase Auth.
+- **Cloud Save**: Notes auto-save to Firestore database in the background.
+- **Offline Support**: Saves locally in browser storage if offline.
 
 ---
 
-## 📊 Feature Comparison Matrix
+## Software & Tech Used
 
-| Feature | **Notes 101** | Standard Note Apps | Corporate SaaS Apps |
-| :--- | :---: | :---: | :---: |
-| **Design Inspiration** | **Photoshop, Illustrator, Figma** | Generic Native UI | Flat Material / Bootstrap |
-| **Subscription Fee** | **100% FREE (Forever)** | $8 - $15 / month | $12 - $30 / month |
-| **Ads & Tracking** | **ZERO Ads** | Frequent Upsells | Data Tracking |
-| **Google Fonts** | **100+ Integrated** | 3 - 5 Fonts | Limited System Fonts |
-| **Freehand Drawing over Text** | **YES (Layered Canvas)** | Rare / Separate View | No |
-| **Color Spectrum Picker** | **YES (HSL + HEX Slider)** | Preset Swatches | Basic Palette |
-| **PDF Export Engine** | **YES (1-Click Compiled)** | Paid Tier Only | Export Limits |
-| **Open Source (MIT License)** | **YES (Fully Open)** | Closed Source | Closed Source |
+- **Design**: Adobe Photoshop, Adobe Illustrator, Figma
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Motion & Scroll**: GSAP, ScrollTrigger, Lenis
+- **Backend & Auth**: Firebase Auth, Cloud Firestore
+- **PDF Export**: html2pdf.js, html2canvas, jsPDF
 
 ---
 
-## 🎨 Design System & Color Tokens
+## Keyboard Shortcuts
 
-```css
-/* Core Studio Palette Tokens */
---color-bg-workspace : #191919;  /* Photoshop Dark Desk */
---color-bg-card      : #242424;  /* Studio Inspector Card */
---color-accent-gold  : #fcf5e5;  /* Editorial Cream */
---color-accent-red   : #e04040;  /* Spectrum Red Accent */
---color-accent-blue  : #4080e0;  /* Studio Active Blue */
---color-success      : #4caf50;  /* Cloud Sync Green */
---color-warning      : #ff4d4f;  /* Logout / Caution Red */
-```
-
----
-
-## ⌨️ Studio Keyboard Shortcuts
-
-| Shortcut | Action |
+| Key | Function |
 | :--- | :--- |
-| `Cmd / Ctrl + B` | Toggle **Bold** Text Formatting |
-| `Cmd / Ctrl + I` | Toggle *Italic* Text Formatting |
-| `Cmd / Ctrl + U` | Toggle <u>Underline</u> Text Formatting |
-| `Cmd / Ctrl + F` | Focus Studio Search Bar |
-| `Esc` | Clear Search Highlights / Close Color Spectrum Popups |
+| `Ctrl + B` / `Cmd + B` | Bold |
+| `Ctrl + I` / `Cmd + I` | Italic |
+| `Ctrl + U` / `Cmd + U` | Underline |
+| `Ctrl + F` / `Cmd + F` | Search notes |
 
 ---
 
-## 💻 Local Quickstart & Development
+## How to Run Locally
 
-### Prerequisites
-A modern web browser (Chrome, Safari, Firefox, Edge).
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/anamrazzaque/ai-note.git
-cd ai-note
-```
-
-### 2. Launch Local Development Server
-Because Firebase Auth ES Modules require an HTTP/HTTPS protocol, serve the project root via any local server:
-
-**Option A — Python (Built-in):**
-```bash
-python3 -m http.server 8000
-```
-Navigate to `http://localhost:8000/landing.html` in your browser.
-
-**Option B — Node.js `npx serve`:**
-```bash
-npx serve ./
-```
-
-**Option C — VS Code Live Server Extension:**
-Right-click `landing.html` -> **Open with Live Server**.
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/anamrazzaque/ai-note.git
+   ```
+2. Start a local server:
+   ```bash
+   python3 -m http.server 8000
+   ```
+3. Open `http://localhost:8000/landing.html` in your browser.
 
 ---
 
-## 📜 License & Open Source Freedom
+## License
 
-This project is licensed under the **MIT License** — permitting free personal and commercial use, modification, distribution, and private hosting without restriction.
+This project is licensed under the **MIT License**. Free to use, modify, and distribute.
 
-```text
-MIT License
-
-Copyright (c) 2026 Notes 101
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY FROM BACKEND, CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
-IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
----
-
-<div align="center">
-  <b>Notes 101 — Designed on Photoshop, Illustrator & Figma</b><br>
-  <sub>Licensed under the MIT Open-Source License</sub>
-</div>
+<p align="center">
+  <sub>Notes 101 · Designed in Photoshop, Illustrator & Figma · MIT License</sub>
+</p>
