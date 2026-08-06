@@ -13,7 +13,7 @@
   --color-cream-soft: #e3dacd;
   --color-cream-dim: #e1d7c9;
   --color-cream-contact: #dfd5c7;
-  --color-orange: #ff8a00;
+  --color-orange: #FFB600;
   --color-orange-text: #121212;
   --color-ink: #000000;
   --color-panel-dark: #191919;
@@ -38,6 +38,19 @@ body {
   overflow-x: hidden;
   overscroll-behavior: none;
   width: 100%;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body {
@@ -281,7 +294,7 @@ input {
   height: 68px;
   z-index: 6;
   border-radius: 48px;
-  background: #FF8A00;
+  background: #FFBF00;
   box-shadow: 3px 4px 25px 20px #000000;
   border: none;
   cursor: pointer;
@@ -821,15 +834,15 @@ input {
   font-family: var(--font-apple-garamond-light);
   font-style: normal;
   font-weight: 400;
-  font-size: clamp(19px, 2.2vw, 42px);
-  line-height: 1.35;
+  font-size: clamp(18px, 2.1vw, 40px);
+  line-height: 1.15;
   text-align: center;
   text-transform: capitalize;
   color: #ffffff;
 }
 
 .contact__links p {
-  margin: 0 0 0.3em 0;
+  margin: 0 0 0.2em 0;
 }
 
 /* =========================================================

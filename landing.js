@@ -33,8 +33,8 @@ import { signInWithGoogle, listenToAuthState } from './firebase/auth.js';
     gsap.registerPlugin(ScrollTrigger);
 
     var lenis = new Lenis({
-        duration: 1.4,
-        wheelMultiplier: 0.7,
+        duration: 2.2,
+        wheelMultiplier: 0.45,
         smoothWheel: true,
         smoothTouch: false
     });
