@@ -101,26 +101,16 @@
   <div class="mobile-card">
     <div class="mobile-icon">🖥️</div>
     <h1 class="mobile-title">Notes 101</h1>
-    <div class="mobile-subtitle">Desktop Experience Required</div>
+    <div class="mobile-subtitle">Designed for Larger Screens</div>
     <p class="mobile-text">
       Notes 101 is designed for larger screen displays to provide full studio tools, A4 paper page layouts, typography controls, and freehand drawing canvas.
     </p>
     <p class="mobile-notice">
-      Please open this site on a laptop or desktop computer for the intended experience.
+      Please open this site on a laptop or desktop computer.
     </p>
-    <button class="mobile-btn" onclick="overrideAndContinue()">
-      Continue to Desktop Site Anyway
-    </button>
-    <button class="mobile-btn mobile-btn-subtle" onclick="window.location.href='https://github.com/byanam/Webnotes'">
+    <button class="mobile-btn" onclick="window.location.href='https://github.com/byanam/Webnotes'">
       View GitHub Repository ↗
     </button>
   </div>
-
-  <script>
-    function overrideAndContinue() {
-      sessionStorage.setItem('overrideMobile', 'true');
-      window.location.href = '/';
-    }
-  </script>
 </body>
 </html>
