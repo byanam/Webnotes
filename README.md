@@ -30,16 +30,6 @@
 
 <p align="center">─────── 🕇 ───────</p>
 
-## Visual Media & Animation Preview
-
-<div align="center">
-  <img src="assets/ae49f0b2eaf092695185f90a8ce26df8__1_.gif" alt="Notes 101 Animation GIF" width="80%" style="border-radius: 8px; border: 1px solid #222;" />
-  <br><br>
-  <img src="assets/app-screenshot.png" alt="Notes 101 Interface Screenshot" width="90%" style="border-radius: 8px; border: 1px solid #222;" />
-</div>
-
-<p align="center">─────── 🕇 ───────</p>
-
 ## About
 
 Notes 101 is a minimal, dark-themed note-taking web app.
@@ -55,7 +45,6 @@ It is 100% free, has no ads, no subscriptions, and runs directly in your web bro
 1. **Animated SVG Banner**: Dynamic border pulsing, line drawing, and glowing title animations at the top of the README.
 2. **Scroll Animations**: Smooth scrolling on the landing page (`landing.html`) with scroll-triggered text reveals and screenshot zoom effects.
 3. **Curtain Reveal Footer**: Contact footer anchored behind the page that reveals when scrolling to the bottom.
-4. **Animated GIF Element**: Embedded animation asset showcasing the aesthetic tone.
 
 ---
 
