@@ -9,7 +9,7 @@ import { signInWithGoogle, listenToAuthState } from './firebase/auth.js';
     var wrapper = document.getElementById('pageScaleWrapper');
     var canvas = document.getElementById('pageCanvas');
     var DESIGN_WIDTH = 1920;
-    var DESIGN_HEIGHT = 5000;
+    var DESIGN_HEIGHT = 3951;
 
     function updateScale() {
         if (!wrapper || !canvas) return;
@@ -33,11 +33,10 @@ import { signInWithGoogle, listenToAuthState } from './firebase/auth.js';
     gsap.registerPlugin(ScrollTrigger);
 
     var lenis = new Lenis({
-        duration: 1.8,
-        easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+        duration: 1.4,
+        wheelMultiplier: 0.7,
         smoothWheel: true,
-        smoothTouch: false,
-        touchMultiplier: 2
+        smoothTouch: false
     });
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -47,39 +46,47 @@ import { signInWithGoogle, listenToAuthState } from './firebase/auth.js';
     });
     gsap.ticker.lagSmoothing(0);
 
-    document.querySelectorAll('.js-scroll-scale').forEach(function (el) {
-        gsap.fromTo(el,
-            { scale: 0.7, transformOrigin: '50% 50%' },
-            {
-                scale: 1,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 90%',
-                    end: 'top 35%',
-                    scrub: 1
-                }
-            }
-        );
-    });
-
     document.querySelectorAll('.js-typewriter').forEach(function (el) {
-        var text = el.textContent;
-        el.setAttribute('aria-label', text);
-        el.textContent = '';
+        var plainText = el.textContent;
+        el.setAttribute('aria-label', plainText);
 
         var inner = document.createElement('span');
         inner.setAttribute('aria-hidden', 'true');
-
         var chars = [];
-        for (var i = 0; i < text.length; i++) {
-            var span = document.createElement('span');
-            span.className = 'promo__heading-char';
-            span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
-            inner.appendChild(span);
-            chars.push(span);
-        }
 
+        Array.from(el.childNodes).forEach(function (node) {
+            if (node.nodeType === 3) { // TEXT_NODE
+                var text = node.textContent;
+                for (var i = 0; i < text.length; i++) {
+                    if (text[i] === ' ') {
+                        inner.appendChild(document.createTextNode(' '));
+                    } else {
+                        var span = document.createElement('span');
+                        span.className = 'promo__heading-char';
+                        span.textContent = text[i];
+                        inner.appendChild(span);
+                        chars.push(span);
+                    }
+                }
+            } else if (node.nodeType === 1) { // ELEMENT_NODE (e.g. <em>)
+                var wrapper = node.cloneNode(false);
+                var text = node.textContent;
+                for (var i = 0; i < text.length; i++) {
+                    if (text[i] === ' ') {
+                        wrapper.appendChild(document.createTextNode(' '));
+                    } else {
+                        var span = document.createElement('span');
+                        span.className = 'promo__heading-char';
+                        span.textContent = text[i];
+                        wrapper.appendChild(span);
+                        chars.push(span);
+                    }
+                }
+                inner.appendChild(wrapper);
+            }
+        });
+
+        el.textContent = '';
         el.appendChild(inner);
 
         gsap.fromTo(chars,
@@ -93,12 +100,268 @@ import { signInWithGoogle, listenToAuthState } from './firebase/auth.js';
                 ease: 'power2.out',
                 scrollTrigger: {
                     trigger: el,
-                    start: 'top 85%',
+                    start: 'top 95%',
                     toggleActions: 'play none none none'
                 }
             }
         );
     });
+
+    // -------------------------------------------------------------------------
+    // NEWSPAPER EDITORIAL SECTION ANIMATIONS
+    // -------------------------------------------------------------------------
+
+    // A2. App Screenshot Zoom-Out Pop-Up (Slower, gradual zoom over long scroll distance)
+    var screenshot = document.querySelector('.promo__screenshot');
+    if (screenshot) {
+        gsap.fromTo(screenshot,
+            { scale: 0.65, opacity: 0.6, transformOrigin: '50% 50%' },
+            {
+                scale: 1,
+                opacity: 1,
+                ease: 'power1.out',
+                scrollTrigger: {
+                    trigger: screenshot,
+                    start: 'top 95%',
+                    end: 'top 15%',
+                    scrub: 1.5
+                }
+            }
+        );
+    }
+
+    // B. Horizontal & Vertical Rule Line Drawing Effect
+    document.querySelectorAll('.editorial__rule').forEach(function (rule) {
+        gsap.fromTo(rule,
+            { scaleX: 0, transformOrigin: 'left center', opacity: 0 },
+            {
+                scaleX: 1,
+                opacity: 1,
+                duration: 1.1,
+                ease: 'power3.inOut',
+                scrollTrigger: {
+                    trigger: rule,
+                    start: 'top 92%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    });
+
+    var colDivider = document.querySelector('.editorial__col-divider');
+    if (colDivider) {
+        gsap.fromTo(colDivider,
+            { scaleY: 0, transformOrigin: 'top center', opacity: 0 },
+            {
+                scaleY: 1,
+                opacity: 1,
+                duration: 1.3,
+                ease: 'power3.inOut',
+                scrollTrigger: {
+                    trigger: colDivider,
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    }
+
+    // C. Generic Character Stagger Helper for Editorial Headlines
+    function animateTextReveal(selector, startTrigger, staggerDelay) {
+        document.querySelectorAll(selector).forEach(function (el) {
+            var plainText = el.textContent;
+            el.setAttribute('aria-label', plainText);
+
+            var inner = document.createElement('span');
+            inner.setAttribute('aria-hidden', 'true');
+            var chars = [];
+
+            Array.from(el.childNodes).forEach(function (node) {
+                if (node.nodeType === 3) {
+                    var text = node.textContent;
+                    for (var i = 0; i < text.length; i++) {
+                        if (text[i] === ' ') {
+                            inner.appendChild(document.createTextNode(' '));
+                        } else {
+                            var span = document.createElement('span');
+                            span.style.display = 'inline-block';
+                            span.textContent = text[i];
+                            inner.appendChild(span);
+                            chars.push(span);
+                        }
+                    }
+                } else if (node.nodeType === 1) {
+                    var wrapper = node.cloneNode(false);
+                    var text = node.textContent;
+                    for (var i = 0; i < text.length; i++) {
+                        if (text[i] === ' ') {
+                            wrapper.appendChild(document.createTextNode(' '));
+                        } else {
+                            var span = document.createElement('span');
+                            span.style.display = 'inline-block';
+                            span.textContent = text[i];
+                            wrapper.appendChild(span);
+                            chars.push(span);
+                        }
+                    }
+                    inner.appendChild(wrapper);
+                }
+            });
+
+            el.textContent = '';
+            el.appendChild(inner);
+
+            gsap.fromTo(chars,
+                { opacity: 0, y: 30, filter: 'blur(6px)' },
+                {
+                    opacity: 1,
+                    y: 0,
+                    filter: 'blur(0px)',
+                    duration: 0.5,
+                    stagger: staggerDelay || 0.025,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: startTrigger || 'top 92%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+    }
+
+    animateTextReveal('.editorial__headline1', 'top 92%', 0.02);
+    animateTextReveal('.editorial__headline2', 'top 92%', 0.02);
+    animateTextReveal('.editorial__col-heading--left', 'top 94%', 0.03);
+    animateTextReveal('.editorial__col-heading--right', 'top 94%', 0.03);
+    animateTextReveal('.editorial__thing-heading', 'top 94%', 0.03);
+    animateTextReveal('.editorial__noads', 'top 92%', 0.025);
+
+    // D. Paragraph Lift & Fade-In
+    var paras = [
+        '.editorial__left-para1',
+        '.editorial__right-para1',
+        '.editorial__left-para2',
+        '.editorial__quote-attr'
+    ];
+
+    paras.forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (el) {
+            gsap.fromTo(el,
+                { opacity: 0, y: 35 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.9,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        }
+    });
+
+    // E. Editorial Quote Pop & Scale Reveal
+    var quote = document.querySelector('.editorial__quote');
+    if (quote) {
+        gsap.fromTo(quote,
+            { opacity: 0, scale: 0.92, y: 25, filter: 'blur(8px)' },
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                duration: 1.0,
+                ease: 'back.out(1.4)',
+                scrollTrigger: {
+                    trigger: quote,
+                    start: 'top 88%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    }
+
+    // F. Hermes-Style Editorial Photo Blur-to-Sharp Unblur Reveal
+    var photo = document.querySelector('.editorial__photo');
+    if (photo) {
+        gsap.fromTo(photo,
+            {
+                opacity: 0,
+                scale: 0.82,
+                y: 40,
+                filter: 'blur(14px)'
+            },
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: photo,
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    }
+
+    // G. Editorial Footer Row Items Stagger
+    document.querySelectorAll('.editorial__footer span').forEach(function (item, idx) {
+        gsap.fromTo(item,
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                delay: idx * 0.15,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.editorial__footer',
+                    start: 'top 95%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    });
+    // H. Hermes-Style Curtain Reveal — newspaper lifts, contact fades in behind
+    var contactFooter = document.getElementById('contactFooter');
+    if (contactFooter) {
+        var lastOpacity = -1;
+
+        // Slow, gradual fade tied to newspaper exit.
+        // Starts when remaining < 60% of viewport (newspaper mostly gone).
+        // Takes the full 60% of viewport scrolling to reach full opacity.
+        function updateContactReveal(scrollY) {
+            var h = window.innerHeight;
+            var maxScroll = Math.max(1, document.documentElement.scrollHeight - h);
+            var remaining = maxScroll - scrollY;
+
+            // Fade spans 60% of viewport height — much slower, follows the newspaper
+            var opacity = Math.max(0, Math.min(1, (0.60 * h - remaining) / (0.60 * h)));
+
+            if (opacity !== lastOpacity) {
+                lastOpacity = opacity;
+                contactFooter.style.setProperty('--contact-opacity', opacity);
+                contactFooter.style.setProperty('--contact-pe', opacity > 0.98 ? 'auto' : 'none');
+            }
+        }
+
+        // Hook into Lenis scroll
+        lenis.on('scroll', function () {
+            updateContactReveal(lenis.scroll);
+        });
+
+        // Initial check
+        updateContactReveal(window.scrollY);
+    }
+
 })();
 
 // =========================================================================
