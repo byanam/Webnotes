@@ -1,5 +1,10 @@
 <div align="center">
 
+  <!-- Main Deployed Website Link (Main Attraction) -->
+  <h1><a href="https://notes--101.web.app">🌐 Launch Live Site: https://notes--101.web.app</a></h1>
+
+  <br>
+
   <!-- Animated SVG Header Banner -->
   <img src="assets/banner.svg" alt="Notes 101 Dark Gothic Banner" width="100%" />
 
@@ -13,17 +18,8 @@
     <img src="https://img.shields.io/badge/Photoshop-000000?style=for-the-badge&logoColor=CCCCCC" alt="Photoshop" />
     <img src="https://img.shields.io/badge/Illustrator-000000?style=for-the-badge&logoColor=CCCCCC" alt="Illustrator" />
     <img src="https://img.shields.io/badge/Figma-000000?style=for-the-badge&logoColor=CCCCCC" alt="Figma" />
-    <img src="https://img.shields.io/badge/GSAP-000000?style=for-the-badge&logoColor=CCCCCC" alt="GSAP" />
     <img src="https://img.shields.io/badge/Firebase-000000?style=for-the-badge&logoColor=CCCCCC" alt="Firebase" />
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-000000?style=for-the-badge&logoColor=CCCCCC" alt="MIT License" /></a>
-  </p>
-
-  <br>
-
-  <p align="center">
-    <a href="/editor.html">📁 <b>Open App Desk</b></a> &nbsp;·&nbsp;
-    <a href="/">🖤 <b>Open Landing Page</b></a> &nbsp;·&nbsp;
-    <a href="https://opensource.org/licenses/MIT">📜 <b>MIT License</b></a>
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img src="https://img.shields.io/badge/License-CC_BY--NC_4.0-000000?style=for-the-badge&logoColor=CCCCCC" alt="Non-Commercial License" /></a>
   </p>
 
 </div>
@@ -32,69 +28,43 @@
 
 ## About
 
-Notes 101 is a minimal, dark-themed note-taking web app.
+Notes 101 is a simple, dark-themed note-taking app.
 
-It was designed in **Photoshop**, **Illustrator**, and **Figma**, then built using plain HTML, CSS, JavaScript, GSAP, and Firebase.
+Designed in **Photoshop**, **Illustrator**, and **Figma**, and built using plain HTML, CSS, JavaScript, and Firebase.
 
-It is 100% free, has no ads, no subscriptions, and runs directly in your web browser.
-
----
-
-## Animated Effects
-
-1. **Animated SVG Banner**: Dynamic border pulsing, line drawing, and glowing title animations at the top of the README.
-2. **Scroll Animations**: Smooth scrolling on the landing page (`/`) with scroll-triggered text reveals and screenshot zoom effects.
-3. **Curtain Reveal Footer**: Contact footer anchored behind the page that reveals when scrolling to the bottom.
+It has no ads, no subscriptions, no corporate bloat, and runs directly in your browser.
 
 ---
 
 ## Features
 
-### 1. Editor & Workspace
-- **A4 Page Layout**: Notes render as A4 sheets with automatic page splitting when text overflows.
-- **Sidebar Tree**: Organize notes into folders, books, and pages.
-- **Text Search**: Document search bar to scan pages with match counters and highlight markers.
-
-### 2. Typography & Formatting
-- **100+ Google Fonts**: Dropdown menu to switch fonts (Sumana, Inter, Fira Code, Caveat, Playfair Display, etc.).
-- **Text Formatting**: Bold, italic, underline, alignment (left, center, right), line spacing, bullet lists, numbered lists, and checklists.
-- **Font Sizes**: Preset text sizing for small, medium, and large.
-
-### 3. Color Pickers
-- **Text Color**: HSL spectrum canvas with hue slider and HEX input.
-- **Highlights**: Preset swatches for highlighting text.
-- **Canvas Background**: Change page background shade (dark mode, warm ivory, pure white).
-- **Ink Color**: Color selector for drawing lines.
-
-### 4. Canvas Drawing Layer
-- **Freehand Sketching**: Draw directly on top of note pages.
-- **Tools**: Fountain pen, pencil, art brush, and eraser.
-- **Stroke Sizes**: Fine (2px), medium (6px), and thick (14px).
-
-### 5. Media & Export
-- **Insert Media**: Upload images and insert data tables.
-- **PDF Export**: Download notes as PDF files with one click.
-
-### 6. Cloud Sync
-- **Google Sign-In**: Login with Google via Firebase Auth.
-- **Background Sync**: Notes auto-save to Firestore database per user.
-- **Offline Storage**: Local browser storage backup when offline.
+- 🔓 **Open Source**: 100% open-source code.
+- 🆓 **Completely Free**: Free to use for everyone.
+- 🚫 **Ad-Free**: Zero advertisements, zero popups, zero data tracking.
+- 🧹 **No Bloat**: Clean and focused. No unnecessary features added.
+- 📄 **Word-Style A4 Editor**: Clean dark studio interface with A4 pages on a desk layout.
+- ✂️ **Automatic Page Splitting**: Dynamic A4 pagination logic that splits pages cleanly when text overflows.
+- 🔤 **100+ Google Fonts**: Switch font styles instantly from the editor sidebar (Sumana, Inter, Fira Code, Caveat, Playfair Display, etc.).
+- 🎨 **Color Spectrum Pickers**: HSL & HEX color pickers for text color, pastel highlights, canvas background shade, and drawing ink.
+- 🖌️ **Canvas Drawing Layer**: Layered freehand pen, pencil, brush, stroke sizes, and eraser directly over note pages.
+- 🔍 **Real-Time Note Search**: Document search bar to scan pages with match counters and highlight markers.
+- 📄 **1-Click PDF Export**: Download formatted note pages as a PDF file with one click.
+- ☁️ **Google Login & Cloud Sync**: Firebase Sign-In with automatic per-user Firestore sync & offline browser backup.
 
 ---
 
-## Software & Technologies Used
+## Software & Tech Used
 
-- **Design Software**: Adobe Photoshop, Adobe Illustrator, Figma
+- **Design**: Adobe Photoshop, Adobe Illustrator, Figma
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Scroll & Motion**: GSAP, ScrollTrigger, Lenis
-- **Backend & Storage**: Firebase Auth, Cloud Firestore
+- **Backend & Auth**: Firebase Auth, Cloud Firestore
 - **PDF Compiler**: html2pdf.js, html2canvas, jsPDF
 
 ---
 
 ## Keyboard Shortcuts
 
-| Shortcut | Function |
+| Key | Function |
 | :--- | :--- |
 | `Ctrl + B` / `Cmd + B` | Bold |
 | `Ctrl + I` / `Cmd + I` | Italic |
@@ -117,10 +87,13 @@ It is 100% free, has no ads, no subscriptions, and runs directly in your web bro
 
 ---
 
-## License
+## License (Non-Commercial)
 
-Licensed under the **MIT License**. Free to use, modify, and share.
+Licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license.
+
+- ✅ **Free to use & share**: Anyone can use, modify, and adapt the code for free.
+- ❌ **Non-Commercial**: You **cannot** sell, monetize, or earn money from this project or its code.
 
 <p align="center">
-  <sub>Notes 101 · Designed in Photoshop, Illustrator & Figma · MIT License</sub>
+  <sub>Notes 101 · Designed in Photoshop, Illustrator & Figma · CC BY-NC 4.0 Non-Commercial License</sub>
 </p>
