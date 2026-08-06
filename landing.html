@@ -1,148 +1,574 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: #191919;">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes 101 — Anam Razzaque</title>
+  <title>Make Notes</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts Library (100+ Free Fonts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alex+Brush&family=Alfa+Slab+One&family=Allura&family=Amatic+SC:wght@400;700&family=Anton&family=Archivo:wght@400;700&family=Arvo:wght@400;700&family=Audiowide&family=Barlow:wght@400;700&family=Bebas+Neue&family=Bitter:wght@400;700&family=Bungee&family=Cardo:wght@400;700&family=Caveat:wght@400;700&family=Chivo:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;700&family=Comfortaa:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Courier+Prime:wght@400;700&family=Creepster&family=Crete+Round&family=Dancing+Script:wght@400;700&family=Domine:wght@400;700&family=Dosis:wght@400;700&family=EB+Garamond:wght@400;700&family=Fira+Code:wght@400;700&family=Gloria+Hallelujah&family=Great+Vibes&family=Handlee&family=Homemade+Apple&family=Inconsolata:wght@400;700&family=Indie+Flower&family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Josefin+Sans:wght@400;700&family=Kalam:wght@400;700&family=Kanit:wght@400;700&family=Kaushan+Script&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="landing.css">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Lobster&family=Lora:ital,wght@0,400;0,700;1,400&family=Luckiest+Guy&family=Marck+Script&family=Merriweather:wght@400;700&family=Monoton&family=Montserrat:wght@400;700&family=Mulish:wght@400;700&family=Niconne&family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;700&family=Nunito:wght@400;700&family=Old+Standard+TT:wght@400;700&family=Open+Sans:wght@400;700&family=Orbitron:wght@400;700&family=Oranienbaum&family=Oswald:wght@400;700&family=Outfit:wght@400;700&family=Oxygen:wght@400;700&family=PT+Serif:wght@400;700&family=Pacifico&family=Parisienne&family=Patrick+Hand&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;700&family=Press+Start+2P&family=Quicksand:wght@400;700&family=Raleway:wght@400;700&family=Righteous&family=Roboto:wght@400;700&family=Rock+Salt&family=Rubik:wght@400;700&family=Sacramento&family=Satisfy&family=Shadows+Into+Light&family=Sniglet&family=Space+Mono:wght@400;700&family=Special+Elite&family=Sumana:wght@400;700&family=Syne:wght@400;700&family=Tangerine:wght@400;700&family=Titillium+Web:wght@400;700&family=Ubuntu:wght@400;700&family=Ultra&family=UnifrakturMaguntia&family=Varela+Round&family=Vibur&family=Volkhov:wght@400;700&family=VT323&family=Work+Sans:wght@400;700&family=Yellowtail&family=Zeyada&family=Zilla+Slab:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="background-color: #191919; margin: 0;">
+  <!-- Transition container for opening reveal transition -->
+  <div class="transition-container" id="transition-container">
+    <!-- Main Content Layout -->
+    <div class="main-content">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Action Bar (Merged with Status) -->
+        <div class="sidebar-toolbar">
+          <!-- Group 1: View Settings (Now on Left) -->
+          <div class="toolbar-group">
+            <div class="icon-button" id="home-btn" title="Home / Landing Page" onclick="navigateToHome(event)">
+              <i class="fa-solid fa-house" aria-hidden="true"></i>
+            </div>
+            <div class="vertical-divider" style="height: 16px; width: 1px; background-color: #333333; margin: 0 2px;">
+            </div>
+            <span class="toolbar-text">Page 1 of 6</span>
+          </div>
 
-  <!-- CONTACT — Fixed background layer (Hermes-style curtain reveal) -->
-  <!-- Sits BEHIND the scrolling canvas. Revealed when the newspaper lifts away. -->
-  <footer class="contact" id="contactFooter" aria-label="Contact">
-    <h2 class="contact__heading">Contact</h2>
-    <div class="contact__links">
-      <p>GitHub</p>
-      <p>anamrazzaque</p>
-      <p>&nbsp;</p>
-      <p>LinkedIn</p>
-      <p>anamrazzaque</p>
-      <p>&nbsp;</p>
-      <p>Email</p>
-      <p>anamrazzaque.work@gmail.com</p>
-    </div>
-  </footer>
-
-  <div class="page-scale-wrapper" id="pageScaleWrapper">
-    <div class="page-canvas" id="pageCanvas">
-
-      <!-- ===================== HERO ===================== -->
-      <!-- Layer order matches Figma: bottom → top -->
-      <header class="hero">
-
-        <!-- Layer 7 (bottom): moving pages -->
-        <div class="hero__pages" id="heroPages" aria-label="Notebook page previews">
-          <div class="hero__pages-track">
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
+          <!-- Group 2: Creation (Now on Right) -->
+          <div class="toolbar-group">
+            <div class="icon-button" id="zoom-btn" title="Fit to Screen">
+              <i class="fa-solid fa-expand" aria-hidden="true"></i>
+            </div>
+            <div class="icon-button" id="add-book-btn" title="New Book">
+              <i class="fa-solid fa-book-medical" aria-hidden="true"></i>
+            </div>
           </div>
         </div>
 
-        <!-- Layer 6: notes 101 (sits behind pages where they overlap) -->
-        <h1 class="hero__title">Notes 101</h1>
-
-        <!-- Layer 5: black shadow gradient (overlays bottom of pages) -->
-        <div class="hero__shadow" aria-hidden="true"></div>
-
-        <!-- Layer 4: tagline (above shadow) -->
-        <p class="hero__tagline">An open-source note-taking site</p>
-
-        <!-- Layer 2: Ready when you are -->
-        <p class="hero__ready">Ready when you are</p>
-
-        <!-- Layer 3+1: CTA button + label (topmost) -->
-        <button class="hero__cta" id="loginBtn" type="button" aria-label="Get started — log in with Google"
-          onclick="if(window.triggerGoogleLogin){window.triggerGoogleLogin(event);}else{window.location.href='index.html';}">
-          <span class="hero__cta-label" id="loginBtnText">Get Started</span>
-        </button>
-      </header>
-
-      <main>
-        <!-- ===================== PROMO ===================== -->
-        <section class="promo" aria-label="Pricing">
-          <img class="promo__texture" src="assets/texture_image.png" alt="" aria-hidden="true">
-
-          <h2 class="promo__heading js-typewriter">Completely <em>FREEEEEEEEE</em></h2>
-
-          <div class="promo__blur-rect" aria-hidden="true"></div>
-
-          <img class="promo__screenshot js-scroll-scale" src="assets/app-screenshot.png"
-            alt="Screenshot of the note-taking application interface">
-
-          <p class="promo__tagline">A lil bit a dis a lil bit a dahh, type shit</p>
-        </section>
-
-        <!-- ===================== EDITORIAL ===================== -->
-        <section class="editorial" aria-label="About">
-          <div class="editorial__card"></div>
-
-          <div class="editorial__rule editorial__rule--top"></div>
-
-          <h2 class="editorial__headline1">This Didn't Need To Exist.</h2>
-          <h2 class="editorial__headline2">But <em>I Made It Anyway.</em></h2>
-
-          <div class="editorial__rule editorial__rule--mid"></div>
-          <div class="editorial__col-divider"></div>
-
-          <h3 class="editorial__col-heading editorial__col-heading--left"><em>So... </em><span>WHY THIS?</span></h3>
-          <h3 class="editorial__col-heading editorial__col-heading--right">EDITOR’S <em>NOTE</em></h3>
-          <div class="editorial__rule editorial__rule--right"></div>
-          <div class="editorial__rule editorial__rule--left-sub"></div>
-
-          <p class="editorial__text editorial__text--justify editorial__left-para1">Couldn't find a note taking app
-            that looked the way I wanted. Everything felt either way too corporate or packed with features I'd never
-            use. I grew up using stuff like Photoshop and VS Code, so I ended up stealing that whole vibe and turning
-            it into a place for notes instead.</p>
-
-          <p class="editorial__text editorial__right-para1">I never sat down with a big plan for this. I just wanted
-            to see what a notes app would look like if I built it my way. One feature turned into another, a few
-            late nights disappeared, and it slowly became the website your looking at now.</p>
-
-          <p class="editorial__text editorial__quote">&ldquo;Honestly, I didn't have anything better to do.&rdquo;</p>
-          <p class="editorial__quote-attr">- anam razzaque</p>
-
-          <img class="editorial__photo" src="assets/ae49f0b2eaf092695185f90a8ce26df8__1_.gif" alt="">
-
-          <p class="editorial__text editorial__text--justify editorial__left-para2">Most note-taking apps get the job
-            done. I just wanted one that looked and felt a little different without making everything more
-            complicated.</p>
-
-          <h3 class="editorial__thing-heading">Here's <em>The Thing...</em></h3>
-          <img class="editorial__thing-img" src="assets/the_thing.png" alt="">
-
-          <p class="editorial__noads">NO Ads &amp; Absolutely NO Subscriptions</p>
-
-          <div class="editorial__rule editorial__rule--footer"></div>
-          <div class="editorial__footer">
-            <span class="editorial__footer-item--1">PROJECT NO. 01</span>
-            <span class="editorial__footer-item--2">EST. 2026</span>
-            <span class="editorial__footer-item--3">BY ANAM</span>
+        <!-- Books List (Scrollable) -->
+        <div class="sidebar-books-scroll">
+          <!-- Top Level Folder -->
+          <div class="folder-group" data-folder-id="workspace-folder">
+            <div class="sidebar-item folder-tab" onclick="toggleSidebarMenu('workspace-folder-menu')">
+              <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+              <span class="sidebar-text">Folder</span>
+            </div>
+            <div class="sidebar-submenu active" id="workspace-folder-menu">
+              <!-- Book 1 Group -->
+              <div class="book-group" data-book-id="book1">
+                <div class="sidebar-item book-tab" onclick="toggleSidebarMenu('book1-menu')">
+                  <i class="fa-solid fa-book" aria-hidden="true"></i>
+                  <span class="sidebar-text">Book 1</span>
+                </div>
+                <div class="sidebar-submenu active" id="book1-menu">
+                  <div class="sidebar-item page-link selected" data-target-id="note-page-1">
+                    <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+                    <span class="sidebar-text">Page 1</span>
+                  </div>
+                  <div class="add-page-card" title="Create New Page" onclick="addNewPageInBook('book1')">
+                    <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </div>
 
-      <!-- Master Texture Overlay — covers ALL text, rules, photos, screenshots, and black boxes -->
-      <div class="editorial__texture-overlay" aria-hidden="true"></div>
+      <!-- Main Content Area (The Desk) -->
+      <div class="main-content-area">
+        <div class="a4-page-container">
+          <div id="document-editor"></div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (Studio Tool Inspector) -->
+      <aside class="sidebar sidebar-right">
+        <!-- User Profile Card Header & Logout -->
+        <div class="sidebar-profile-card" style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 12px; overflow: hidden;">
+            <img src="profile.jpg" alt="User Avatar" class="profile-avatar" id="user-profile-avatar" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+            <div class="profile-info" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              <div class="profile-name" id="user-profile-name" style="font-weight: 700; font-size: 14px; text-overflow: ellipsis; overflow: hidden;">Guest User</div>
+              <div class="profile-last-edited" id="user-profile-email" style="font-size: 11px; color: #888; text-overflow: ellipsis; overflow: hidden;">Loading session...</div>
+              <div id="cloud-sync-status" style="font-size: 11px; color: #4caf50; font-weight: 600; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Connected
+              </div>
+            </div>
+          </div>
+          <button type="button" id="logoutBtn" title="Log out" style="background: rgba(255, 77, 79, 0.1); border: 1px solid rgba(255, 77, 79, 0.3); color: #ff4d4f; padding: 6px 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 12px; transition: all 0.2s ease;">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </button>
+        </div>
+
+        <!-- Top Ribbon Header (Search Bar) -->
+        <div class="sidebar-toolbar">
+          <div class="sidebar-search-container">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="sidebar-doc-search" class="sidebar-search-input" placeholder="Search notes..."
+              autocomplete="off" spellcheck="false">
+            <span id="search-count-badge" class="search-count-badge" style="display: none;">0/0</span>
+            <button type="button" id="search-prev-btn" class="search-nav-btn" title="Previous match"
+              style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>
+            <button type="button" id="search-next-btn" class="search-nav-btn" title="Next match"
+              style="display: none;"><i class="fa-solid fa-chevron-down"></i></button>
+            <button type="button" id="search-clear-btn" class="search-clear-btn" title="Clear search"
+              style="display: none;"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+
+        <!-- Section 1: Formatting -->
+        <div class="studio-section">
+          <div class="studio-section-title">
+            <i class="fa-solid fa-font"></i> Formatting
+          </div>
+          <div class="tool-pill-group bold-italic-box">
+            <button type="button" class="tool-pill-btn text-format-button" title="Bold"><strong>B</strong></button>
+            <button type="button" class="tool-pill-btn text-format-button" title="Italic"><em>I</em></button>
+            <button type="button" class="tool-pill-btn text-format-button" title="Underline"><u>U</u></button>
+          </div>
+          <div class="tool-pill-group alignment-box">
+            <button type="button" class="tool-pill-btn icon-button active" title="Align Left"><i
+                class="fa-solid fa-align-left"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Align Center"><i
+                class="fa-solid fa-align-center"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Align Right"><i
+                class="fa-solid fa-align-right"></i></button>
+          </div>
+          <div class="tool-pill-group lists-box line-spacing-box">
+            <button type="button" class="tool-pill-btn icon-button" title="Line Spacing"><i
+                class="fa-solid fa-text-height"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Bullet List"><i
+                class="fa-solid fa-list-ul"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Numbered List"><i
+                class="fa-solid fa-list-ol"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Checklist"><i
+                class="fa-solid fa-list-check"></i></button>
+          </div>
+        </div>
+
+        <!-- Section 2: Style & Color -->
+        <div class="studio-section">
+          <div class="studio-section-title">
+            <i class="fa-solid fa-palette"></i> Style & Color
+          </div>
+          <div class="studio-row font-box">
+            <span class="studio-select-label">FONT</span>
+            <div class="dropdown-menu" id="font-box-trigger" style="position: relative;">
+              <span class="dropdown-text" id="font-box-text" style="font-size: 16px;">Sumana</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #555; margin-left: 4px;"></i>
+              <!-- Custom MS Word-Style Font Dropdown Menu (100+ Free Fonts) -->
+              <div class="custom-font-menu" id="custom-font-menu">
+                <div class="font-menu-item" data-font="Homemade Apple" style="font-family: 'Homemade Apple', cursive;">
+                  Homemade Apple</div>
+                <div class="font-menu-item active" data-font="Sumana" style="font-family: 'Sumana', serif;">Sumana</div>
+                <div class="font-menu-item" data-font="Inter" style="font-family: 'Inter', sans-serif;">Inter</div>
+                <div class="font-menu-item" data-font="Roboto" style="font-family: 'Roboto', sans-serif;">Roboto</div>
+                <div class="font-menu-item" data-font="Playfair Display"
+                  style="font-family: 'Playfair Display', serif;">Playfair Display</div>
+                <div class="font-menu-item" data-font="Montserrat" style="font-family: 'Montserrat', sans-serif;">
+                  Montserrat</div>
+                <div class="font-menu-item" data-font="Lora" style="font-family: 'Lora', serif;">Lora</div>
+                <div class="font-menu-item" data-font="Open Sans" style="font-family: 'Open Sans', sans-serif;">Open
+                  Sans</div>
+                <div class="font-menu-item" data-font="Caveat" style="font-family: 'Caveat', cursive;">Caveat</div>
+                <div class="font-menu-item" data-font="Dancing Script" style="font-family: 'Dancing Script', cursive;">
+                  Dancing Script</div>
+                <div class="font-menu-item" data-font="Pacifico" style="font-family: 'Pacifico', cursive;">Pacifico
+                </div>
+                <div class="font-menu-item" data-font="Courier Prime" style="font-family: 'Courier Prime', monospace;">
+                  Courier Prime</div>
+                <div class="font-menu-item" data-font="Fira Code" style="font-family: 'Fira Code', monospace;">Fira Code
+                </div>
+                <div class="font-menu-item" data-font="Cinzel" style="font-family: 'Cinzel', serif;">Cinzel</div>
+                <div class="font-menu-item" data-font="Oswald" style="font-family: 'Oswald', sans-serif;">Oswald</div>
+                <div class="font-menu-item" data-font="Merriweather" style="font-family: 'Merriweather', serif;">
+                  Merriweather</div>
+                <div class="font-menu-item" data-font="Kalam" style="font-family: 'Kalam', cursive;">Kalam</div>
+                <div class="font-menu-item" data-font="Outfit" style="font-family: 'Outfit', sans-serif;">Outfit</div>
+                <div class="font-menu-item" data-font="Great Vibes" style="font-family: 'Great Vibes', cursive;">Great
+                  Vibes</div>
+                <div class="font-menu-item" data-font="Comfortaa" style="font-family: 'Comfortaa', cursive;">Comfortaa
+                </div>
+                <div class="font-menu-item" data-font="Poppins" style="font-family: 'Poppins', sans-serif;">Poppins
+                </div>
+                <div class="font-menu-item" data-font="Raleway" style="font-family: 'Raleway', sans-serif;">Raleway
+                </div>
+                <div class="font-menu-item" data-font="PT Serif" style="font-family: 'PT Serif', serif;">PT Serif</div>
+                <div class="font-menu-item" data-font="Nunito" style="font-family: 'Nunito', sans-serif;">Nunito</div>
+                <div class="font-menu-item" data-font="EB Garamond" style="font-family: 'EB Garamond', serif;">EB
+                  Garamond</div>
+                <div class="font-menu-item" data-font="Bebas Neue" style="font-family: 'Bebas Neue', display;">Bebas
+                  Neue</div>
+                <div class="font-menu-item" data-font="Sacramento" style="font-family: 'Sacramento', cursive;">
+                  Sacramento</div>
+                <div class="font-menu-item" data-font="Shadows Into Light"
+                  style="font-family: 'Shadows Into Light', cursive;">Shadows Into Light</div>
+                <div class="font-menu-item" data-font="Indie Flower" style="font-family: 'Indie Flower', cursive;">Indie
+                  Flower</div>
+                <div class="font-menu-item" data-font="Amatic SC" style="font-family: 'Amatic SC', cursive;">Amatic SC
+                </div>
+                <div class="font-menu-item" data-font="Lobster" style="font-family: 'Lobster', cursive;">Lobster</div>
+                <div class="font-menu-item" data-font="Abril Fatface" style="font-family: 'Abril Fatface', serif;">Abril
+                  Fatface</div>
+                <div class="font-menu-item" data-font="Quicksand" style="font-family: 'Quicksand', sans-serif;">
+                  Quicksand</div>
+                <div class="font-menu-item" data-font="Work Sans" style="font-family: 'Work Sans', sans-serif;">Work
+                  Sans</div>
+                <div class="font-menu-item" data-font="Syne" style="font-family: 'Syne', sans-serif;">Syne</div>
+                <div class="font-menu-item" data-font="Cormorant Garamond"
+                  style="font-family: 'Cormorant Garamond', serif;">Cormorant Garamond</div>
+                <div class="font-menu-item" data-font="Satisfy" style="font-family: 'Satisfy', cursive;">Satisfy</div>
+                <div class="font-menu-item" data-font="Permanent Marker"
+                  style="font-family: 'Permanent Marker', cursive;">Permanent Marker</div>
+                <div class="font-menu-item" data-font="Space Mono" style="font-family: 'Space Mono', monospace;">Space
+                  Mono</div>
+                <div class="font-menu-item" data-font="JetBrains Mono"
+                  style="font-family: 'JetBrains Mono', monospace;">JetBrains Mono</div>
+                <div class="font-menu-item" data-font="Cinzel Decorative"
+                  style="font-family: 'Cinzel Decorative', serif;">Cinzel Decorative</div>
+                <div class="font-menu-item" data-font="Barlow" style="font-family: 'Barlow', sans-serif;">Barlow</div>
+                <div class="font-menu-item" data-font="Josefin Sans" style="font-family: 'Josefin Sans', sans-serif;">
+                  Josefin Sans</div>
+                <div class="font-menu-item" data-font="Tangerine" style="font-family: 'Tangerine', cursive;">Tangerine
+                </div>
+                <div class="font-menu-item" data-font="Alex Brush" style="font-family: 'Alex Brush', cursive;">Alex
+                  Brush</div>
+                <div class="font-menu-item" data-font="Marck Script" style="font-family: 'Marck Script', cursive;">Marck
+                  Script</div>
+                <div class="font-menu-item" data-font="Zeyada" style="font-family: 'Zeyada', cursive;">Zeyada</div>
+                <div class="font-menu-item" data-font="Allura" style="font-family: 'Allura', cursive;">Allura</div>
+                <div class="font-menu-item" data-font="Parisienne" style="font-family: 'Parisienne', cursive;">
+                  Parisienne</div>
+                <div class="font-menu-item" data-font="Georgia" style="font-family: Georgia, serif;">Georgia</div>
+                <div class="font-menu-item" data-font="Arial" style="font-family: Arial, sans-serif;">Arial</div>
+                <div class="font-menu-item" data-font="Times New Roman" style="font-family: 'Times New Roman', serif;">
+                  Times New Roman</div>
+                <div class="font-menu-item" data-font="Alfa Slab One" style="font-family: 'Alfa Slab One', cursive;">
+                  Alfa Slab One</div>
+                <div class="font-menu-item" data-font="Anton" style="font-family: 'Anton', sans-serif;">Anton</div>
+                <div class="font-menu-item" data-font="Archivo" style="font-family: 'Archivo', sans-serif;">Archivo
+                </div>
+                <div class="font-menu-item" data-font="Arvo" style="font-family: 'Arvo', serif;">Arvo</div>
+                <div class="font-menu-item" data-font="Audiowide" style="font-family: 'Audiowide', display;">Audiowide
+                </div>
+                <div class="font-menu-item" data-font="Bitter" style="font-family: 'Bitter', serif;">Bitter</div>
+                <div class="font-menu-item" data-font="Bungee" style="font-family: 'Bungee', display;">Bungee</div>
+                <div class="font-menu-item" data-font="Cardo" style="font-family: 'Cardo', serif;">Cardo</div>
+                <div class="font-menu-item" data-font="Chivo" style="font-family: 'Chivo', sans-serif;">Chivo</div>
+                <div class="font-menu-item" data-font="Creepster" style="font-family: 'Creepster', display;">Creepster
+                </div>
+                <div class="font-menu-item" data-font="Crete Round" style="font-family: 'Crete Round', serif;">Crete
+                  Round</div>
+                <div class="font-menu-item" data-font="Domine" style="font-family: 'Domine', serif;">Domine</div>
+                <div class="font-menu-item" data-font="Dosis" style="font-family: 'Dosis', sans-serif;">Dosis</div>
+                <div class="font-menu-item" data-font="Gloria Hallelujah"
+                  style="font-family: 'Gloria Hallelujah', cursive;">Gloria Hallelujah</div>
+                <div class="font-menu-item" data-font="Handlee" style="font-family: 'Handlee', cursive;">Handlee</div>
+                <div class="font-menu-item" data-font="Inconsolata" style="font-family: 'Inconsolata', monospace;">
+                  Inconsolata</div>
+                <div class="font-menu-item" data-font="Kanit" style="font-family: 'Kanit', sans-serif;">Kanit</div>
+                <div class="font-menu-item" data-font="Kaushan Script" style="font-family: 'Kaushan Script', cursive;">
+                  Kaushan Script</div>
+                <div class="font-menu-item" data-font="Lato" style="font-family: 'Lato', sans-serif;">Lato</div>
+                <div class="font-menu-item" data-font="Libre Baskerville"
+                  style="font-family: 'Libre Baskerville', serif;">Libre Baskerville</div>
+                <div class="font-menu-item" data-font="Luckiest Guy" style="font-family: 'Luckiest Guy', display;">
+                  Luckiest Guy</div>
+                <div class="font-menu-item" data-font="Monoton" style="font-family: 'Monoton', display;">Monoton</div>
+                <div class="font-menu-item" data-font="Mulish" style="font-family: 'Mulish', sans-serif;">Mulish</div>
+                <div class="font-menu-item" data-font="Niconne" style="font-family: 'Niconne', cursive;">Niconne</div>
+                <div class="font-menu-item" data-font="Noto Sans" style="font-family: 'Noto Sans', sans-serif;">Noto
+                  Sans</div>
+                <div class="font-menu-item" data-font="Noto Serif" style="font-family: 'Noto Serif', serif;">Noto Serif
+                </div>
+                <div class="font-menu-item" data-font="Old Standard TT" style="font-family: 'Old Standard TT', serif;">
+                  Old Standard TT</div>
+                <div class="font-menu-item" data-font="Orbitron" style="font-family: 'Orbitron', display;">Orbitron
+                </div>
+                <div class="font-menu-item" data-font="Oxygen" style="font-family: 'Oxygen', sans-serif;">Oxygen</div>
+                <div class="font-menu-item" data-font="Patrick Hand" style="font-family: 'Patrick Hand', cursive;">
+                  Patrick Hand</div>
+                <div class="font-menu-item" data-font="Press Start 2P"
+                  style="font-family: 'Press Start 2P', monospace;">Press Start 2P</div>
+                <div class="font-menu-item" data-font="Righteous" style="font-family: 'Righteous', display;">Righteous
+                </div>
+                <div class="font-menu-item" data-font="Rock Salt" style="font-family: 'Rock Salt', cursive;">Rock Salt
+                </div>
+                <div class="font-menu-item" data-font="Rubik" style="font-family: 'Rubik', sans-serif;">Rubik</div>
+                <div class="font-menu-item" data-font="Sniglet" style="font-family: 'Sniglet', cursive;">Sniglet</div>
+                <div class="font-menu-item" data-font="Special Elite" style="font-family: 'Special Elite', monospace;">
+                  Special Elite</div>
+                <div class="font-menu-item" data-font="Titillium Web" style="font-family: 'Titillium Web', sans-serif;">
+                  Titillium Web</div>
+                <div class="font-menu-item" data-font="Ubuntu" style="font-family: 'Ubuntu', sans-serif;">Ubuntu</div>
+                <div class="font-menu-item" data-font="Ultra" style="font-family: 'Ultra', serif;">Ultra</div>
+                <div class="font-menu-item" data-font="UnifrakturMaguntia"
+                  style="font-family: 'UnifrakturMaguntia', display;">UnifrakturMaguntia</div>
+                <div class="font-menu-item" data-font="Varela Round" style="font-family: 'Varela Round', sans-serif;">
+                  Varela Round</div>
+                <div class="font-menu-item" data-font="Vibur" style="font-family: 'Vibur', cursive;">Vibur</div>
+                <div class="font-menu-item" data-font="Volkhov" style="font-family: 'Volkhov', serif;">Volkhov</div>
+                <div class="font-menu-item" data-font="VT323" style="font-family: 'VT323', monospace;">VT323</div>
+                <div class="font-menu-item" data-font="Yellowtail" style="font-family: 'Yellowtail', cursive;">
+                  Yellowtail</div>
+                <div class="font-menu-item" data-font="Zilla Slab" style="font-family: 'Zilla Slab', serif;">Zilla Slab
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="studio-row size-box">
+            <span class="studio-select-label">SIZE</span>
+            <div class="dropdown-menu" id="size-box-trigger" style="position: relative;">
+              <span class="dropdown-text" id="size-box-text" style="font-size: 15px;">Medium</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #555; margin-left: 4px;"></i>
+              <!-- Custom Size Dropdown Menu -->
+              <div class="custom-size-menu" id="custom-size-menu">
+                <div class="size-menu-item" data-size="Small" data-value="13px" style="font-size: 13px;">Small</div>
+                <div class="size-menu-item active" data-size="Medium" data-value="18px" style="font-size: 16px;">Medium
+                </div>
+                <div class="size-menu-item" data-size="Large" data-value="26px" style="font-size: 20px;">Large</div>
+              </div>
+            </div>
+          </div>
+          <div class="studio-row text-colour-box size-colour-box">
+            <span class="studio-select-label">TEXT COLOR</span>
+            <div class="studio-swatch-group" id="text-color-swatch-group" style="position: relative;">
+              <!-- First Box: Spectrum Color Picker Trigger -->
+              <div class="studio-swatch-ring active color-swatch spectrum-box-trigger" id="text-color-spectrum-trigger"
+                style="background-color: #e04040; position: relative;" title="Click for Color Spectrum">
+                <i class="fa-solid fa-palette"
+                  style="font-size: 10px; color: rgba(255,255,255,0.7); pointer-events: none; position: absolute; top: 3px; right: 3px;"></i>
+              </div>
+              <button type="button" class="studio-swatch-ring color-swatch text-color-preset"
+                style="background-color: #4080e0;" data-color="#4080e0" title="Blue Text"></button>
+              <button type="button" class="studio-swatch-ring color-swatch text-color-preset"
+                style="background-color: #ffffff;" data-color="#ffffff" title="White Text"></button>
+
+              <!-- Custom Color Spectrum Dropdown Popup -->
+              <div class="custom-spectrum-menu" id="text-color-spectrum-menu">
+                <div class="spectrum-header"
+                  style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.5px; margin-bottom: 6px;">
+                  COLOR SPECTRUM</div>
+                <div class="spectrum-canvas-container" style="position: relative;">
+                  <canvas id="text-color-spectrum-canvas" width="160" height="95"
+                    style="border-radius: 2px; cursor: crosshair; width: 100%; display: block;"></canvas>
+                </div>
+                <!-- Hue Spectrum Range Slider -->
+                <div class="hue-slider-container" style="margin-top: 8px;">
+                  <input type="range" id="text-color-hue-slider" min="0" max="360" value="0" class="hue-range-input"
+                    style="width: 100%; cursor: pointer;">
+                </div>
+                <!-- Footer with HEX badge & native color input -->
+                <div class="spectrum-footer"
+                  style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+                  <div class="color-hex-badge" id="text-color-hex-badge"
+                    style="font-family: monospace; font-size: 11px; color: #e0e0e0; background: #222; padding: 2px 4px; border: 1px solid #333; border-radius: 2px;">
+                    #E04040</div>
+                  <input type="color" id="text-color-native-input" value="#e04040"
+                    style="width: 24px; height: 22px; border: 1px solid #333; background: transparent; cursor: pointer; padding: 0;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="studio-row highlight-box">
+            <span class="studio-select-label">HIGHLIGHT</span>
+            <div class="dropdown-menu" id="highlight-box-trigger"
+              style="position: relative; background-color: #ffe066; transition: background-color 0.22s ease;">
+              <!-- Custom Highlight Dropdown Menu (12 Aesthetic Color Swatches Grid) -->
+              <div class="custom-highlight-menu" id="custom-highlight-menu">
+                <div class="highlight-menu-item active" data-color="#ffe066" style="background-color: #ffe066;"
+                  title="Yellow"></div>
+                <div class="highlight-menu-item" data-color="#a8ffb2" style="background-color: #a8ffb2;" title="Green">
+                </div>
+                <div class="highlight-menu-item" data-color="#ffb3d9" style="background-color: #ffb3d9;" title="Pink">
+                </div>
+                <div class="highlight-menu-item" data-color="#99e6ff" style="background-color: #99e6ff;"
+                  title="Cyan Blue"></div>
+                <div class="highlight-menu-item" data-color="#ffd199" style="background-color: #ffd199;" title="Orange">
+                </div>
+                <div class="highlight-menu-item" data-color="#d9b3ff" style="background-color: #d9b3ff;" title="Purple">
+                </div>
+                <div class="highlight-menu-item" data-color="#ff9999" style="background-color: #ff9999;"
+                  title="Soft Red"></div>
+                <div class="highlight-menu-item" data-color="#d4ff80" style="background-color: #d4ff80;" title="Lime">
+                </div>
+                <div class="highlight-menu-item" data-color="#b3c6ff" style="background-color: #b3c6ff;"
+                  title="Lavender"></div>
+                <div class="highlight-menu-item" data-color="#ffe699" style="background-color: #ffe699;" title="Gold">
+                </div>
+                <div class="highlight-menu-item" data-color="#ffb3a7" style="background-color: #ffb3a7;" title="Coral">
+                </div>
+                <div class="highlight-menu-item" data-color="#99ffe6" style="background-color: #99ffe6;" title="Mint">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="studio-row page-colour-box">
+            <span class="studio-select-label">CANVAS</span>
+            <div class="studio-swatch-group" id="canvas-swatch-group" style="position: relative;">
+              <!-- Box 1: Canvas Spectrum Color Picker Trigger -->
+              <div class="studio-swatch-ring active color-swatch spectrum-box-trigger" id="canvas-spectrum-trigger"
+                style="background-color: #191919; position: relative;" title="Click for Canvas Spectrum">
+                <i class="fa-solid fa-palette"
+                  style="font-size: 10px; color: rgba(255,255,255,0.7); pointer-events: none; position: absolute; top: 3px; right: 3px;"></i>
+              </div>
+              <!-- Box 2 & Box 3: Most Recently Used Canvas Colors -->
+              <button type="button" class="studio-swatch-ring color-swatch recent-canvas-btn" id="recent-canvas-1"
+                style="background-color: #ffffff;" data-color="#ffffff" title="Recent Canvas: Pure White"></button>
+              <button type="button" class="studio-swatch-ring color-swatch recent-canvas-btn" id="recent-canvas-2"
+                style="background-color: #fcf5e5;" data-color="#fcf5e5" title="Recent Canvas: Warm Ivory"></button>
+
+              <!-- Custom Canvas Spectrum Dropdown Popup -->
+              <div class="custom-spectrum-menu" id="canvas-spectrum-menu">
+                <div class="spectrum-header"
+                  style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.5px; margin-bottom: 6px;">
+                  CANVAS SPECTRUM</div>
+                <div class="spectrum-canvas-container" style="position: relative;">
+                  <canvas id="canvas-spectrum-canvas" width="160" height="95"
+                    style="border-radius: 2px; cursor: crosshair; width: 100%; display: block;"></canvas>
+                </div>
+                <!-- Hue Spectrum Range Slider -->
+                <div class="hue-slider-container" style="margin-top: 8px;">
+                  <input type="range" id="canvas-hue-slider" min="0" max="360" value="0" class="hue-range-input"
+                    style="width: 100%; cursor: pointer;">
+                </div>
+                <!-- Footer with HEX badge & native color input -->
+                <div class="spectrum-footer"
+                  style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+                  <div class="color-hex-badge" id="canvas-hex-badge"
+                    style="font-family: monospace; font-size: 11px; color: #e0e0e0; background: #222; padding: 2px 4px; border: 1px solid #333; border-radius: 2px;">
+                    #191919</div>
+                  <input type="color" id="canvas-native-input" value="#191919"
+                    style="width: 24px; height: 22px; border: 1px solid #333; background: transparent; cursor: pointer; padding: 0;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Draw & Canvas -->
+        <div class="studio-section">
+          <div class="studio-section-title">
+            <i class="fa-solid fa-paintbrush"></i> Draw & Canvas
+          </div>
+          <div class="tool-pill-group draw-tools-box">
+            <button type="button" class="tool-pill-btn active draw-tool-btn" title="Text Mode / Type"
+              data-tool="text"><i class="fa-solid fa-i-cursor"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Fountain Pen" data-tool="pen"><i
+                class="fa-solid fa-pen-nib"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Pencil" data-tool="pencil"><i
+                class="fa-solid fa-pencil"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Art Brush" data-tool="brush"><i
+                class="fa-solid fa-paint-brush"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Eraser" data-tool="eraser"><i
+                class="fa-solid fa-eraser"></i></button>
+          </div>
+          <div class="tool-pill-group draw-size-box">
+            <button type="button" class="tool-pill-btn active draw-size-btn" style="font-size: 11px; font-weight: 700;"
+              data-size="2">FINE</button>
+            <button type="button" class="tool-pill-btn draw-size-btn" style="font-size: 11px; font-weight: 700;"
+              data-size="6">MEDIUM</button>
+            <button type="button" class="tool-pill-btn draw-size-btn" style="font-size: 11px; font-weight: 700;"
+              data-size="14">THICK</button>
+          </div>
+          <div class="studio-row draw-options-box">
+            <span class="studio-select-label">INK COLOR</span>
+            <div class="studio-swatch-group" id="ink-color-swatch-group" style="position: relative;">
+              <div class="studio-swatch-ring active color-swatch spectrum-box-trigger" id="ink-color-spectrum-trigger"
+                style="background-color: #ffffff; position: relative;" title="Click for Ink Color Spectrum">
+                <i class="fa-solid fa-palette" id="ink-color-palette-icon"
+                  style="font-size: 10px; color: rgba(0,0,0,0.6); pointer-events: none; position: absolute; top: 3px; right: 3px;"></i>
+              </div>
+              <button type="button" class="studio-swatch-ring color-swatch draw-ink-btn recent-ink-btn"
+                id="recent-ink-1" style="background-color: #e04040;" data-ink="#e04040"
+                title="Recent Ink: #e04040"></button>
+              <button type="button" class="studio-swatch-ring color-swatch draw-ink-btn recent-ink-btn"
+                id="recent-ink-2" style="background-color: #4080e0;" data-ink="#4080e0"
+                title="Recent Ink: #4080e0"></button>
+
+              <!-- Custom Ink Color Spectrum Dropdown Popup -->
+              <div class="custom-spectrum-menu" id="ink-color-spectrum-menu">
+                <div class="spectrum-header"
+                  style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.5px; margin-bottom: 6px;">
+                  INK COLOR SPECTRUM</div>
+                <div class="spectrum-canvas-container" style="position: relative;">
+                  <canvas id="ink-color-spectrum-canvas" width="160" height="95"
+                    style="border-radius: 2px; cursor: crosshair; width: 100%; display: block;"></canvas>
+                </div>
+                <!-- Hue Spectrum Range Slider -->
+                <div class="hue-slider-container" style="margin-top: 8px;">
+                  <input type="range" id="ink-color-hue-slider" min="0" max="360" value="0" class="hue-range-input"
+                    style="width: 100%; cursor: pointer;">
+                </div>
+                <!-- Footer with HEX badge & native color input -->
+                <div class="spectrum-footer"
+                  style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+                  <div class="color-hex-badge" id="ink-color-hex-badge"
+                    style="font-family: monospace; font-size: 11px; color: #e0e0e0; background: #222; padding: 2px 4px; border: 1px solid #333; border-radius: 2px;">
+                    #FFFFFF</div>
+                  <input type="color" id="ink-color-native-input" value="#ffffff"
+                    style="width: 24px; height: 22px; border: 1px solid #333; background: transparent; cursor: pointer; padding: 0;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Insert & Export -->
+        <div class="studio-section">
+          <div class="studio-section-title">
+            <i class="fa-solid fa-layer-group"></i> Insert & Export
+          </div>
+          <div class="tool-pill-group insert-box">
+            <button type="button" class="tool-pill-btn icon-button" id="insert-image-btn" title="Insert Image"><i
+                class="fa-solid fa-image"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" id="insert-table-btn" title="Insert Table"><i
+                class="fa-solid fa-table"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" id="share-link-btn" title="Share Note Link"><i
+                class="fa-solid fa-share-nodes"></i></button>
+          </div>
+          <div class="tool-pill-group page-export-box">
+            <button type="button" class="tool-pill-btn icon-button" id="export-pdf-btn" title="Export PDF"><i
+                class="fa-solid fa-file-pdf"></i></button>
+          </div>
+          <!-- Hidden file input for image insertion -->
+          <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
+        </div>
+      </aside>
+
 
     </div>
   </div>
-
-  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script type="module" src="landing.js"></script>
+  <div id="context-menu" class="context-menu">
+    <div class="menu-item" id="context-close">
+      <i class="fa-solid fa-trash"></i> Delete
+    </div>
+    <div class="menu-item" id="context-color">
+      <i class="fa-solid fa-palette"></i> Color Mark
+      <!-- Color Palette (Hidden by default, shown on hover/click) -->
+      <div class="color-palette">
+        <div class="context-swatch" style="background-color: #e74c3c;" data-color="#e74c3c"></div> <!-- Red -->
+        <div class="context-swatch" style="background-color: #3498db;" data-color="#3498db"></div> <!-- Blue -->
+        <div class="context-swatch" style="background-color: #2ecc71;" data-color="#2ecc71"></div> <!-- Green -->
+        <div class="context-swatch" style="background-color: #f39c12;" data-color="#f39c12"></div> <!-- Orange -->
+        <div class="context-swatch" style="background-color: #9b59b6;" data-color="#9b59b6"></div> <!-- Purple -->
+        <div class="context-swatch" style="background-color: #6f6f6f;" data-color="#3A3A3A"></div> <!-- Default -->
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script src="right_sidebar.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 
-</html>
+</html>deploy Fri Aug  7 00:00:01 IST 2026
