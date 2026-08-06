@@ -146,8 +146,8 @@
     <rect x="526" y="0" width="75" height="26" class="tag-pill" />
     <text x="563.5" y="17" text-anchor="middle" class="tag-text">FIREBASE</text>
 
-    <!-- NON-COMMERCIAL -->
-    <rect x="609" y="0" width="130" height="26" class="tag-pill" />
-    <text x="674" y="17" text-anchor="middle" class="tag-text">NON-COMMERCIAL</text>
+    <!-- MIT -->
+    <rect x="609" y="0" width="60" height="26" class="tag-pill" />
+    <text x="639" y="17" text-anchor="middle" class="tag-text">MIT</text>
   </g>
 </svg>

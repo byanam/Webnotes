@@ -1,14 +1,16 @@
 <div align="center">
 
-  <!-- Main Deployed Website Link (Main Attraction) -->
-  <h1><a href="https://notes--101.web.app">🌐 Launch Live Site: https://notes--101.web.app</a></h1>
-
-  <br>
-
   <!-- Animated SVG Header Banner -->
   <img src="assets/banner.svg" alt="Notes 101 Dark Gothic Banner" width="100%" />
 
   <br><br>
+
+  <!-- High-Aesthetic Live Site Launcher Button -->
+  <p align="center">
+    <a href="https://notes--101.web.app" target="_blank">
+      <img src="https://img.shields.io/badge/🌐_LIVE_APP-notes--101.web.app-000000?style=for-the-badge&logoColor=FFFFFF&labelColor=111111" alt="Launch Live Site" height="42" />
+    </a>
+  </p>
 
   <!-- Dark Gothic Pure Monochrome Badge Row -->
   <p align="center">
@@ -19,7 +21,15 @@
     <img src="https://img.shields.io/badge/Illustrator-000000?style=for-the-badge&logoColor=CCCCCC" alt="Illustrator" />
     <img src="https://img.shields.io/badge/Figma-000000?style=for-the-badge&logoColor=CCCCCC" alt="Figma" />
     <img src="https://img.shields.io/badge/Firebase-000000?style=for-the-badge&logoColor=CCCCCC" alt="Firebase" />
-    <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img src="https://img.shields.io/badge/License-CC_BY--NC_4.0-000000?style=for-the-badge&logoColor=CCCCCC" alt="Non-Commercial License" /></a>
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-000000?style=for-the-badge&logoColor=CCCCCC" alt="MIT License" /></a>
+  </p>
+
+  <br>
+
+  <p align="center">
+    <a href="https://notes--101.web.app">🌐 <b>Launch Live App</b></a> &nbsp;·&nbsp;
+    <a href="/editor.html">📁 <b>Open App Desk</b></a> &nbsp;·&nbsp;
+    <a href="https://opensource.org/licenses/MIT">📜 <b>MIT License</b></a>
   </p>
 
 </div>
@@ -28,11 +38,11 @@
 
 ## About
 
-Notes 101 is a simple, dark-themed note-taking app.
+Notes 101 is a minimal, dark-themed note-taking app.
 
 Designed in **Photoshop**, **Illustrator**, and **Figma**, and built using plain HTML, CSS, JavaScript, and Firebase.
 
-It has no ads, no subscriptions, no corporate bloat, and runs directly in your browser.
+It is 100% free, has no ads, no subscriptions, and runs directly in your web browser.
 
 ---
 
@@ -87,13 +97,10 @@ It has no ads, no subscriptions, no corporate bloat, and runs directly in your b
 
 ---
 
-## License (Non-Commercial)
+## License
 
-Licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license.
-
-- ✅ **Free to use & share**: Anyone can use, modify, and adapt the code for free.
-- ❌ **Non-Commercial**: You **cannot** sell, monetize, or earn money from this project or its code.
+Licensed under the **MIT License**. Free to use, modify, and share.
 
 <p align="center">
-  <sub>Notes 101 · Designed in Photoshop, Illustrator & Figma · CC BY-NC 4.0 Non-Commercial License</sub>
+  <sub>Notes 101 · Designed in Photoshop, Illustrator & Figma · MIT License</sub>
 </p>
