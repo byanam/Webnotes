@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes 101 — Desktop Experience Required</title>
+  <script>
+    (function () {
+      var ua = navigator.userAgent || '';
+      var isMobileUA = /iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || (/Android/i.test(ua) && /Mobile/i.test(ua));
+      var isDesktopOS = /Macintosh|Windows|X11|Linux x86_64/i.test(ua) && !/Android|iPhone|iPad/i.test(ua);
+      var hasFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+      var isSmallScreen = window.innerWidth < 600;
+      
+      var isMobileDevice = isMobileUA && !isDesktopOS && !hasFinePointer && isSmallScreen;
+      // If user is on a desktop/laptop, auto-redirect them to index.html immediately
+      if (!isMobileDevice && window.location.pathname.endsWith('mobile.html')) {
+        window.location.href = 'index.html';
+      }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -108,6 +123,9 @@
     <p class="mobile-notice">
       Please open this site on a laptop or desktop computer.
     </p>
+    <button class="mobile-btn" onclick="window.location.href='index.html'" style="margin-bottom: 12px; background: rgba(223, 213, 199, 0.12); border-color: #DFD5C7; color: #ffffff;">
+      Continue to Website ↗
+    </button>
     <button class="mobile-btn" onclick="window.location.href='https://github.com/byanam/Webnotes'">
       View GitHub Repository ↗
     </button>

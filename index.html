@@ -6,8 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
     (function () {
-      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth < 768 && window.innerHeight < 1000);
-      if (isMobile && !window.location.pathname.endsWith('mobile.html')) {
+      var ua = navigator.userAgent || '';
+      var isMobileUA = /iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || (/Android/i.test(ua) && /Mobile/i.test(ua));
+      var isDesktopOS = /Macintosh|Windows|X11|Linux x86_64/i.test(ua) && !/Android|iPhone|iPad/i.test(ua);
+      var hasFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+      var isSmallScreen = window.innerWidth < 600;
+      
+      var isMobileDevice = isMobileUA && !isDesktopOS && !hasFinePointer && isSmallScreen;
+      if (isMobileDevice && !window.location.pathname.endsWith('mobile.html')) {
         window.location.href = 'mobile.html';
       }
     })();
