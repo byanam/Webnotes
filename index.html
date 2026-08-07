@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
-    (function() {
+    (function () {
       var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth < 768 && window.innerHeight < 1000);
       if (isMobile && !window.location.pathname.endsWith('mobile.html')) {
         window.location.href = 'mobile.html';
@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Oranienbaum&family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
 </head>
@@ -32,7 +32,8 @@
       <p><a href="https://github.com/byanam" target="_blank" rel="noopener noreferrer">byanam</a></p>
       <p>&nbsp;</p>
       <p>LinkedIn</p>
-      <p><a href="https://www.linkedin.com/in/anam-razzaque/" target="_blank" rel="noopener noreferrer">anam-razzaque</a></p>
+      <p><a href="https://www.linkedin.com/in/anam-razzaque/" target="_blank"
+          rel="noopener noreferrer">anam-razzaque</a></p>
       <p>&nbsp;</p>
       <p>Email</p>
       <p><a href="mailto:anamrazzaque.work@gmail.com">anamrazzaque.work@gmail.com</a></p>
@@ -46,26 +47,171 @@
       <!-- Layer order matches Figma: bottom → top -->
       <header class="hero">
 
-        <!-- Layer 7 (bottom): moving pages -->
+        <!-- Layer 7 (bottom): moving pages track with authentic student notes & sketches -->
         <div class="hero__pages" id="heroPages" aria-label="Notebook page previews">
           <div class="hero__pages-track">
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
-            <div class="hero__page" aria-hidden="true"></div>
+
+            <!-- Page 1: ConvNets Class Notes -->
+            <div class="hero__page" aria-hidden="true">
+              <div class="hero__page-content">
+                <div class="hero__page-meta">unit 4 // convnets - apr 14</div>
+                <div class="hero__page-divider"></div>
+                <p class="hero__page-hand">so basically fully connected layers flatten everything and lose all spatial information in 2D images.</p>
+                <p class="hero__page-hand">conv layers solve this by sliding a small filter matrix across the image instead of looking at all pixels at once.</p>
+                <div class="hero__page-sketch" aria-hidden="true">
+                  <svg width="280" height="85" viewBox="0 0 280 85" fill="none" stroke="#E2D7CA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="10" y="10" width="55" height="55" rx="3" stroke-dasharray="1 1" />
+                    <line x1="28" y1="10" x2="28" y2="65" />
+                    <line x1="46" y1="10" x2="46" y2="65" />
+                    <line x1="10" y1="28" x2="65" y2="28" />
+                    <line x1="10" y1="46" x2="65" y2="46" />
+                    <rect x="10" y="10" width="36" height="36" fill="rgba(255, 182, 0, 0.15)" stroke="#FFB600" />
+                    <path d="M 85 37 Q 110 32 135 37 M 127 30 L 137 37 L 129 44" />
+                    <text x="92" y="23" fill="#E2D7CA" font-family="'Homemade Apple', cursive" font-size="11" stroke="none">conv filter (3x3)</text>
+                    <rect x="155" y="18" width="38" height="38" rx="3" />
+                    <line x1="174" y1="18" x2="174" y2="56" />
+                    <line x1="155" y1="37" x2="193" y2="37" />
+                  </svg>
+                </div>
+                <p class="hero__page-hand">output feature map size depends on kernel K, padding P &amp; stride S:</p>
+                <div class="hero__page-math">O = (W - K + 2P)/S + 1</div>
+                <div class="hero__page-margin-note">⭐ prof sharma said this is on the quiz!</div>
+                <p class="hero__page-hand">relu zeroes out negative values so gradient descent converges way faster during backprop.</p>
+                <pre class="hero__page-code"><code>nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1)</code></pre>
+              </div>
+            </div>
+
+            <!-- Page 2: Late Night Scratchpad -->
+            <div class="hero__page" aria-hidden="true">
+              <div class="hero__page-content">
+                <div class="hero__page-meta">08.05 // 2:40 am</div>
+                <div class="hero__page-divider"></div>
+                <p class="hero__page-hand">spent like 3 hours trying to find a simple note-taking app that doesn't cost $10/month or hide markdown export behind a paywall.</p>
+                <p class="hero__page-hand">literally every app now has AI summary popups, weird database tables, and 50 extra buttons nobody asked for.</p>
+                <div class="hero__page-sketch" aria-hidden="true">
+                  <svg width="260" height="85" viewBox="0 0 260 85" fill="none" stroke="#E2D7CA" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M 20 30 Q 20 70 45 70 Q 70 70 70 30 Z" />
+                    <path d="M 70 40 Q 85 40 85 52 Q 85 62 70 62" />
+                    <path d="M 30 20 Q 33 10 30 5 M 45 20 Q 48 10 45 5 M 60 20 Q 63 10 60 5" opacity="0.6" />
+                    <path d="M 100 45 Q 130 25 160 45 M 150 38 L 162 45 L 153 53" />
+                    <text x="105" y="70" fill="#FFB600" font-family="'Homemade Apple', cursive" font-size="13" stroke="none">built Notes 101 instead!</text>
+                  </svg>
+                </div>
+                <p class="hero__page-hand">i just wanted a clean dark canvas that looks like Photoshop and VS Code had a baby.</p>
+                <div class="hero__page-checklist-hand">
+                  <p>✓ 100% free under MIT open source license</p>
+                  <p>✓ zero ads, zero tracking, no weird popups</p>
+                  <p>✓ dark gothic matte theme (#08080a)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 3: Webnotes Architecture Notes -->
+            <div class="hero__page" aria-hidden="true">
+              <div class="hero__page-content">
+                <div class="hero__page-meta">notes 101 - how sync works</div>
+                <div class="hero__page-divider"></div>
+                <p class="hero__page-hand">wanted zero lag while typing so state updates happen in local memory first before sending to server.</p>
+                <div class="hero__page-sketch" aria-hidden="true">
+                  <svg width="290" height="95" viewBox="0 0 290 95" fill="none" stroke="#E2D7CA" stroke-width="1.5" stroke-linecap="round">
+                    <rect x="10" y="15" width="75" height="35" rx="5" />
+                    <text x="18" y="37" fill="#E2D7CA" font-family="monospace" font-size="11" stroke="none">Editor UI</text>
+                    <path d="M 85 32 L 120 32 M 112 26 L 122 32 L 112 38" />
+                    <rect x="125" y="15" width="75" height="35" rx="5" stroke="#FFB600" />
+                    <text x="133" y="37" fill="#FFB600" font-family="monospace" font-size="11" stroke="none">Firestore</text>
+                    <path d="M 200 32 L 235 32 M 227 26 L 237 32 L 227 38" />
+                    <rect x="240" y="15" width="45" height="35" rx="5" />
+                    <text x="246" y="37" fill="#E2D7CA" font-family="monospace" font-size="11" stroke="none">Auth</text>
+                    <text x="20" y="78" fill="#E2D7CA" font-family="'Homemade Apple', cursive" font-size="12" stroke="none">real-time sync over WebSockets ✨</text>
+                  </svg>
+                </div>
+                <p class="hero__page-hand">realtime Firestore listener handles background persistence so even if internet drops out, you don't lose a single character.</p>
+                <div class="hero__page-margin-note">(0ms input lag while typing!)</div>
+                <p class="hero__page-hand">also set up clean HTTP 301 redirects so URLs look clean without .html everywhere.</p>
+              </div>
+            </div>
+
+            <!-- Page 4: Linear Algebra Lecture Notes -->
+            <div class="hero__page" aria-hidden="true">
+              <div class="hero__page-content">
+                <div class="hero__page-meta">math 201 // linear algebra</div>
+                <div class="hero__page-divider"></div>
+                <p class="hero__page-hand">eigenvectors are basically vectors that don't change direction when a matrix transformation happens.</p>
+                <div class="hero__page-math">A &middot; v = &lambda; &middot; v</div>
+                <div class="hero__page-margin-note">(&lambda; is scale factor! if &lambda; &gt; 1, v stretches)</div>
+                <div class="hero__page-sketch" aria-hidden="true">
+                  <svg width="270" height="90" viewBox="0 0 270 90" fill="none" stroke="#E2D7CA" stroke-width="1.5" stroke-linecap="round">
+                    <line x1="20" y1="75" x2="140" y2="75" />
+                    <line x1="20" y1="75" x2="20" y2="10" />
+                    <path d="M 20 75 L 80 28" stroke="#E2D7CA" stroke-width="2" />
+                    <path d="M 72 28 L 82 26 L 78 36" fill="#E2D7CA" />
+                    <text x="88" y="28" fill="#E2D7CA" font-family="'Homemade Apple', cursive" font-size="13" stroke="none">v</text>
+                    <path d="M 20 75 L 125 12" stroke="#FFB600" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <text x="132" y="16" fill="#FFB600" font-family="'Homemade Apple', cursive" font-size="13" stroke="none">&lambda;v</text>
+                    <text x="160" y="55" fill="#E2D7CA" font-family="monospace" font-size="14" stroke="none">A = U &Sigma; V<sup>T</sup></text>
+                  </svg>
+                </div>
+                <p class="hero__page-hand">singular value decomposition (SVD) is super important for PCA — used to compress high-dimensional feature vectors in machine learning pipelines.</p>
+              </div>
+            </div>
+
+            <!-- Page 5: Loop repeat Page 1 -->
+            <div class="hero__page" aria-hidden="true">
+              <div class="hero__page-content">
+                <div class="hero__page-meta">unit 4 // convnets - apr 14</div>
+                <div class="hero__page-divider"></div>
+                <p class="hero__page-hand">so basically fully connected layers flatten everything and lose all spatial information in 2D images.</p>
+                <p class="hero__page-hand">conv layers solve this by sliding a small filter matrix across the image instead of looking at all pixels at once.</p>
+                <div class="hero__page-sketch" aria-hidden="true">
+                  <svg width="280" height="85" viewBox="0 0 280 85" fill="none" stroke="#E2D7CA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="10" y="10" width="55" height="55" rx="3" stroke-dasharray="1 1" />
+                    <line x1="28" y1="10" x2="28" y2="65" />
+                    <line x1="46" y1="10" x2="46" y2="65" />
+                    <line x1="10" y1="28" x2="65" y2="28" />
+                    <line x1="10" y1="46" x2="65" y2="46" />
+                    <rect x="10" y="10" width="36" height="36" fill="rgba(255, 182, 0, 0.15)" stroke="#FFB600" />
+                    <path d="M 85 37 Q 110 32 135 37 M 127 30 L 137 37 L 129 44" />
+                    <text x="92" y="23" fill="#E2D7CA" font-family="'Homemade Apple', cursive" font-size="11" stroke="none">conv filter (3x3)</text>
+                    <rect x="155" y="18" width="38" height="38" rx="3" />
+                    <line x1="174" y1="18" x2="174" y2="56" />
+                    <line x1="155" y1="37" x2="193" y2="37" />
+                  </svg>
+                </div>
+                <div class="hero__page-margin-note">⭐ prof sharma said this is on the quiz!</div>
+              </div>
+            </div>
+
+            <!-- Page 6: Loop repeat Page 2 -->
+            <div class="hero__page" aria-hidden="true">
+              <div class="hero__page-content">
+                <div class="hero__page-meta">08.05 // 2:40 am</div>
+                <div class="hero__page-divider"></div>
+                <p class="hero__page-hand">spent like 3 hours trying to find a simple note-taking app that doesn't cost $10/month or hide markdown export behind a paywall.</p>
+                <p class="hero__page-hand">literally every app now has AI summary popups, weird database tables, and 50 extra buttons nobody asked for.</p>
+                <div class="hero__page-sketch" aria-hidden="true">
+                  <svg width="260" height="85" viewBox="0 0 260 85" fill="none" stroke="#E2D7CA" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M 20 30 Q 20 70 45 70 Q 70 70 70 30 Z" />
+                    <path d="M 70 40 Q 85 40 85 52 Q 85 62 70 62" />
+                    <path d="M 30 20 Q 33 10 30 5 M 45 20 Q 48 10 45 5 M 60 20 Q 63 10 60 5" opacity="0.6" />
+                    <path d="M 100 45 Q 130 25 160 45 M 150 38 L 162 45 L 153 53" />
+                    <text x="105" y="70" fill="#FFB600" font-family="'Homemade Apple', cursive" font-size="13" stroke="none">built Notes 101 instead!</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Layer 6: notes 101 (sits behind pages where they overlap) -->
-        <h1 class="hero__title">Notes 101</h1>
+        <!-- Layer 6: notes 101 image title (sits behind pages where they overlap) -->
+        <img class="hero__title-img" src="assets/notes101_title.png" alt="notes 101">
 
         <!-- Layer 5: black shadow gradient (overlays bottom of pages) -->
         <div class="hero__shadow" aria-hidden="true"></div>
 
-        <!-- Layer 4: tagline (above shadow) -->
-        <p class="hero__tagline">An open-source note-taking site</p>
+        <!-- Layer 4: Taglines (Left: "an open source", Right: "note taking site") -->
+        <p class="hero__tagline-left">an open source</p>
+        <p class="hero__tagline-right">note taking site</p>
 
         <!-- Layer 2: Ready when you are -->
         <p class="hero__ready">Ready when you are</p>

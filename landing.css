@@ -24,6 +24,7 @@
   --font-serif: 'EB Garamond', 'Garamond', Georgia, serif;
   --font-apple-garamond: 'Apple Garamond', 'EB Garamond', 'Garamond', Georgia, serif;
   --font-apple-garamond-light: 'Apple Garamond Light', 'Apple Garamond', 'EB Garamond', 'Garamond', Georgia, serif;
+  --font-handwriting: 'Homemade Apple', 'Apple Garamond', cursive;
 }
 
 * {
@@ -189,31 +190,168 @@ input {
   width: 616px;
   height: 831px;
   background: #191919;
+  border: 1px solid rgba(226, 215, 202, 0.12);
+  border-radius: 4px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
   user-select: none;
   pointer-events: none;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* "notes 101" — LAYER 6 (z:1, behind pages)
-   Figma: 1862×363, left: calc(50% - 1862/2 + 8), top: 31,
-   Akira Expanded 800, 251px, #E2D7CA */
-.hero__title {
-  position: absolute;
-  left: calc(50% - 1862px / 2 + 8px);
-  top: 31px;
-  width: 1862px;
-  height: 363px;
-  z-index: 1;
+.hero__page-content {
+  padding: 44px 38px;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  font-family: var(--font-poster);
-  font-style: normal;
-  font-weight: 800;
-  font-size: 251px;
-  line-height: 0%;
+  flex-direction: column;
   color: #E2D7CA;
+  box-sizing: border-box;
+}
+
+.hero__page-meta {
+  font-family: monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(226, 215, 202, 0.45);
   text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.hero__page-hand-title {
+  font-family: var(--font-handwriting), cursive;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.4;
+  color: #E2D7CA;
+  margin: 0 0 16px 0;
+}
+
+.hero__page-hand {
+  font-family: var(--font-handwriting), cursive;
+  font-size: 19px;
+  line-height: 1.7;
+  color: #E2D7CA;
+  opacity: 0.92;
+  margin: 0 0 16px 0;
+}
+
+.hero__page-margin-note {
+  font-family: var(--font-handwriting), cursive;
+  font-size: 17px;
+  color: #FFB600;
+  margin: 8px 0 14px 4px;
+  transform: rotate(-1.5deg);
+  display: inline-block;
+}
+
+.hero__page-sketch {
+  margin: 12px 0 16px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.hero__page-checklist-hand {
+  font-family: var(--font-handwriting), cursive;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #E2D7CA;
+  margin: 12px 0;
+}
+
+.hero__page-checklist-hand p {
+  margin: 6px 0;
+}
+
+.hero__page-title {
+  font-family: var(--font-apple-garamond), serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.25;
+  color: #E2D7CA;
+  margin: 0 0 16px 0;
+}
+
+.hero__page-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(226, 215, 202, 0.12);
+  margin: 12px 0 20px 0;
+}
+
+.hero__page-text {
+  font-family: var(--font-apple-garamond-light), serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #DFD5C7;
+  opacity: 0.88;
+  margin: 0 0 16px 0;
+}
+
+.hero__page-quote {
+  font-family: var(--font-apple-garamond), serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  color: #E3DACD;
+  border-left: 2px solid rgba(226, 215, 202, 0.4);
+  padding-left: 16px;
+  margin: 16px 0;
+}
+
+.hero__page-math {
+  font-family: monospace;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(226, 215, 202, 0.15);
+  border-radius: 4px;
+  padding: 12px 16px;
+  color: #E2D7CA;
+  margin: 14px 0;
+  display: inline-block;
+  letter-spacing: 0.04em;
+}
+
+.hero__page-code {
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background: #0D0D0D;
+  border: 1px solid rgba(226, 215, 202, 0.12);
+  border-radius: 4px;
+  padding: 16px;
+  color: #DFD5C7;
+  margin: 14px 0;
+  overflow: hidden;
+}
+
+.hero__page-list,
+.hero__page-checklist {
+  font-family: var(--font-apple-garamond-light), serif;
+  font-size: 19px;
+  line-height: 1.6;
+  color: #DFD5C7;
+  opacity: 0.88;
+  margin: 8px 0 16px 20px;
+  padding: 0;
+}
+
+.hero__page-checklist p {
+  margin: 8px 0;
+}
+
+/* "notes 101" Image Title — LAYER 6 (z:1, behind pages)
+   Figma: 635×256, left: calc(50% - 635px / 2 - 1.5px), top: 92px */
+.hero__title-img {
+  position: absolute;
+  left: calc(50% - 635px / 2 - 1.5px);
+  top: 92px;
+  width: 635px;
+  height: 256px;
+  z-index: 1;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 /* "black shadow" — LAYER 5 (z:3, on top of pages)
@@ -231,30 +369,50 @@ input {
   pointer-events: none;
 }
 
-/* "An open-source note-taking site" — LAYER 4 (z:4, above shadow)
-   Figma: 761×69, left: calc(50% - 761px / 2 + 35.5px), top: 31,
-   Oranienbaum 400, 63px, line-height: 109.07%,
-   letter-spacing: -0.05em, #E3DACD */
-.hero__tagline {
+/* "an open source" — Left Tagline
+   Figma: 311×363, left: calc(50% - 311px / 2 - 804.5px), top: -150px */
+.hero__tagline-left {
   position: absolute;
-  left: calc(50% - 761px / 2 + 35.5px);
-  top: 31px;
-  width: 761px;
-  height: 69px;
+  left: calc(50% - 311px / 2 - 804.5px);
+  top: -150px;
+  width: 311px;
+  height: 363px;
   z-index: 4;
   display: flex;
   align-items: center;
-  text-align: center;
-  justify-content: center;
+  justify-content: flex-end;
+  text-align: right;
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-apple-garamond-light);
   font-style: normal;
   font-weight: 400;
-  font-size: 63px;
+  font-size: 64px;
   line-height: 109.07%;
   letter-spacing: -0.05em;
   color: #E3DACD;
-  white-space: nowrap;
+}
+
+/* "note taking site" — Right Tagline
+   Figma: 311×363, left: calc(50% - 311px / 2 + 804.5px), top: -150px */
+.hero__tagline-right {
+  position: absolute;
+  left: calc(50% - 311px / 2 + 804.5px);
+  top: -150px;
+  width: 311px;
+  height: 363px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  margin: 0;
+  font-family: var(--font-apple-garamond-light);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 109.07%;
+  letter-spacing: -0.05em;
+  color: #E3DACD;
 }
 
 /* "Ready when you are" — LAYER 2 (z:5, above shadow)
@@ -270,6 +428,7 @@ input {
   z-index: 5;
   display: flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
   margin: 0;
   font-family: var(--font-apple-garamond);
@@ -280,6 +439,23 @@ input {
   letter-spacing: -0.05em;
   color: #E3DACD;
   white-space: nowrap;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 0, 0, 0.9);
+}
+
+.hero__ready::before {
+  content: '';
+  position: absolute;
+  inset: -40px -75px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.90) 0%,
+    rgba(0, 0, 0, 0.60) 50%,
+    rgba(0, 0, 0, 0) 88%
+  );
+  filter: blur(20px);
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Interactive Cursor Trigger Zone below "Ready when you are" */
