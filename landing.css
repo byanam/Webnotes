@@ -206,6 +206,7 @@ input {
   flex-direction: column;
   color: #E2D7CA;
   box-sizing: border-box;
+  opacity: 0.68;
 }
 
 .hero__page-meta {
