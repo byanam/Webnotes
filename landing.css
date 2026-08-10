@@ -74,7 +74,7 @@ img {
   position: relative;
   z-index: 1;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   background: transparent;
   /* transparent so contact footer shows through */
   margin-bottom: 82vh;
@@ -373,11 +373,12 @@ input {
   pointer-events: none;
 }
 
-/* "an open source" — Left Tagline */
+/* "an open source" — Left Tagline
+   Figma: 311×363, left: calc(50% - 311px / 2 - 804.5px), top: -150px */
 .hero__tagline-left {
   position: absolute;
-  left: 48px;
-  top: 38px;
+  left: calc(50% - 311px / 2 - 804.5px);
+  top: -150px;
   width: 311px;
   height: 363px;
   z-index: 4;
@@ -395,11 +396,12 @@ input {
   color: #E3DACD;
 }
 
-/* "note taking site" — Right Tagline */
+/* "note taking site" — Right Tagline
+   Figma: 311×363, left: calc(50% - 311px / 2 + 804.5px), top: -150px */
 .hero__tagline-right {
   position: absolute;
-  left: 1561px;
-  top: 38px;
+  left: calc(50% - 311px / 2 + 804.5px);
+  top: -150px;
   width: 311px;
   height: 363px;
   z-index: 4;
