@@ -13,7 +13,8 @@ import { signInWithGoogle, listenToAuthState } from './firebase/auth.js';
 
     function updateScale() {
         if (!wrapper || !canvas) return;
-        var scale = window.innerWidth / DESIGN_WIDTH;
+        var clientWidth = document.documentElement.clientWidth || window.innerWidth;
+        var scale = clientWidth / DESIGN_WIDTH;
         canvas.style.transform = 'scale(' + scale + ')';
         wrapper.style.height = (DESIGN_HEIGHT * scale) + 'px';
         if (window.ScrollTrigger) window.ScrollTrigger.refresh();

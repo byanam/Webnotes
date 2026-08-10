@@ -39,6 +39,9 @@ body {
   overflow-x: hidden;
   overscroll-behavior: none;
   width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -370,12 +373,11 @@ input {
   pointer-events: none;
 }
 
-/* "an open source" — Left Tagline
-   Figma: 311×363, left: calc(50% - 311px / 2 - 804.5px), top: -150px */
+/* "an open source" — Left Tagline */
 .hero__tagline-left {
   position: absolute;
-  left: calc(50% - 311px / 2 - 804.5px);
-  top: -150px;
+  left: 48px;
+  top: 38px;
   width: 311px;
   height: 363px;
   z-index: 4;
@@ -393,12 +395,11 @@ input {
   color: #E3DACD;
 }
 
-/* "note taking site" — Right Tagline
-   Figma: 311×363, left: calc(50% - 311px / 2 + 804.5px), top: -150px */
+/* "note taking site" — Right Tagline */
 .hero__tagline-right {
   position: absolute;
-  left: calc(50% - 311px / 2 + 804.5px);
-  top: -150px;
+  left: 1561px;
+  top: 38px;
   width: 311px;
   height: 363px;
   z-index: 4;
@@ -718,20 +719,20 @@ input {
 .editorial__headline1 {
   top: 2707px;
   width: 1612px;
-  height: 100px;
+  height: auto;
   font-size: 204px;
   letter-spacing: -0.05em;
-  line-height: 49%;
+  line-height: 0.95;
 }
 
 /* "But I Made It Anyway." */
 .editorial__headline2 {
   top: 2855px;
   width: 1236px;
-  height: 81px;
+  height: auto;
   font-size: 166px;
   letter-spacing: -0.05em;
-  line-height: 49%;
+  line-height: 0.95;
 }
 
 .editorial__headline2 em {
@@ -760,13 +761,13 @@ input {
   left: 149px;
   top: 3056px;
   width: 735px;
-  height: 63px;
+  height: auto;
   font-family: var(--font-apple-garamond-light);
   font-style: normal;
   font-weight: 300;
   font-size: 128px;
   letter-spacing: -0.01em;
-  line-height: 49%;
+  line-height: 1.05;
   color: #000000;
 }
 
@@ -788,13 +789,13 @@ input {
   left: 1024px;
   top: 3054px;
   width: 813px;
-  height: 78px;
+  height: auto;
   font-family: var(--font-apple-garamond-light);
   font-style: normal;
   font-weight: 400;
   font-size: 96px;
   letter-spacing: -0.01em;
-  line-height: 10px;
+  line-height: 1.05;
   color: #000000;
   text-transform: none;
 }
@@ -814,7 +815,7 @@ input {
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
-  line-height: 90%;
+  line-height: 1.15;
   letter-spacing: -0.01em;
   display: flex;
   align-items: center;
@@ -861,7 +862,7 @@ input {
   font-style: italic;
   font-weight: 700;
   font-size: 40px;
-  line-height: 90%;
+  line-height: 1.15;
   letter-spacing: -0.01em;
   color: #000000;
   display: flex;
