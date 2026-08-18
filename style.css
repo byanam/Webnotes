@@ -731,15 +731,200 @@ mark.doc-search-highlight.active-match {
 }
 
 /* =========================================================================
-   RIGHT SIDEBAR STUDIO CONSOLE DESIGN
+   RIGHT SIDEBAR STUDIO CONSOLE DESIGN (Redesigned Glassmorphic Studio Panel)
    ========================================================================= */
 
+.sidebar.sidebar-right {
+  width: 310px;
+  border-right: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: linear-gradient(180deg, #141417 0%, #0d0d0f 100%);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+
+.sidebar.sidebar-right::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar.sidebar-right::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* User Profile Card Header */
+.sidebar-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin: 12px 12px 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.sidebar-profile-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.profile-left-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 182, 0, 0.4);
+  background: #2a2a2a;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-name {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.profile-last-edited {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  color: #888892;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 1px;
+}
+
+.cloud-sync-status {
+  font-size: 10px;
+  color: #4caf50;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+}
+
+.logout-btn {
+  background: rgba(255, 77, 79, 0.1);
+  border: 1px solid rgba(255, 77, 79, 0.25);
+  color: #ff4d4f;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 77, 79, 0.22);
+  border-color: rgba(255, 77, 79, 0.45);
+  transform: translateY(-1px);
+  color: #ff6b6b;
+}
+
+/* Search Toolbar Header */
+.sidebar.sidebar-right .sidebar-toolbar {
+  border-top: none !important;
+  padding: 4px 12px 10px 12px;
+}
+
+.sidebar-search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 6px 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidebar-search-container:focus-within {
+  border-color: rgba(255, 182, 0, 0.5);
+  box-shadow: 0 0 12px rgba(255, 182, 0, 0.15);
+}
+
+.sidebar-search-input {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  width: 100%;
+  outline: none;
+}
+
+.sidebar-search-input::placeholder {
+  color: #666670;
+}
+
+.search-icon {
+  color: #777782;
+  font-size: 12px;
+}
+
+.search-count-badge {
+  font-size: 10px;
+  color: #ffb600;
+  font-weight: 700;
+  background: rgba(255, 182, 0, 0.15);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.search-nav-btn, .search-clear-btn {
+  background: transparent;
+  border: none;
+  color: #888892;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 2px 4px;
+  transition: color 0.2s ease;
+}
+
+.search-nav-btn:hover, .search-clear-btn:hover {
+  color: #ffffff;
+}
+
+/* Studio Sections */
 .studio-section {
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0;
   flex: none;
+  margin-bottom: 2px;
 }
 
 .studio-section:last-of-type {
@@ -749,109 +934,125 @@ mark.doc-search-highlight.active-match {
 }
 
 .studio-section-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #555555;
+  letter-spacing: 0.08em;
+  color: #8a8a93;
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 16px;
-  min-height: 40px;
-  border-bottom: 3px solid #333333;
-  background-color: #191919;
+  gap: 8px;
+  padding: 0 14px;
+  min-height: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .studio-section-title i {
-  font-size: 14px;
-  color: #555555;
+  font-size: 12px;
+  color: #FFB600;
 }
 
+/* Segmented Tool Pill Groups */
 .tool-pill-group {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: #000000;
-  border-bottom: 3px solid #333333;
-  min-height: 44px;
-  padding: 0;
-  gap: 0;
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  min-height: 42px;
+  padding: 4px 8px;
+  gap: 4px;
 }
 
 .tool-pill-btn {
   background: transparent;
-  border: none;
-  border-right: 3px solid #333333;
-  color: #3A3A3A;
-  font-size: 18px;
-  padding: 10px 0;
+  border: 1px solid transparent;
+  color: #7a7a85;
+  font-size: 14px;
+  padding: 6px 0;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   flex: 1;
-  min-height: 44px;
-}
-
-.tool-pill-btn:last-child {
-  border-right: none;
+  min-height: 34px;
+  border-radius: 8px;
 }
 
 .tool-pill-btn:hover {
-  color: #777;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .tool-pill-btn.active {
-  color: #e0e0e0;
+  color: #FFB600;
+  background: rgba(255, 182, 0, 0.12);
+  border-color: rgba(255, 182, 0, 0.25);
+  box-shadow: 0 0 12px rgba(255, 182, 0, 0.1);
+  font-weight: 700;
 }
 
+/* Tool Rows & Select Labels */
 .studio-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  background: #000000;
-  border-bottom: 3px solid #333333;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   min-height: 44px;
-  padding: 0 0 0 16px;
+  padding: 4px 14px;
 }
 
 .studio-select-label {
-  font-family: "Sumana", serif;
-  font-size: 14px;
-  color: #555555;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  color: #8a8a93;
   font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .font-box {
-  padding-left: 0;
+  padding-left: 14px;
 }
 
 .font-box .studio-select-label {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-left: 12px;
+  flex: none;
+  text-align: left;
+  padding-left: 0;
 }
 
 .studio-row .dropdown-menu {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 8px;
   margin-left: auto;
-  align-self: stretch;
-  border-left: 3px solid #333333;
-  padding: 0 12px;
+  align-self: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 6px 12px;
   cursor: pointer;
-  min-width: 135px;
+  min-width: 140px;
   box-sizing: border-box;
   text-align: center;
+  transition: all 0.2s ease;
+}
+
+.studio-row .dropdown-menu:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 182, 0, 0.4);
+}
+
+.dropdown-text {
+  color: #ffffff;
+  font-weight: 600;
 }
 
 /* Custom MS Word-Style Font Dropdown Popup */
@@ -862,22 +1063,28 @@ mark.doc-search-highlight.active-match {
 .custom-font-menu {
   display: block;
   position: absolute;
-  top: 100%;
-  left: -3px;
-  right: -12px;
-  width: calc(100% + 15px);
-  max-height: 260px;
+  top: calc(100% + 6px);
+  right: 0;
+  left: auto;
+  width: 220px;
+  max-height: 280px;
   overflow-y: auto;
-  background-color: #141414;
-  border: 3px solid #333333;
-  border-top: none;
-  border-radius: 0;
+  background-color: #18181c;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
   z-index: 1000;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9);
   box-sizing: border-box;
+  padding: 6px;
+  backdrop-filter: blur(12px);
 
   /* Smooth Dropdown Animation */
   opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s ease;
+  pointer-events: none;
+}
   visibility: hidden;
   transform: translateY(-8px) scaleY(0.95);
   transform-origin: top center;
