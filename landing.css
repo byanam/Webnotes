@@ -136,8 +136,8 @@ img {
   overflow: visible;
   background: transparent;
   /* transparent so contact footer shows through */
-  margin-bottom: 90vh;
-  /* scroll stops with newspaper bottom just above CONTACT heading */
+  margin-bottom: 86vh;
+  /* scroll stops with newspaper bottom right above CONTACT heading */
 }
 
 .page-canvas {
