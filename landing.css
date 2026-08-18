@@ -727,22 +727,22 @@ input {
 
 /* "This Didn't Need To Exist." */
 .editorial__headline1 {
-  top: 2707px;
+  top: 2665px;
   width: 1612px;
   height: auto;
   font-size: 204px;
   letter-spacing: -0.05em;
-  line-height: 0.95;
+  line-height: 0.85;
 }
 
 /* "But I Made It Anyway." */
 .editorial__headline2 {
-  top: 2855px;
+  top: 2810px;
   width: 1236px;
   height: auto;
   font-size: 166px;
   letter-spacing: -0.05em;
-  line-height: 0.95;
+  line-height: 0.85;
 }
 
 .editorial__headline2 em {
@@ -776,7 +776,7 @@ input {
   font-style: italic;
   font-weight: 700;
   font-size: 128px;
-  line-height: 0.95;
+  line-height: 0.85;
   color: #000000;
   display: flex;
   align-items: center;
@@ -807,7 +807,7 @@ input {
   font-style: normal;
   font-weight: 400;
   font-size: 96px;
-  line-height: 0.95;
+  line-height: 0.85;
   color: #000000;
   display: flex;
   align-items: center;
@@ -830,10 +830,9 @@ input {
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
-  line-height: 0.95;
+  line-height: 1.05;
   letter-spacing: -0.01em;
-  display: flex;
-  align-items: center;
+  display: block;
 }
 
 .editorial__text--justify {
@@ -843,7 +842,7 @@ input {
 /* Left para 1 — "Couldn't find a note taking app..." */
 .editorial__left-para1 {
   left: 143px;
-  top: 3175px;
+  top: 3205px;
   width: 824px;
   height: auto;
   text-align: justify;
@@ -852,7 +851,7 @@ input {
 /* Left para 2 — "Most note-taking apps..." */
 .editorial__left-para2 {
   left: 149px;
-  top: 3490px;
+  top: 3515px;
   width: 824px;
   height: auto;
   text-align: justify;
@@ -870,14 +869,14 @@ input {
 /* Quote — "Honestly, I didn't have anything better to do." */
 .editorial__quote {
   left: 1024px;
-  top: 3380px;
+  top: 3360px;
   width: 762px;
   height: auto;
   font-family: var(--font-apple-garamond);
   font-style: italic;
   font-weight: 700;
   font-size: 40px;
-  line-height: 0.95;
+  line-height: 1.05;
   letter-spacing: -0.01em;
   color: #000000;
   display: flex;
@@ -888,7 +887,7 @@ input {
 .editorial__quote-attr {
   position: absolute;
   left: 1635px;
-  top: 3450px;
+  top: 3435px;
   width: 172px;
   height: 23px;
   display: flex;
@@ -908,7 +907,7 @@ input {
 .editorial__thing-heading {
   position: absolute;
   left: 143px;
-  top: 3395px;
+  top: 3410px;
   width: 813px;
   height: auto;
   display: flex;
@@ -920,7 +919,7 @@ input {
   font-weight: 400;
   font-size: 96px;
   letter-spacing: -0.01em;
-  line-height: 0.95;
+  line-height: 0.85;
   text-transform: none;
   white-space: nowrap;
 }
@@ -935,7 +934,7 @@ input {
 .editorial__thing-img {
   position: absolute;
   left: 782px;
-  top: 3371px;
+  top: 3385px;
   width: 185px;
   height: 104px;
   object-fit: cover;
@@ -973,7 +972,7 @@ input {
 .editorial__photo {
   position: absolute;
   left: 1003px;
-  top: 3453px;
+  top: 3480px;
   width: 804px;
   height: 452px;
   object-fit: cover;
