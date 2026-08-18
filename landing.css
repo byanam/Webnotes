@@ -1,15 +1,64 @@
-/* Font-face local mappings: Mac uses local Apple Garamond natively; Windows uses Google EB Garamond fallback */
+/* Custom font web imports: Ensures 100% identical typography and layout on Mac, Windows, and Linux */
 @font-face {
   font-family: 'Apple Garamond';
-  src: local('Apple Garamond'), local('Apple Garamond Light'),
-    url('https://fonts.gstatic.com/s/ebgaramond/v27/1Pskypcx55h-m2Jkb20d5255-B39_d_AGg.ttf') format('truetype');
+  src: local('Apple Garamond'),
+    url('assets/fonts/AppleGaramond.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apple Garamond';
+  src: local('Apple Garamond Bold'),
+    url('assets/fonts/AppleGaramond-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apple Garamond';
+  src: local('Apple Garamond Italic'),
+    url('assets/fonts/AppleGaramond-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apple Garamond';
+  src: local('Apple Garamond Bold Italic'),
+    url('assets/fonts/AppleGaramond-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Apple Garamond Light';
-  src: local('Apple Garamond Light'), local('Apple Garamond'),
-    url('https://fonts.gstatic.com/s/ebgaramond/v27/1Pskypcx55h-m2Jkb20d5255-B39_d_AGg.ttf') format('truetype');
+  src: local('Apple Garamond Light'),
+    url('assets/fonts/AppleGaramond-Light.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apple Garamond Light';
+  src: local('Apple Garamond Light Italic'),
+    url('assets/fonts/AppleGaramond-LightItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Akira Expanded';
+  src: local('Akira Expanded'), local('Akira Expanded Demo'),
+    url('assets/fonts/Akira%20Expanded%20Demo.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -30,10 +79,10 @@
 
   /* Fonts */
   --font-display: 'Oranienbaum', 'Georgia', serif;
-  --font-poster: 'Akira Expanded', 'AkiraExpanded-SuperBold', 'Akira', 'Impact', 'Arial Black', sans-serif;
-  --font-serif: 'EB Garamond', 'Garamond', Georgia, serif;
-  --font-apple-garamond: 'Apple Garamond', 'EB Garamond', 'Garamond', Georgia, serif;
-  --font-apple-garamond-light: 'Apple Garamond Light', 'Apple Garamond', 'EB Garamond', 'Garamond', Georgia, serif;
+  --font-poster: 'Akira Expanded', 'Akira Expanded Demo', 'Impact', sans-serif;
+  --font-serif: 'Apple Garamond', 'EB Garamond', serif;
+  --font-apple-garamond: 'Apple Garamond', serif;
+  --font-apple-garamond-light: 'Apple Garamond Light', 'Apple Garamond', serif;
   --font-handwriting: 'Homemade Apple', 'Apple Garamond', cursive;
 }
 
