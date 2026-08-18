@@ -1,8 +1,18 @@
-/* =========================================================
-   DESIGN TOKENS
-   (Design authored at a fixed 1920 x 5000 canvas, scaled
-   proportionally to fit any viewport)
-   ========================================================= */
+/* Font-face local mappings: Mac uses local Apple Garamond natively; Windows uses Google EB Garamond fallback */
+@font-face {
+  font-family: 'Apple Garamond';
+  src: local('Apple Garamond'), local('Apple Garamond Light'),
+    url('https://fonts.gstatic.com/s/ebgaramond/v27/1Pskypcx55h-m2Jkb20d5255-B39_d_AGg.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apple Garamond Light';
+  src: local('Apple Garamond Light'), local('Apple Garamond'),
+    url('https://fonts.gstatic.com/s/ebgaramond/v27/1Pskypcx55h-m2Jkb20d5255-B39_d_AGg.ttf') format('truetype');
+  font-display: swap;
+}
+
 :root {
   --canvas-width: 1920px;
   --canvas-height: 3951px;
@@ -20,7 +30,7 @@
 
   /* Fonts */
   --font-display: 'Oranienbaum', 'Georgia', serif;
-  --font-poster: 'Akira Expanded', 'Arial Black', 'Haettenschweiler', 'Impact', sans-serif;
+  --font-poster: 'Akira Expanded', 'Oranienbaum', 'EB Garamond', 'Arial Black', sans-serif;
   --font-serif: 'EB Garamond', 'Garamond', Georgia, serif;
   --font-apple-garamond: 'Apple Garamond', 'EB Garamond', 'Garamond', Georgia, serif;
   --font-apple-garamond-light: 'Apple Garamond Light', 'Apple Garamond', 'EB Garamond', 'Garamond', Georgia, serif;
@@ -450,12 +460,10 @@ input {
   content: '';
   position: absolute;
   inset: -40px -75px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.90) 0%,
-    rgba(0, 0, 0, 0.60) 50%,
-    rgba(0, 0, 0, 0) 88%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(0, 0, 0, 0.90) 0%,
+      rgba(0, 0, 0, 0.60) 50%,
+      rgba(0, 0, 0, 0) 88%);
   filter: blur(20px);
   border-radius: 50%;
   z-index: -1;
@@ -549,14 +557,15 @@ input {
 /* "Completely FREEEEEEEEE" */
 .promo__heading {
   position: absolute;
-  left: 182px;
+  left: 50%;
+  transform: translateX(-50%);
   top: 1422px;
-  width: 1594px;
+  width: max-content;
   height: 218px;
   display: flex;
   align-items: center;
-  text-align: left;
-  justify-content: flex-start;
+  text-align: center;
+  justify-content: center;
   margin: 0;
   font-family: var(--font-apple-garamond);
   font-style: normal;
@@ -565,7 +574,6 @@ input {
   letter-spacing: -0.06em;
   line-height: 109.07%;
   color: #000000;
-  text-transform: none;
   white-space: nowrap;
   z-index: 10;
 }
@@ -691,7 +699,7 @@ input {
   border-top: 10px solid var(--color-ink);
 }
 
-/* Line 4 — vertical column divider (3px, rotated 90deg = vertical) */
+/* Line 4 — vertical column divider (3px) */
 .editorial__col-divider {
   position: absolute;
   left: 988px;
@@ -763,14 +771,17 @@ input {
   left: 149px;
   top: 3056px;
   width: 735px;
-  height: auto;
-  font-family: var(--font-apple-garamond-light);
-  font-style: normal;
-  font-weight: 300;
+  height: 63px;
+  font-family: var(--font-apple-garamond);
+  font-style: italic;
+  font-weight: 700;
   font-size: 128px;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
+  line-height: 49%;
   color: #000000;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.01em;
+  text-transform: capitalize;
 }
 
 .editorial__col-heading--left em,
@@ -791,15 +802,17 @@ input {
   left: 1024px;
   top: 3054px;
   width: 813px;
-  height: auto;
+  height: 78px;
   font-family: var(--font-apple-garamond-light);
   font-style: normal;
   font-weight: 400;
   font-size: 96px;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
+  line-height: 10px;
   color: #000000;
-  text-transform: none;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.01em;
+  text-transform: capitalize;
 }
 
 .editorial__col-heading--right em {
@@ -817,7 +830,7 @@ input {
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
-  line-height: 1.15;
+  line-height: 90%;
   letter-spacing: -0.01em;
   display: flex;
   align-items: center;
@@ -864,7 +877,7 @@ input {
   font-style: italic;
   font-weight: 700;
   font-size: 40px;
-  line-height: 1.15;
+  line-height: 90%;
   letter-spacing: -0.01em;
   color: #000000;
   display: flex;
