@@ -344,13 +344,13 @@ import { signInWithGoogle, listenToAuthState } from './firebase/auth.js';
             var maxScroll = Math.max(1, document.documentElement.scrollHeight - h);
             var remaining = maxScroll - scrollY;
 
-            // Fade spans 60% of viewport height — much slower, follows the newspaper
-            var opacity = Math.max(0, Math.min(1, (0.60 * h - remaining) / (0.60 * h)));
+            // Fade spans 60% of viewport height — with 60px tolerance so Windows scrollbars allow full 100% lift
+            var opacity = Math.max(0, Math.min(1, (0.60 * h - (remaining - 60)) / (0.60 * h)));
 
             if (opacity !== lastOpacity) {
                 lastOpacity = opacity;
                 contactFooter.style.setProperty('--contact-opacity', opacity);
-                contactFooter.style.setProperty('--contact-pe', opacity > 0.98 ? 'auto' : 'none');
+                contactFooter.style.setProperty('--contact-pe', opacity > 0.95 ? 'auto' : 'none');
             }
         }
 
