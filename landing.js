@@ -415,20 +415,27 @@ function initAuthUI() {
         }
     }
 
-    // Auto-detect existing logged-in session (Requirement #3)
+    // Auto-detect existing logged-in session and redirect directly to editor.html
     const justLoggedOut = window.location.search.includes('logout=true') || sessionStorage.getItem('justLoggedOut') === 'true';
+    if (justLoggedOut) {
+        sessionStorage.removeItem('justLoggedOut');
+        localStorage.removeItem('notesUserLoggedIn');
+    }
+
     try {
         listenToAuthState((user) => {
-            if (user && !isRedirecting && !justLoggedOut) {
-                isRedirecting = true;
-                console.log("[Landing] Active session detected for:", user.email);
-                setLoading(true, 'Redirecting...');
-
-                setTimeout(() => {
+            if (user) {
+                localStorage.setItem('notesUserLoggedIn', 'true');
+                if (!isRedirecting && !justLoggedOut) {
+                    isRedirecting = true;
+                    console.log("[Landing] Active session detected for:", user.email);
+                    setLoading(true, 'Opening notes...');
                     if (!window.location.pathname.endsWith('editor.html') && !window.location.href.includes('editor.html')) {
-                        window.location.href = '/editor.html';
+                        window.location.replace('/editor.html');
                     }
-                }, 300);
+                }
+            } else {
+                localStorage.removeItem('notesUserLoggedIn');
             }
         });
     } catch (err) {
@@ -449,16 +456,17 @@ function initAuthUI() {
         isAuthenticating = false;
 
         if (response.success) {
+            localStorage.setItem('notesUserLoggedIn', 'true');
             isRedirecting = true;
-            setLoading(true, 'Redirecting...');
-            window.location.href = '/editor.html';
+            setLoading(true, 'Opening notes...');
+            window.location.replace('/editor.html');
         } else if (response.redirecting) {
             setLoading(true, 'Redirecting...');
         } else if (response.isUnconfigured) {
             showAuthToast("Firebase credentials required! Add your Firebase details in firebase/firebase-config.js. Entering Preview Mode...", false);
             setLoading(true, 'Preview Mode...');
             setTimeout(() => {
-                window.location.href = '/editor.html';
+                window.location.replace('/editor.html');
             }, 1800);
         } else {
             setLoading(false);

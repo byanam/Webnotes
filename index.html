@@ -6,15 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
     (function () {
+      // 1. Mobile Redirection
       var ua = navigator.userAgent || '';
       var isMobileUA = /iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || (/Android/i.test(ua) && /Mobile/i.test(ua));
       var isDesktopOS = /Macintosh|Windows|X11|Linux x86_64/i.test(ua) && !/Android|iPhone|iPad/i.test(ua);
       var hasFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
       var isSmallScreen = window.innerWidth < 600;
-      
       var isMobileDevice = isMobileUA && !isDesktopOS && !hasFinePointer && isSmallScreen;
       if (isMobileDevice && !window.location.pathname.endsWith('mobile.html')) {
         window.location.href = 'mobile.html';
+        return;
+      }
+
+      // 2. Instant Logged-In User Redirect to Editor
+      var isLoggedOut = window.location.search.includes('logout=true') || sessionStorage.getItem('justLoggedOut') === 'true';
+      if (!isLoggedOut) {
+        var hasSession = localStorage.getItem('notesUserLoggedIn') === 'true' || 
+                         Object.keys(localStorage).some(function(k) { return k.startsWith('firebase:authUser:') || k.startsWith('aiNoteData_'); });
+        if (hasSession) {
+          window.location.replace('editor.html');
+        }
       }
     })();
   </script>

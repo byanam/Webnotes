@@ -31,17 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listen to Firebase Auth state for active session & per-user cloud sync
     listenToAuthState(async (user) => {
         if (!user) {
+            localStorage.removeItem('notesUserLoggedIn');
             console.log("[App] No active session found. Redirecting to landing page...");
             if (typeof window.clearNotesData === 'function') {
                 window.clearNotesData();
             }
             const path = window.location.pathname;
             if (path !== '/' && path !== '' && !path.endsWith('/index.html') && !path.endsWith('/')) {
-                window.location.href = '/';
+                window.location.replace('/');
             }
             return;
         }
 
+        localStorage.setItem('notesUserLoggedIn', 'true');
         currentUser = user;
         console.log("[App] User authenticated:", user.displayName || user.email, "| UID:", user.uid);
 
@@ -150,11 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
             window.clearNotesData();
         }
 
+        localStorage.removeItem('notesUserLoggedIn');
         const result = await logoutUser();
         if (result.success) {
             console.log("[App] Logged out. Redirecting to clean homepage...");
             sessionStorage.setItem('justLoggedOut', 'true');
-            window.location.href = '/?logout=true';
+            window.location.replace('/?logout=true');
         } else {
             alert("Logout failed: " + result.error);
             if (logoutBtn) {
