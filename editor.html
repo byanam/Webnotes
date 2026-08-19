@@ -11,7 +11,7 @@
       var isDesktopOS = /Macintosh|Windows|X11|Linux x86_64/i.test(ua) && !/Android|iPhone|iPad/i.test(ua);
       var hasFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
       var isSmallScreen = window.innerWidth < 600;
-      
+
       var isMobileDevice = isMobileUA && !isDesktopOS && !hasFinePointer && isSmallScreen;
       if (isMobileDevice && !window.location.pathname.endsWith('mobile.html')) {
         window.location.href = 'mobile.html';
@@ -102,7 +102,9 @@
         <!-- User Profile Card Header & Logout -->
         <div class="sidebar-profile-card">
           <div class="profile-left-wrap">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23888888'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" alt="User Avatar" class="profile-avatar" id="user-profile-avatar">
+            <img
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23888888'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"
+              alt="User Avatar" class="profile-avatar" id="user-profile-avatar">
             <div class="profile-info">
               <div class="profile-name" id="user-profile-name">User Account</div>
               <div class="profile-last-edited" id="user-profile-email">Loading session...</div>
@@ -132,47 +134,19 @@
           </div>
         </div>
 
-        <!-- Section 1: Formatting -->
+        <!-- Section 1: Text & Typography -->
         <div class="studio-section">
           <div class="studio-section-title">
-            <i class="fa-solid fa-font"></i> Formatting
+            <i class="fa-solid fa-font"></i> TEXT & TYPOGRAPHY
           </div>
-          <div class="tool-pill-group bold-italic-box">
-            <button type="button" class="tool-pill-btn text-format-button" title="Bold"><strong>B</strong></button>
-            <button type="button" class="tool-pill-btn text-format-button" title="Italic"><em>I</em></button>
-            <button type="button" class="tool-pill-btn text-format-button" title="Underline"><u>U</u></button>
-          </div>
-          <div class="tool-pill-group alignment-box">
-            <button type="button" class="tool-pill-btn icon-button active" title="Align Left"><i
-                class="fa-solid fa-align-left"></i></button>
-            <button type="button" class="tool-pill-btn icon-button" title="Align Center"><i
-                class="fa-solid fa-align-center"></i></button>
-            <button type="button" class="tool-pill-btn icon-button" title="Align Right"><i
-                class="fa-solid fa-align-right"></i></button>
-          </div>
-          <div class="tool-pill-group lists-box line-spacing-box">
-            <button type="button" class="tool-pill-btn icon-button" title="Line Spacing"><i
-                class="fa-solid fa-text-height"></i></button>
-            <button type="button" class="tool-pill-btn icon-button" title="Bullet List"><i
-                class="fa-solid fa-list-ul"></i></button>
-            <button type="button" class="tool-pill-btn icon-button" title="Numbered List"><i
-                class="fa-solid fa-list-ol"></i></button>
-            <button type="button" class="tool-pill-btn icon-button" title="Checklist"><i
-                class="fa-solid fa-list-check"></i></button>
-          </div>
-        </div>
 
-        <!-- Section 2: Style & Color -->
-        <div class="studio-section">
-          <div class="studio-section-title">
-            <i class="fa-solid fa-palette"></i> Style & Color
-          </div>
           <div class="studio-row font-box">
             <span class="studio-select-label">FONT</span>
             <div class="dropdown-menu" id="font-box-trigger" style="position: relative;">
-              <span class="dropdown-text" id="font-box-text" style="font-size: 16px;">Sumana</span>
-              <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #555; margin-left: 4px;"></i>
-              <!-- Custom MS Word-Style Font Dropdown Menu (100+ Free Fonts) -->
+              <span class="dropdown-text" id="font-box-text"
+                style="font-family: 'Sumana', serif; font-size: 11px;">Sumana</span>
+              <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+              <!-- Custom Font Dropdown Menu -->
               <div class="custom-font-menu" id="custom-font-menu">
                 <div class="font-menu-item" data-font="Homemade Apple" style="font-family: 'Homemade Apple', cursive;">
                   Homemade Apple</div>
@@ -259,108 +233,35 @@
                 <div class="font-menu-item" data-font="Arial" style="font-family: Arial, sans-serif;">Arial</div>
                 <div class="font-menu-item" data-font="Times New Roman" style="font-family: 'Times New Roman', serif;">
                   Times New Roman</div>
-                <div class="font-menu-item" data-font="Alfa Slab One" style="font-family: 'Alfa Slab One', cursive;">
-                  Alfa Slab One</div>
-                <div class="font-menu-item" data-font="Anton" style="font-family: 'Anton', sans-serif;">Anton</div>
-                <div class="font-menu-item" data-font="Archivo" style="font-family: 'Archivo', sans-serif;">Archivo
-                </div>
-                <div class="font-menu-item" data-font="Arvo" style="font-family: 'Arvo', serif;">Arvo</div>
-                <div class="font-menu-item" data-font="Audiowide" style="font-family: 'Audiowide', display;">Audiowide
-                </div>
-                <div class="font-menu-item" data-font="Bitter" style="font-family: 'Bitter', serif;">Bitter</div>
-                <div class="font-menu-item" data-font="Bungee" style="font-family: 'Bungee', display;">Bungee</div>
-                <div class="font-menu-item" data-font="Cardo" style="font-family: 'Cardo', serif;">Cardo</div>
-                <div class="font-menu-item" data-font="Chivo" style="font-family: 'Chivo', sans-serif;">Chivo</div>
-                <div class="font-menu-item" data-font="Creepster" style="font-family: 'Creepster', display;">Creepster
-                </div>
-                <div class="font-menu-item" data-font="Crete Round" style="font-family: 'Crete Round', serif;">Crete
-                  Round</div>
-                <div class="font-menu-item" data-font="Domine" style="font-family: 'Domine', serif;">Domine</div>
-                <div class="font-menu-item" data-font="Dosis" style="font-family: 'Dosis', sans-serif;">Dosis</div>
-                <div class="font-menu-item" data-font="Gloria Hallelujah"
-                  style="font-family: 'Gloria Hallelujah', cursive;">Gloria Hallelujah</div>
-                <div class="font-menu-item" data-font="Handlee" style="font-family: 'Handlee', cursive;">Handlee</div>
-                <div class="font-menu-item" data-font="Inconsolata" style="font-family: 'Inconsolata', monospace;">
-                  Inconsolata</div>
-                <div class="font-menu-item" data-font="Kanit" style="font-family: 'Kanit', sans-serif;">Kanit</div>
-                <div class="font-menu-item" data-font="Kaushan Script" style="font-family: 'Kaushan Script', cursive;">
-                  Kaushan Script</div>
-                <div class="font-menu-item" data-font="Lato" style="font-family: 'Lato', sans-serif;">Lato</div>
-                <div class="font-menu-item" data-font="Libre Baskerville"
-                  style="font-family: 'Libre Baskerville', serif;">Libre Baskerville</div>
-                <div class="font-menu-item" data-font="Luckiest Guy" style="font-family: 'Luckiest Guy', display;">
-                  Luckiest Guy</div>
-                <div class="font-menu-item" data-font="Monoton" style="font-family: 'Monoton', display;">Monoton</div>
-                <div class="font-menu-item" data-font="Mulish" style="font-family: 'Mulish', sans-serif;">Mulish</div>
-                <div class="font-menu-item" data-font="Niconne" style="font-family: 'Niconne', cursive;">Niconne</div>
-                <div class="font-menu-item" data-font="Noto Sans" style="font-family: 'Noto Sans', sans-serif;">Noto
-                  Sans</div>
-                <div class="font-menu-item" data-font="Noto Serif" style="font-family: 'Noto Serif', serif;">Noto Serif
-                </div>
-                <div class="font-menu-item" data-font="Old Standard TT" style="font-family: 'Old Standard TT', serif;">
-                  Old Standard TT</div>
-                <div class="font-menu-item" data-font="Orbitron" style="font-family: 'Orbitron', display;">Orbitron
-                </div>
-                <div class="font-menu-item" data-font="Oxygen" style="font-family: 'Oxygen', sans-serif;">Oxygen</div>
-                <div class="font-menu-item" data-font="Patrick Hand" style="font-family: 'Patrick Hand', cursive;">
-                  Patrick Hand</div>
-                <div class="font-menu-item" data-font="Press Start 2P"
-                  style="font-family: 'Press Start 2P', monospace;">Press Start 2P</div>
-                <div class="font-menu-item" data-font="Righteous" style="font-family: 'Righteous', display;">Righteous
-                </div>
-                <div class="font-menu-item" data-font="Rock Salt" style="font-family: 'Rock Salt', cursive;">Rock Salt
-                </div>
-                <div class="font-menu-item" data-font="Rubik" style="font-family: 'Rubik', sans-serif;">Rubik</div>
-                <div class="font-menu-item" data-font="Sniglet" style="font-family: 'Sniglet', cursive;">Sniglet</div>
-                <div class="font-menu-item" data-font="Special Elite" style="font-family: 'Special Elite', monospace;">
-                  Special Elite</div>
-                <div class="font-menu-item" data-font="Titillium Web" style="font-family: 'Titillium Web', sans-serif;">
-                  Titillium Web</div>
-                <div class="font-menu-item" data-font="Ubuntu" style="font-family: 'Ubuntu', sans-serif;">Ubuntu</div>
-                <div class="font-menu-item" data-font="Ultra" style="font-family: 'Ultra', serif;">Ultra</div>
-                <div class="font-menu-item" data-font="UnifrakturMaguntia"
-                  style="font-family: 'UnifrakturMaguntia', display;">UnifrakturMaguntia</div>
-                <div class="font-menu-item" data-font="Varela Round" style="font-family: 'Varela Round', sans-serif;">
-                  Varela Round</div>
-                <div class="font-menu-item" data-font="Vibur" style="font-family: 'Vibur', cursive;">Vibur</div>
-                <div class="font-menu-item" data-font="Volkhov" style="font-family: 'Volkhov', serif;">Volkhov</div>
-                <div class="font-menu-item" data-font="VT323" style="font-family: 'VT323', monospace;">VT323</div>
-                <div class="font-menu-item" data-font="Yellowtail" style="font-family: 'Yellowtail', cursive;">
-                  Yellowtail</div>
-                <div class="font-menu-item" data-font="Zilla Slab" style="font-family: 'Zilla Slab', serif;">Zilla Slab
-                </div>
               </div>
             </div>
           </div>
+
           <div class="studio-row size-box">
             <span class="studio-select-label">SIZE</span>
             <div class="dropdown-menu" id="size-box-trigger" style="position: relative;">
-              <span class="dropdown-text" id="size-box-text" style="font-size: 15px;">Medium</span>
-              <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #555; margin-left: 4px;"></i>
-              <!-- Custom Size Dropdown Menu -->
+              <span class="dropdown-text" id="size-box-text">Medium</span>
+              <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
               <div class="custom-size-menu" id="custom-size-menu">
-                <div class="size-menu-item" data-size="Small" data-value="13px" style="font-size: 13px;">Small</div>
-                <div class="size-menu-item active" data-size="Medium" data-value="18px" style="font-size: 16px;">Medium
+                <div class="size-menu-item" data-size="Small" data-value="13px" style="font-size: 11.5px;">Small</div>
+                <div class="size-menu-item active" data-size="Medium" data-value="18px" style="font-size: 13px;">Medium
                 </div>
-                <div class="size-menu-item" data-size="Large" data-value="26px" style="font-size: 20px;">Large</div>
+                <div class="size-menu-item" data-size="Large" data-value="26px" style="font-size: 15px;">Large</div>
               </div>
             </div>
           </div>
+
           <div class="studio-row text-colour-box size-colour-box">
             <span class="studio-select-label">TEXT COLOR</span>
             <div class="studio-swatch-group" id="text-color-swatch-group" style="position: relative;">
-              <!-- First Box: Spectrum Color Picker Trigger -->
               <div class="studio-swatch-ring active color-swatch spectrum-box-trigger" id="text-color-spectrum-trigger"
                 style="background-color: #e04040; position: relative;" title="Click for Color Spectrum">
-                <i class="fa-solid fa-palette"
-                  style="font-size: 10px; color: rgba(255,255,255,0.7); pointer-events: none; position: absolute; top: 3px; right: 3px;"></i>
               </div>
               <button type="button" class="studio-swatch-ring color-swatch text-color-preset"
                 style="background-color: #4080e0;" data-color="#4080e0" title="Blue Text"></button>
               <button type="button" class="studio-swatch-ring color-swatch text-color-preset"
                 style="background-color: #ffffff;" data-color="#ffffff" title="White Text"></button>
 
-              <!-- Custom Color Spectrum Dropdown Popup -->
               <div class="custom-spectrum-menu" id="text-color-spectrum-menu">
                 <div class="spectrum-header"
                   style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.5px; margin-bottom: 6px;">
@@ -369,12 +270,10 @@
                   <canvas id="text-color-spectrum-canvas" width="160" height="95"
                     style="border-radius: 2px; cursor: crosshair; width: 100%; display: block;"></canvas>
                 </div>
-                <!-- Hue Spectrum Range Slider -->
                 <div class="hue-slider-container" style="margin-top: 8px;">
                   <input type="range" id="text-color-hue-slider" min="0" max="360" value="0" class="hue-range-input"
                     style="width: 100%; cursor: pointer;">
                 </div>
-                <!-- Footer with HEX badge & native color input -->
                 <div class="spectrum-footer"
                   style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
                   <div class="color-hex-badge" id="text-color-hex-badge"
@@ -386,11 +285,17 @@
               </div>
             </div>
           </div>
+
           <div class="studio-row highlight-box">
             <span class="studio-select-label">HIGHLIGHT</span>
-            <div class="dropdown-menu" id="highlight-box-trigger"
-              style="position: relative; background-color: #ffe066; transition: background-color 0.22s ease;">
-              <!-- Custom Highlight Dropdown Menu (12 Aesthetic Color Swatches Grid) -->
+            <div class="dropdown-menu" id="highlight-box-trigger" style="position: relative;">
+              <div
+                style="display: flex; align-items: center; gap: 7px; overflow: hidden; pointer-events: none; flex: 1;">
+                <span id="highlight-color-preview"
+                  style="width: 14px; height: 14px; border-radius: 50%; background-color: #ffe066; border: 1.5px solid rgba(255,255,255,0.3); display: inline-block; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.4);"></span>
+                <span class="dropdown-text" id="highlight-box-text">Yellow</span>
+              </div>
+              <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
               <div class="custom-highlight-menu" id="custom-highlight-menu">
                 <div class="highlight-menu-item active" data-color="#ffe066" style="background-color: #ffe066;"
                   title="Yellow"></div>
@@ -419,22 +324,112 @@
               </div>
             </div>
           </div>
+
+          <div class="tool-pill-row">
+            <div class="tool-pill-group bold-italic-box">
+              <button type="button" class="tool-pill-btn text-format-button" title="Bold"><strong>B</strong></button>
+              <button type="button" class="tool-pill-btn text-format-button" title="Italic"><em>I</em></button>
+              <button type="button" class="tool-pill-btn text-format-button" title="Underline"><u>U</u></button>
+            </div>
+
+            <div class="tool-pill-group alignment-box">
+              <button type="button" class="tool-pill-btn icon-button active" title="Align Left"><i
+                  class="fa-solid fa-align-left"></i></button>
+              <button type="button" class="tool-pill-btn icon-button" title="Align Center"><i
+                  class="fa-solid fa-align-center"></i></button>
+              <button type="button" class="tool-pill-btn icon-button" title="Align Right"><i
+                  class="fa-solid fa-align-right"></i></button>
+            </div>
+          </div>
+
+          <div class="tool-pill-group lists-box line-spacing-box">
+            <button type="button" class="tool-pill-btn icon-button" title="Line Spacing"><i
+                class="fa-solid fa-text-height"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Bullet List"><i
+                class="fa-solid fa-list-ul"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Numbered List"><i
+                class="fa-solid fa-list-ol"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" title="Checklist"><i
+                class="fa-solid fa-list-check"></i></button>
+          </div>
+        </div>
+
+        <!-- Section 2: Drawing & Canvas -->
+        <div class="studio-section">
+          <div class="studio-section-title">
+            <i class="fa-solid fa-paintbrush"></i> DRAWING & CANVAS
+          </div>
+
+          <div class="tool-pill-group draw-tools-box">
+            <button type="button" class="tool-pill-btn active draw-tool-btn" title="Text Mode / Type"
+              data-tool="text"><i class="fa-solid fa-i-cursor"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Fountain Pen" data-tool="pen"><i
+                class="fa-solid fa-pen-nib"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Pencil" data-tool="pencil"><i
+                class="fa-solid fa-pencil"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Art Brush" data-tool="brush"><i
+                class="fa-solid fa-paint-brush"></i></button>
+            <button type="button" class="tool-pill-btn draw-tool-btn" title="Eraser" data-tool="eraser"><i
+                class="fa-solid fa-eraser"></i></button>
+          </div>
+
+          <div class="tool-pill-group draw-size-box">
+            <button type="button" class="tool-pill-btn active draw-size-btn" style="font-size: 10px; font-weight: 700;"
+              data-size="2">FINE</button>
+            <button type="button" class="tool-pill-btn draw-size-btn" style="font-size: 10px; font-weight: 700;"
+              data-size="6">MEDIUM</button>
+            <button type="button" class="tool-pill-btn draw-size-btn" style="font-size: 10px; font-weight: 700;"
+              data-size="14">THICK</button>
+          </div>
+
+          <div class="studio-row draw-options-box">
+            <span class="studio-select-label">INK COLOR</span>
+            <div class="studio-swatch-group" id="ink-color-swatch-group" style="position: relative;">
+              <div class="studio-swatch-ring active color-swatch spectrum-box-trigger" id="ink-color-spectrum-trigger"
+                style="background-color: #ffffff; position: relative;" title="Click for Ink Color Spectrum">
+              </div>
+              <button type="button" class="studio-swatch-ring color-swatch draw-ink-btn recent-ink-btn"
+                id="recent-ink-1" style="background-color: #e04040;" data-ink="#e04040"
+                title="Recent Ink: #e04040"></button>
+              <button type="button" class="studio-swatch-ring color-swatch draw-ink-btn recent-ink-btn"
+                id="recent-ink-2" style="background-color: #4080e0;" data-ink="#4080e0"
+                title="Recent Ink: #4080e0"></button>
+
+              <div class="custom-spectrum-menu" id="ink-color-spectrum-menu">
+                <div class="spectrum-header"
+                  style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.5px; margin-bottom: 6px;">
+                  INK COLOR SPECTRUM</div>
+                <div class="spectrum-canvas-container" style="position: relative;">
+                  <canvas id="ink-color-spectrum-canvas" width="160" height="95"
+                    style="border-radius: 2px; cursor: crosshair; width: 100%; display: block;"></canvas>
+                </div>
+                <div class="hue-slider-container" style="margin-top: 8px;">
+                  <input type="range" id="ink-color-hue-slider" min="0" max="360" value="0" class="hue-range-input"
+                    style="width: 100%; cursor: pointer;">
+                </div>
+                <div class="spectrum-footer"
+                  style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+                  <div class="color-hex-badge" id="ink-color-hex-badge"
+                    style="font-family: monospace; font-size: 11px; color: #e0e0e0; background: #222; padding: 2px 4px; border: 1px solid #333; border-radius: 2px;">
+                    #FFFFFF</div>
+                  <input type="color" id="ink-color-native-input" value="#ffffff"
+                    style="width: 24px; height: 22px; border: 1px solid #333; background: transparent; cursor: pointer; padding: 0;">
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="studio-row page-colour-box">
             <span class="studio-select-label">CANVAS</span>
             <div class="studio-swatch-group" id="canvas-swatch-group" style="position: relative;">
-              <!-- Box 1: Canvas Spectrum Color Picker Trigger -->
               <div class="studio-swatch-ring active color-swatch spectrum-box-trigger" id="canvas-spectrum-trigger"
                 style="background-color: #191919; position: relative;" title="Click for Canvas Spectrum">
-                <i class="fa-solid fa-palette"
-                  style="font-size: 10px; color: rgba(255,255,255,0.7); pointer-events: none; position: absolute; top: 3px; right: 3px;"></i>
               </div>
-              <!-- Box 2 & Box 3: Most Recently Used Canvas Colors -->
               <button type="button" class="studio-swatch-ring color-swatch recent-canvas-btn" id="recent-canvas-1"
                 style="background-color: #ffffff;" data-color="#ffffff" title="Recent Canvas: Pure White"></button>
               <button type="button" class="studio-swatch-ring color-swatch recent-canvas-btn" id="recent-canvas-2"
                 style="background-color: #fcf5e5;" data-color="#fcf5e5" title="Recent Canvas: Warm Ivory"></button>
 
-              <!-- Custom Canvas Spectrum Dropdown Popup -->
               <div class="custom-spectrum-menu" id="canvas-spectrum-menu">
                 <div class="spectrum-header"
                   style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.5px; margin-bottom: 6px;">
@@ -443,12 +438,10 @@
                   <canvas id="canvas-spectrum-canvas" width="160" height="95"
                     style="border-radius: 2px; cursor: crosshair; width: 100%; display: block;"></canvas>
                 </div>
-                <!-- Hue Spectrum Range Slider -->
                 <div class="hue-slider-container" style="margin-top: 8px;">
                   <input type="range" id="canvas-hue-slider" min="0" max="360" value="0" class="hue-range-input"
                     style="width: 100%; cursor: pointer;">
                 </div>
-                <!-- Footer with HEX badge & native color input -->
                 <div class="spectrum-footer"
                   style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
                   <div class="color-hex-badge" id="canvas-hex-badge"
@@ -462,79 +455,12 @@
           </div>
         </div>
 
-        <!-- Section 3: Draw & Canvas -->
+        <!-- Section 3: Insert & Export -->
         <div class="studio-section">
           <div class="studio-section-title">
-            <i class="fa-solid fa-paintbrush"></i> Draw & Canvas
+            <i class="fa-solid fa-layer-group"></i> INSERT & EXPORT
           </div>
-          <div class="tool-pill-group draw-tools-box">
-            <button type="button" class="tool-pill-btn active draw-tool-btn" title="Text Mode / Type"
-              data-tool="text"><i class="fa-solid fa-i-cursor"></i></button>
-            <button type="button" class="tool-pill-btn draw-tool-btn" title="Fountain Pen" data-tool="pen"><i
-                class="fa-solid fa-pen-nib"></i></button>
-            <button type="button" class="tool-pill-btn draw-tool-btn" title="Pencil" data-tool="pencil"><i
-                class="fa-solid fa-pencil"></i></button>
-            <button type="button" class="tool-pill-btn draw-tool-btn" title="Art Brush" data-tool="brush"><i
-                class="fa-solid fa-paint-brush"></i></button>
-            <button type="button" class="tool-pill-btn draw-tool-btn" title="Eraser" data-tool="eraser"><i
-                class="fa-solid fa-eraser"></i></button>
-          </div>
-          <div class="tool-pill-group draw-size-box">
-            <button type="button" class="tool-pill-btn active draw-size-btn" style="font-size: 11px; font-weight: 700;"
-              data-size="2">FINE</button>
-            <button type="button" class="tool-pill-btn draw-size-btn" style="font-size: 11px; font-weight: 700;"
-              data-size="6">MEDIUM</button>
-            <button type="button" class="tool-pill-btn draw-size-btn" style="font-size: 11px; font-weight: 700;"
-              data-size="14">THICK</button>
-          </div>
-          <div class="studio-row draw-options-box">
-            <span class="studio-select-label">INK COLOR</span>
-            <div class="studio-swatch-group" id="ink-color-swatch-group" style="position: relative;">
-              <div class="studio-swatch-ring active color-swatch spectrum-box-trigger" id="ink-color-spectrum-trigger"
-                style="background-color: #ffffff; position: relative;" title="Click for Ink Color Spectrum">
-                <i class="fa-solid fa-palette" id="ink-color-palette-icon"
-                  style="font-size: 10px; color: rgba(0,0,0,0.6); pointer-events: none; position: absolute; top: 3px; right: 3px;"></i>
-              </div>
-              <button type="button" class="studio-swatch-ring color-swatch draw-ink-btn recent-ink-btn"
-                id="recent-ink-1" style="background-color: #e04040;" data-ink="#e04040"
-                title="Recent Ink: #e04040"></button>
-              <button type="button" class="studio-swatch-ring color-swatch draw-ink-btn recent-ink-btn"
-                id="recent-ink-2" style="background-color: #4080e0;" data-ink="#4080e0"
-                title="Recent Ink: #4080e0"></button>
 
-              <!-- Custom Ink Color Spectrum Dropdown Popup -->
-              <div class="custom-spectrum-menu" id="ink-color-spectrum-menu">
-                <div class="spectrum-header"
-                  style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.5px; margin-bottom: 6px;">
-                  INK COLOR SPECTRUM</div>
-                <div class="spectrum-canvas-container" style="position: relative;">
-                  <canvas id="ink-color-spectrum-canvas" width="160" height="95"
-                    style="border-radius: 2px; cursor: crosshair; width: 100%; display: block;"></canvas>
-                </div>
-                <!-- Hue Spectrum Range Slider -->
-                <div class="hue-slider-container" style="margin-top: 8px;">
-                  <input type="range" id="ink-color-hue-slider" min="0" max="360" value="0" class="hue-range-input"
-                    style="width: 100%; cursor: pointer;">
-                </div>
-                <!-- Footer with HEX badge & native color input -->
-                <div class="spectrum-footer"
-                  style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
-                  <div class="color-hex-badge" id="ink-color-hex-badge"
-                    style="font-family: monospace; font-size: 11px; color: #e0e0e0; background: #222; padding: 2px 4px; border: 1px solid #333; border-radius: 2px;">
-                    #FFFFFF</div>
-                  <input type="color" id="ink-color-native-input" value="#ffffff"
-                    style="width: 24px; height: 22px; border: 1px solid #333; background: transparent; cursor: pointer; padding: 0;">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Section 4: Insert & Export -->
-        <div class="studio-section">
-          <div class="studio-section-title">
-            <i class="fa-solid fa-layer-group"></i> Insert & Export
-          </div>
           <div class="tool-pill-group insert-box">
             <button type="button" class="tool-pill-btn icon-button" id="insert-image-btn" title="Insert Image"><i
                 class="fa-solid fa-image"></i></button>
@@ -542,13 +468,17 @@
                 class="fa-solid fa-table"></i></button>
             <button type="button" class="tool-pill-btn icon-button" id="share-link-btn" title="Share Note Link"><i
                 class="fa-solid fa-share-nodes"></i></button>
+            <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
           </div>
+
           <div class="tool-pill-group page-export-box">
+            <button type="button" class="tool-pill-btn icon-button" id="add-page-btn" title="Add New Page"><i
+                class="fa-solid fa-file-circle-plus"></i></button>
+            <button type="button" class="tool-pill-btn icon-button" id="delete-page-btn" title="Delete Page"><i
+                class="fa-solid fa-trash-can"></i></button>
             <button type="button" class="tool-pill-btn icon-button" id="export-pdf-btn" title="Export PDF"><i
                 class="fa-solid fa-file-pdf"></i></button>
           </div>
-          <!-- Hidden file input for image insertion -->
-          <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
         </div>
       </aside>
 
@@ -580,4 +510,4 @@
   <script type="module" src="app.js"></script>
 </body>
 
-</html>deploy Fri Aug  7 00:00:01 IST 2026
+</html>deploy Fri Aug 7 00:00:01 IST 2026

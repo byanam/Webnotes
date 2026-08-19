@@ -257,19 +257,62 @@ document.addEventListener('DOMContentLoaded', () => {
             '#custom-font-menu, #custom-size-menu, #text-color-spectrum-menu, #custom-highlight-menu, #canvas-spectrum-menu, #ink-color-spectrum-menu, .custom-font-menu, .custom-size-menu, .custom-spectrum-menu, .custom-highlight-menu'
         );
 
-        allDropdowns.forEach(menu => {
-            const parentRow = menu.closest('.studio-row');
-            const parentTrigger = menu.closest('.studio-swatch-ring, .dropdown-menu, .studio-swatch-group');
+        // 1. Reset all studio rows, toolbars, triggers, sections to default z-index
+        document.querySelectorAll('.studio-row, .studio-section, .dropdown-menu, .studio-swatch-group, .studio-swatch-ring, .tool-pill-row, .tool-pill-group').forEach(el => {
+            el.classList.remove('menu-open');
+            el.style.removeProperty('z-index');
+            el.style.removeProperty('position');
+        });
 
+        // 2. Close all dropdown menus
+        allDropdowns.forEach(menu => {
             if (menu !== exceptMenu) {
                 menu.classList.remove('show');
-                if (parentRow) parentRow.style.zIndex = '';
-                if (parentTrigger) parentTrigger.style.zIndex = '';
-            } else {
-                if (parentRow) parentRow.style.zIndex = '99999';
-                if (parentTrigger) parentTrigger.style.zIndex = '99999';
+                menu.classList.remove('active');
+                menu.style.removeProperty('z-index');
             }
         });
+
+        // 3. If a target menu is opening, explicitly demote ALL other rows and promote the active container chain
+        if (exceptMenu) {
+            exceptMenu.classList.add('show');
+            exceptMenu.style.setProperty('z-index', '1000000', 'important');
+
+            const parentTrigger = exceptMenu.closest('.dropdown-menu, .studio-swatch-group, .studio-swatch-ring');
+            const parentRow = exceptMenu.closest('.studio-row');
+            const parentSection = exceptMenu.closest('.studio-section');
+
+            // Explicitly demote all other sections and rows
+            document.querySelectorAll('.studio-section').forEach(sec => {
+                if (sec !== parentSection) {
+                    sec.style.setProperty('z-index', '0', 'important');
+                }
+            });
+
+            if (parentSection) {
+                parentSection.classList.add('menu-open');
+                parentSection.style.setProperty('position', 'relative', 'important');
+                parentSection.style.setProperty('z-index', '999999', 'important');
+
+                parentSection.querySelectorAll('.studio-row, .tool-pill-row, .tool-pill-group').forEach(row => {
+                    if (row !== parentRow) {
+                        row.style.setProperty('z-index', '0', 'important');
+                    }
+                });
+            }
+
+            if (parentRow) {
+                parentRow.classList.add('menu-open');
+                parentRow.style.setProperty('position', 'relative', 'important');
+                parentRow.style.setProperty('z-index', '999999', 'important');
+            }
+
+            if (parentTrigger) {
+                parentTrigger.classList.add('menu-open');
+                parentTrigger.style.setProperty('position', 'relative', 'important');
+                parentTrigger.style.setProperty('z-index', '999999', 'important');
+            }
+        }
     }
 
     // --- Custom MS Word-Style Font Dropdown Handler ---
@@ -294,13 +337,24 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpening = !customFontMenu.classList.contains('show');
             closeAllCustomDropdowns(isOpening ? customFontMenu : null);
-            customFontMenu.classList.toggle('show', isOpening);
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!fontBoxTrigger.contains(e.target)) {
                 customFontMenu.classList.remove('show');
+                const parentRow = fontBoxTrigger.closest('.studio-row');
+                const parentSection = fontBoxTrigger.closest('.studio-section');
+                if (parentRow) {
+                    parentRow.classList.remove('menu-open');
+                    parentRow.style.zIndex = '';
+                }
+                if (parentSection) {
+                    parentSection.classList.remove('menu-open');
+                    parentSection.style.zIndex = '';
+                }
+                fontBoxTrigger.classList.remove('menu-open');
+                fontBoxTrigger.style.zIndex = '';
             }
         });
 
@@ -409,12 +463,23 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpening = !customSizeMenu.classList.contains('show');
             closeAllCustomDropdowns(isOpening ? customSizeMenu : null);
-            customSizeMenu.classList.toggle('show', isOpening);
         });
 
         document.addEventListener('click', (e) => {
             if (!sizeBoxTrigger.contains(e.target)) {
                 customSizeMenu.classList.remove('show');
+                const parentRow = sizeBoxTrigger.closest('.studio-row');
+                const parentSection = sizeBoxTrigger.closest('.studio-section');
+                if (parentRow) {
+                    parentRow.classList.remove('menu-open');
+                    parentRow.style.zIndex = '';
+                }
+                if (parentSection) {
+                    parentSection.classList.remove('menu-open');
+                    parentSection.style.zIndex = '';
+                }
+                sizeBoxTrigger.classList.remove('menu-open');
+                sizeBoxTrigger.style.zIndex = '';
             }
         });
 
@@ -537,16 +602,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpening = !spectrumMenu.classList.contains('show');
             closeAllCustomDropdowns(isOpening ? spectrumMenu : null);
-            const isOpen = spectrumMenu.classList.toggle('show', isOpening);
-            const parentRow = spectrumTrigger.closest('.studio-row');
-
-            if (isOpen) {
-                spectrumTrigger.style.zIndex = '99999';
-                if (parentRow) parentRow.style.zIndex = '99999';
+            if (isOpening) {
                 drawSpectrumCanvas();
-            } else {
-                spectrumTrigger.style.zIndex = '';
-                if (parentRow) parentRow.style.zIndex = '';
             }
         });
 
@@ -765,6 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const highlightBoxText = document.getElementById('highlight-box-text');
     const highlightSwatchBadge = document.getElementById('highlight-swatch-badge');
     const customHighlightMenu = document.getElementById('custom-highlight-menu');
+    let savedHighlightRange = null;
 
     if (highlightBoxTrigger && customHighlightMenu) {
         highlightBoxTrigger.addEventListener('mousedown', (e) => {
@@ -779,12 +837,23 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpening = !customHighlightMenu.classList.contains('show');
             closeAllCustomDropdowns(isOpening ? customHighlightMenu : null);
-            customHighlightMenu.classList.toggle('show', isOpening);
         });
 
         document.addEventListener('click', (e) => {
             if (!highlightBoxTrigger.contains(e.target)) {
                 customHighlightMenu.classList.remove('show');
+                const parentRow = highlightBoxTrigger.closest('.studio-row');
+                const parentSection = highlightBoxTrigger.closest('.studio-section');
+                if (parentRow) {
+                    parentRow.classList.remove('menu-open');
+                    parentRow.style.zIndex = '';
+                }
+                if (parentSection) {
+                    parentSection.classList.remove('menu-open');
+                    parentSection.style.zIndex = '';
+                }
+                highlightBoxTrigger.classList.remove('menu-open');
+                highlightBoxTrigger.style.zIndex = '';
             }
         });
 
@@ -800,8 +869,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const name = item.getAttribute('data-name');
                 if (!color) return;
 
-                // 1. Update trigger box background color directly
-                highlightBoxTrigger.style.backgroundColor = color;
+                // 1. Update preview dot and text label
+                const previewDot = document.getElementById('highlight-color-preview');
+                if (previewDot) previewDot.style.backgroundColor = color;
+                if (highlightBoxText) highlightBoxText.textContent = item.getAttribute('title') || name || 'Yellow';
 
                 // 2. Restore active text selection
                 const selection = window.getSelection();
@@ -818,14 +889,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 3. Apply highlight color to text selection
                 try {
                     document.execCommand('styleWithCSS', false, true);
-                } catch (err) {}
+                } catch (err) { }
 
                 try {
                     document.execCommand('hiliteColor', false, color);
                 } catch (err) {
                     try {
                         document.execCommand('backColor', false, color);
-                    } catch (err2) {}
+                    } catch (err2) { }
                 }
 
                 // 4. Update active menu item highlight
@@ -859,16 +930,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpening = !canvasMenu.classList.contains('show');
             closeAllCustomDropdowns(isOpening ? canvasMenu : null);
-            const isOpen = canvasMenu.classList.toggle('show', isOpening);
-            const parentRow = canvasTrigger.closest('.studio-row');
-
-            if (isOpen) {
-                canvasTrigger.style.zIndex = '99999';
-                if (parentRow) parentRow.style.zIndex = '99999';
+            if (isOpening) {
                 drawCanvasSpectrumCanvas();
-            } else {
-                canvasTrigger.style.zIndex = '';
-                if (parentRow) parentRow.style.zIndex = '';
             }
         });
 
@@ -1072,15 +1135,181 @@ document.addEventListener('DOMContentLoaded', () => {
         block.style.lineHeight = nextSpacing;
     }
 
+    // --- Caret Positioning Helper ---
+    function setCaretToNode(node, offset = 0) {
+        if (!node) return;
+        node.focus();
+        const range = document.createRange();
+        const sel = window.getSelection();
+        if (node.firstChild && node.firstChild.nodeType === Node.TEXT_NODE) {
+            try {
+                range.setStart(node.firstChild, Math.min(offset, node.firstChild.length || 0));
+            } catch (e) {
+                range.setStart(node, 0);
+            }
+        } else {
+            range.setStart(node, 0);
+        }
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+
     // --- Interactive Checklist Handler ---
     function handleChecklist() {
         const selection = window.getSelection();
-        const selectedText = selection.toString().trim() || 'Checklist item';
+        let selectedText = '';
+        if (selection.rangeCount > 0) {
+            selectedText = selection.toString().trim();
+        }
 
-        const checklistHtml = `<div class="checklist-row" style="display: flex; align-items: center; gap: 10px; margin: 4px 0;" contenteditable="false"><input type="checkbox" class="task-checkbox" style="width: 16px; height: 16px; cursor: pointer; accent-color: #555555;" onclick="this.nextElementSibling.style.textDecoration = this.checked ? 'line-through' : 'none'; this.nextElementSibling.style.opacity = this.checked ? '0.5' : '1';"><span class="task-text" contenteditable="true" style="flex: 1; outline: none; color: #e0e0e0; font-family: inherit;">${selectedText}</span></div>&nbsp;`;
+        const checklistHtml = `
+            <div class="checklist-row" style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0; min-height: 22px;">
+                <span class="checklist-checkbox-container" contenteditable="false" style="user-select: none; -webkit-user-select: none; display: inline-flex; align-items: center; margin-right: 2px;">
+                    <input type="checkbox" class="task-checkbox" style="cursor: pointer; width: 14px; height: 14px; accent-color: #e2d7ca; vertical-align: middle;">
+                </span>
+                <span class="task-text" contenteditable="true" style="flex: 1; outline: none; color: inherit; font-family: inherit; min-width: 30px;">${selectedText || '<br>'}</span>
+            </div>`;
+
+        // If current block is an empty <p> or line inside an active page, replace it smoothly
+        if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            let block = range.startContainer.nodeType === Node.ELEMENT_NODE ? range.startContainer : range.startContainer.parentElement;
+            const closestP = block ? block.closest('p, div:not(.checklist-row):not(.a4-page)') : null;
+            if (closestP && closestP.innerText.trim() === '' && closestP.parentElement && closestP.parentElement.classList.contains('a4-page')) {
+                const temp = document.createElement('div');
+                temp.innerHTML = checklistHtml.trim();
+                const newRow = temp.firstElementChild;
+                closestP.parentElement.replaceChild(newRow, closestP);
+                const taskText = newRow.querySelector('.task-text');
+                if (taskText) {
+                    setCaretToNode(taskText, 0);
+                }
+                triggerEditorSave();
+                return;
+            }
+        }
 
         document.execCommand('insertHTML', false, checklistHtml);
+        triggerEditorSave();
     }
+
+    // --- Global Keyboard & Interaction Handler for Checklists ---
+    document.addEventListener('keydown', (e) => {
+        const selection = window.getSelection();
+        if (!selection || !selection.rangeCount) return;
+
+        const range = selection.getRangeAt(0);
+        let node = range.startContainer;
+        if (node.nodeType === Node.TEXT_NODE) node = node.parentElement;
+
+        const checklistRow = node ? node.closest('.checklist-row') : null;
+        if (!checklistRow) return;
+
+        const taskText = checklistRow.querySelector('.task-text') || checklistRow;
+        const textContent = (taskText.innerText || '').replace(/\u200B/g, '').replace(/\n/g, '').trim();
+
+        // 1. BACKSPACE key: Delete or Convert checklist item
+        if (e.key === 'Backspace') {
+            const isAtStart = (range.startOffset === 0 && range.endOffset === 0 && 
+                (range.startContainer === taskText || range.startContainer === taskText.firstChild || range.startContainer === checklistRow));
+            const isEmpty = textContent === '' || taskText.innerHTML === '<br>' || taskText.innerHTML === '';
+
+            if (isEmpty || isAtStart) {
+                e.preventDefault();
+                const parent = checklistRow.parentElement;
+                if (!parent) return;
+
+                if (isEmpty) {
+                    // Turn into normal empty paragraph or clean line
+                    const newP = document.createElement('p');
+                    newP.innerHTML = '<br>';
+                    parent.replaceChild(newP, checklistRow);
+                    setCaretToNode(newP, 0);
+                } else {
+                    // Convert checklist row into normal paragraph retaining the text
+                    const newP = document.createElement('p');
+                    newP.innerHTML = taskText.innerHTML;
+                    parent.replaceChild(newP, checklistRow);
+                    setCaretToNode(newP, 0);
+                }
+                triggerEditorSave();
+                return;
+            }
+        }
+
+        // 2. ENTER key: Create next checklist item or exit on empty item
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const parent = checklistRow.parentElement;
+            if (!parent) return;
+
+            const isEmpty = textContent === '' || taskText.innerHTML === '<br>' || taskText.innerHTML === '';
+
+            if (isEmpty) {
+                // Exit checklist mode: replace empty checklist with normal paragraph
+                const newP = document.createElement('p');
+                newP.innerHTML = '<br>';
+                parent.replaceChild(newP, checklistRow);
+                setCaretToNode(newP, 0);
+            } else {
+                // Create a new checklist item immediately below
+                const newRow = document.createElement('div');
+                newRow.className = 'checklist-row';
+                newRow.style.cssText = 'display: flex; align-items: baseline; gap: 8px; margin: 4px 0; min-height: 22px;';
+                newRow.innerHTML = `
+                    <span class="checklist-checkbox-container" contenteditable="false" style="user-select: none; -webkit-user-select: none; display: inline-flex; align-items: center; margin-right: 2px;">
+                        <input type="checkbox" class="task-checkbox" style="cursor: pointer; width: 14px; height: 14px; accent-color: #e2d7ca; vertical-align: middle;">
+                    </span>
+                    <span class="task-text" contenteditable="true" style="flex: 1; outline: none; color: inherit; font-family: inherit; min-width: 30px;"><br></span>
+                `;
+
+                if (checklistRow.nextSibling) {
+                    parent.insertBefore(newRow, checklistRow.nextSibling);
+                } else {
+                    parent.appendChild(newRow);
+                }
+
+                const nextTaskText = newRow.querySelector('.task-text');
+                if (nextTaskText) {
+                    setCaretToNode(nextTaskText, 0);
+                }
+            }
+            triggerEditorSave();
+            return;
+        }
+
+        // 3. DELETE key (Forward delete)
+        if (e.key === 'Delete') {
+            const isEmpty = textContent === '' || taskText.innerHTML === '<br>' || taskText.innerHTML === '';
+            if (isEmpty) {
+                e.preventDefault();
+                const parent = checklistRow.parentElement;
+                if (!parent) return;
+                const next = checklistRow.nextElementSibling;
+                checklistRow.remove();
+                if (next) {
+                    setCaretToNode(next, 0);
+                }
+                triggerEditorSave();
+            }
+        }
+    });
+
+    // Checkbox toggling handler
+    document.addEventListener('change', (e) => {
+        if (e.target && e.target.classList.contains('task-checkbox')) {
+            const row = e.target.closest('.checklist-row');
+            if (row) {
+                const text = row.querySelector('.task-text');
+                if (text) {
+                    text.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+                    text.style.opacity = e.target.checked ? '0.5' : '1';
+                }
+                triggerEditorSave();
+            }
+        }
+    });
 
     // --- Helper to trigger document save ---
     function triggerEditorSave() {
@@ -1499,16 +1728,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpening = !inkMenu.classList.contains('show');
             closeAllCustomDropdowns(isOpening ? inkMenu : null);
-            const isOpen = inkMenu.classList.toggle('show', isOpening);
-            const parentRow = inkTrigger.closest('.studio-row');
-
-            if (isOpen) {
-                inkTrigger.style.zIndex = '99999';
-                if (parentRow) parentRow.style.zIndex = '99999';
+            if (isOpening) {
                 drawInkSpectrumCanvas();
-            } else {
-                inkTrigger.style.zIndex = '';
-                if (parentRow) parentRow.style.zIndex = '';
             }
         });
 
@@ -1729,7 +1950,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Drag Handle or Wrapper Content Clicked -> Select & Prepare Free Canvas Drag
         const dragHandle = e.target.closest('.resizable-drag-handle');
         const wrapper = e.target.closest('.resizable-wrapper');
-        
+
         if (dragHandle || wrapper) {
             const targetWrapper = (dragHandle ? dragHandle.closest('.resizable-wrapper') : wrapper);
             if (targetWrapper) {
@@ -2002,7 +2223,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Auto-copy to clipboard
             navigator.clipboard.writeText(shareUrl).then(() => {
                 showShareToast('Link copied to clipboard!');
-            }).catch(() => {});
+            }).catch(() => { });
 
             // Show share modal dialog
             showShareModal(shareUrl);
@@ -2071,6 +2292,27 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.style.transition = 'opacity 0.3s ease';
             setTimeout(() => toast.remove(), 300);
         }, 2500);
+    }
+
+    // ─── 3. DELETE PAGE HANDLER ───────────────────────────────────────────
+    const deletePageBtn = document.getElementById('delete-page-btn');
+    if (deletePageBtn) {
+        deletePageBtn.addEventListener('click', () => {
+            const activePageTab = document.querySelector('.page-link.active, .sidebar-item.active');
+            if (activePageTab) {
+                const deleteAction = activePageTab.querySelector('.delete-tab-btn') || activePageTab.querySelector('.tab-delete-icon');
+                if (deleteAction) {
+                    deleteAction.click();
+                } else if (window.editorState && window.editorState.activeChapterId) {
+                    const chapterId = window.editorState.activeChapterId;
+                    window.editorState.deleteChapter(chapterId);
+                    activePageTab.remove();
+                    showShareToast('Page deleted');
+                }
+            } else {
+                showShareToast('No active page to delete');
+            }
+        });
     }
 
     // ─── 4. EXPORT PDF WITH ACTUAL PDF PREVIEW ───────────────────────────

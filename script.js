@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const clone = page.cloneNode(true);
                     clone.querySelectorAll('.drawing-layer').forEach(dl => dl.remove());
                     this.chapters.get(page.id).content = clone.innerHTML;
+                    if (typeof updatePageThumbnail === 'function') {
+                        updatePageThumbnail(page.id);
+                    }
                 }
             });
             saveData();
@@ -530,8 +533,9 @@ document.addEventListener('DOMContentLoaded', () => {
             pageLinks.forEach(link => {
                 if (link.dataset.isContinuation === 'true' || link.classList.contains('virtual-page-link')) return;
 
-                const textWithPrefix = link.querySelector('.sidebar-text').innerText;
+                const textSpan = link.querySelector('.sidebar-text');
                 const targetId = link.dataset.targetId;
+                const textWithPrefix = textSpan ? textSpan.innerText : (editor.chapters.get(targetId)?.title || 'Page');
 
                 let content = '';
                 const chapter = editor.chapters.get(targetId);
@@ -803,6 +807,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addNewPageInBook = addNewPageInBook;
 
+    function updatePageThumbnail(pageId) {
+        if (!pageId) return;
+        const link = document.querySelector(`.page-link[data-target-id="${pageId}"]`);
+        if (!link) return;
+
+        let thumbCanvas = link.querySelector('.page-thumbnail-canvas');
+        if (!thumbCanvas) {
+            link.innerHTML = `
+                <div class="page-thumbnail-container">
+                    <div class="page-thumbnail-canvas">
+                        <div class="empty-thumb-placeholder"></div>
+                    </div>
+                    <span class="page-thumbnail-badge">1</span>
+                </div>
+            `;
+            thumbCanvas = link.querySelector('.page-thumbnail-canvas');
+        }
+
+        const chapter = editor.chapters.get(pageId);
+        const content = chapter ? chapter.content : '';
+
+        // Match the live page background and text color if present
+        const pageEl = document.getElementById(pageId);
+        if (pageEl) {
+            const pageBg = window.getComputedStyle(pageEl).backgroundColor;
+            if (pageBg && pageBg !== 'rgba(0, 0, 0, 0)' && pageBg !== 'transparent') {
+                thumbCanvas.style.backgroundColor = pageBg;
+                link.style.backgroundColor = pageBg;
+            }
+            const pageColor = window.getComputedStyle(pageEl).color;
+            if (pageColor) {
+                thumbCanvas.style.color = pageColor;
+            }
+        }
+
+        // Render live content preview
+        if (!content || content.trim() === '' || content === '<p><br></p>') {
+            thumbCanvas.innerHTML = '<div class="empty-thumb-placeholder"></div>';
+        } else {
+            thumbCanvas.innerHTML = content;
+            thumbCanvas.querySelectorAll('.drawing-layer').forEach(dl => dl.remove());
+        }
+
+        // Update miniature page badge number
+        const badge = link.querySelector('.page-thumbnail-badge');
+        if (badge) {
+            const parentSubmenu = link.closest('.sidebar-submenu');
+            if (parentSubmenu) {
+                const allLinks = Array.from(parentSubmenu.querySelectorAll('.page-link')).filter(l => l.dataset.isContinuation !== 'true');
+                const idx = allLinks.indexOf(link);
+                badge.innerText = idx >= 0 ? (idx + 1) : '1';
+            }
+        }
+    }
+    window.updatePageThumbnail = updatePageThumbnail;
+
+    function updateAllPageThumbnails() {
+        document.querySelectorAll('.page-link').forEach(link => {
+            if (link.dataset.targetId) {
+                updatePageThumbnail(link.dataset.targetId);
+            }
+        });
+    }
+    window.updateAllPageThumbnails = updateAllPageThumbnails;
+
     function createSidebarLink(submenu, text, id, isContinuation) {
         const link = document.createElement('div');
         link.className = 'sidebar-item page-link';
@@ -813,7 +882,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        link.innerHTML = `<i class="fa-regular fa-file-lines" aria-hidden="true"></i><span class="sidebar-text">${text}</span>`;
+        link.innerHTML = `
+            <div class="page-thumbnail-container">
+                <div class="page-thumbnail-canvas">
+                    <div class="empty-thumb-placeholder"></div>
+                </div>
+                <span class="page-thumbnail-badge">1</span>
+            </div>
+            <span class="sidebar-text" style="display: none;">${text}</span>
+        `;
 
         link.onclick = (e) => {
             if (e.target.closest('.icon-button')) return;
@@ -832,6 +909,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ensureAddPageCard(submenu);
             }
         }
+
+        setTimeout(() => updatePageThumbnail(id), 10);
         return link;
     }
 
@@ -1235,7 +1314,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     bookColor = getBookColor(parentBookTab);
                 }
             }
-            let text = selectedPage.querySelector('.sidebar-text').innerText;
+            const textSpan = selectedPage.querySelector('.sidebar-text');
+            let text = textSpan ? textSpan.innerText : (editor.chapters.get(editor.activeChapterId)?.title || 'Page');
             if (text.includes(':')) {
                 text = text.split(':')[0].trim();
             }
@@ -1632,6 +1712,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateToolbarText();
         }
+        setTimeout(() => updateAllPageThumbnails(), 100);
     }
 
     // --- Toolbar & Context ---
